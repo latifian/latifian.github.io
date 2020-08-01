@@ -28,15 +28,26 @@
     
     {% if post.link %}
     <h2 class="archive__item-title" itemprop="headline">
-      
         <b>{{ title }}</b> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      
     </h2>
     {% endif %}
     
     {% if post.collection == 'publications' %}
         <div> 
-          <b>{{ title }}</b> {% if post.shortvenue %} ({{ post.shortvenue }})
+          <b>{{ title }}</b> {% if post.shortvenue %} ({{ post.shortvenue }}) {% endif %}
+          {% if post.paperurl %}
+        <span style="float: right"> [ Paper 
+          {% if post.fullurl %}
+            | <a href=" {{ post.fullurl }} ">Full Version</a> 
+          {% endif %}
+          {% if post.slideurl %}
+            | <a href=" {{ post.slideurl }} ">Slides</a> 
+          {% endif %}
+          {% if post.videourl %}
+            | <a href=" {{ post.videourl }} ">Video</a> 
+          {% endif %}
+            ]</span>
+          {% endif %}
           
         </div>
     {% endif %}
