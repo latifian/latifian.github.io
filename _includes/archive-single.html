@@ -36,7 +36,7 @@
         <div> 
           <b>{{ title }}</b> {% if post.shortvenue %} ({{ post.shortvenue }}) {% endif %}
           {% if post.paperurl %}
-        <span style="float: right"> [ Paper 
+          <span style="float: right"> [ <a href=" {{ post.paperurl }} ">Paper</a>
           {% if post.fullurl %}
             | <a href=" {{ post.fullurl }} ">Full Version</a> 
           {% endif %}
@@ -52,6 +52,12 @@
         </div>
     {% endif %}
     
+    {% if post.collection == 'publications' and post.coauthors %}
+      <ul>
+        <li> <span>{{ post.coauthors }}</span> </li>
+      </ul>
+    {% endif %}
+          
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
@@ -68,12 +74,6 @@
 
     {% if post.excerpt and site.read_more == 'enabled' %}
     <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
-    {% endif %}
-    
-    {% if post.collection == 'publications' and post.coauthors %}
-      <ul>
-        <li><span>{{ post.coauthors }}<\span><\li>
-      </ul>
     {% endif %}
     
     {% if post.citation and post.paperurl %}
