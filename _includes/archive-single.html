@@ -29,20 +29,37 @@
     <h2 class="archive__item-title" itemprop="headline">
       {% if post.link %}
         <b>{{ title }}</b> <a href="{{ base_path }}{{ post.url }}" rel="permalink"><i class="fa fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>
-      {% else %}
-        <b>{{ title }}</b>
       {% endif %}
     </h2>
+    
+    {% if post.collection == 'publications' %}
+        <div> 
+          <b>{{ title }}</b> {% if post.shortvenue %} ({{ post.shortvenue }})
+          {% if post.paperurl %}
+        <span style="float: right"> [ Paper 
+          {% if post.fullurl %}
+            | <a href=" {{ post.fullurl }} ">Full Version</a> 
+          {% endif %}
+          {% if post.slideurl %}
+            | <a href=" {{ post.slideurl }} ">Slides</a> 
+          {% endif %}
+          {% if post.videourl %}
+            | <a href=" {{ post.videourl }} ">Video</a> 
+          {% endif %}
+            ]</span>
+          {% endif %}
+    </div>
+          {% endif %}
     
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
-
+    
         {% if post.collection == 'teaching' %}
           <p> {{ post.type }}, <i>{{ post.venue }}</i></p>
-        {% elsif post.collection == 'publications' %}
-          <p>Published in <i>{{ post.venue }}</i>{% if post.shortvenue %} ({{ post.shortvenue }}) {% endif %}</p>
-        {% elsif post.date %}
+        {% elsif post.collection == 'publications' and !post.shortvenue%}
+          <p>Published in <i>{{ post.venue }}</i></p>
+        {% elsif post.date and !post.shortvenue%}
          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}
 
@@ -52,27 +69,14 @@
     
     {% if post.collection == 'publications' and post.coauthors %}
       <ul>
-        <li>{{ post.coauthors }}<\li>
+        <li><span>{{ post.coauthors }}<\span><\li>
       </ul>
     {% endif %}
     
     {% if post.citation and post.paperurl %}
       <p>Recommended citation: {{ post.citation }} <a href="{{ post.paperurl }}"><u>{{ post.paperurl }}</u></a></p>
     {% elsif post.citation %}
-      <p>Recommended citation: {{ post.citation }} </p>
-    {% elsif post.paperurl %}
-        {% if post.fullurl %}
-          <p>Download <a href=" {{ post.paperurl }} ">confrence version</a>, <a href=" {{ post.fullurl }} ">full version</a></p>
-        {% else %}
-          <p>Download paper <a href=" {{ post.paperurl }} ">here</a></p>
-        {% endif %}
-    {% endif %}
-    {% if post.slideurl %}
-         {% if post.videourl %}
-          <p>Download <a href=" {{ post.slideurl }} ">slides</a>, <a href=" {{ post.videourl }} ">video</a></p>
-         {% else %}
-          <p>Download slides <a href=" {{ post.slideurl }} ">here</a></p>
-        {% endif %}
+          <p>Recommended citation: {{ post.citation }} </p>
     {% endif %}
     
 
