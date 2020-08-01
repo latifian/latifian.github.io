@@ -15,5 +15,17 @@ I'm a Ph.D. student at the University of Toronto, where I am fortunate to be adv
 
 **Research Intrests**
 
+- Design and Analysis of Algorithms
+- Algorithmic Game Theory
+- Computational Social Choice
 
 **Publications**
+{% if author.googlescholar %}
+  You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
+{% endif %}
+
+{% include base_path %}
+
+{% for post in site.publications reversed %}
+  {% include archive-single.html %}
+{% endfor %}
