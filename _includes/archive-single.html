@@ -54,7 +54,11 @@
     
     {% if post.collection == 'publications' and post.coauthors %}
       <ul>
-        <li> <span>{{ post.coauthors }}</span> </li>
+        <li> 
+          <span>
+            {% for ca in post.coauthors %}
+              {{ ca }} -
+            {% endfor %}</span> </li>
       </ul>
     {% endif %}
           
@@ -65,7 +69,7 @@
         {% if post.collection == 'teaching' %}
           <p> {{ post.type }}, <i>{{ post.venue }}</i></p>
         {% elsif post.collection == 'publications' and post.shortvenue %}
-    <p> dared <\p>
+
         {% elsif post.collection == 'publications' %}
           <p>Published in <i>{{ post.venue }}</i></p>
         {% elsif post.date %}
