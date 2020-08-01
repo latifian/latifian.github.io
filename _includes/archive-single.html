@@ -39,7 +39,7 @@
     {% endif %}
 
         {% if post.collection == 'teaching' %}
-          <p> {{ post.type }}, <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
+          <p> {{ post.type }}, <i>{{ post.venue }}</i></p>
         {% elsif post.collection == 'publications' %}
           <p>Published in <i>{{ post.venue }}</i>, {{ post.date | default: "1900-01-01" | date: "%Y" }} </p>
         {% elsif post.date %}
@@ -52,13 +52,26 @@
     <p class="archive__item-excerpt" itemprop="description"><p>{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}<strong><a href="{{ base_path }}{{ post.url }}" rel="permalink"> Read more</a></strong></p></p>
     {% endif %}
     
+    
     {% if post.citation and post.paperurl %}
       <p>Recommended citation: {{ post.citation }} <a href="{{ post.paperurl }}"><u>{{ post.paperurl }}</u></a></p>
     {% elsif post.citation %}
       <p>Recommended citation: {{ post.citation }} </p>
     {% elsif post.paperurl %}
-      <p>Download <a href=" {{ post.paperurl }} "><u>here</u></a></p>
+        {% if post.fullurl %}
+          <p>Download <a href=" {{ post.paperurl }} "><u>confrence version</u></a>, <a href=" {{ post.fullurl }} "><u>full version</u></a></p>
+        {% else %}
+          <p>Download paper <a href=" {{ post.paperurl }} "><u>here</u></a></p>
+        {% endif %}
     {% endif %}
+    {% if post.slideurl %}
+         {% if post.videourl %}
+          <p>Download <a href=" {{ post.slideurl }} "><u>slides</u></a>, <a href=" {{ post.videourl }} "><u>video</u></a></p>
+         {% else %}
+          <p>Download slides <a href=" {{ post.slideurl }} "><u>here</u></a></p>
+        {% endif %}
+    {% endif %}
+    
 
   </article>
 </div>
