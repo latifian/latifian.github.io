@@ -81,13 +81,13 @@ analytics:
 # Site Author
 author:
   name             : "Mohamad Latifian"
-  avatar           : "profile.png"
-  bio              : "Your biography for the left-hand sidebar"
+  avatar           : "profile.jpg"
+  bio              : "Ph.D. Computer Science, University of Toronto"
   location         : "Tehran, Iran"
   employer         :
   pubmed           :
   googlescholar    : "https://scholar.google.com/citations?user=NzeBNBYAAAAJ&hl=en"
-  email            :
+  email            : "latifian@cs.toronto.edu"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
