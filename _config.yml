@@ -10,9 +10,8 @@ locale                   : "en-US"
 title                    : "Mohamad Latifian"
 title_separator          : "-"
 name                     : &name "Mohamad Latifian"
-description              : &description "I've got my M.Sc. degree in the field of Algorithms and Computation at Department of Computer Engineering of Sharif University of Technology,
-and I'm going to strat my Ph.D at UofT this fall."
-url                      : https://latifian.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+description              : &description "personal description"
+url                      : https://academicpages.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "academicpages/academicpages.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
@@ -81,13 +80,14 @@ analytics:
 
 # Site Author
 author:
-  name             :"Mohamad Latifian"
-  avatar           : 
-  bio              :"Your biography for the left-hand sidebar"
-  location         :"Tehran, Iran"
+  name             : "Mohamad Latifian"
+  avatar           : "profile.png"
+  bio              : "Your biography for the left-hand sidebar"
+  location         : "Tehran, Iran"
   employer         :
-  googlescholar    :"https://scholar.google.com/citations?user=NzeBNBYAAAAJ&hl=en"
-  email            :"latifian@cs.toronto.edu
+  pubmed           :
+  googlescholar    : "https://scholar.google.com/citations?user=NzeBNBYAAAAJ&hl=en"
+  email            :
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -96,20 +96,20 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : 
+  github           :
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
   linkedin         :
-  orcid            : 
+  orcid            :
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
   steam            :
   tumblr           :
-  twitter          : 
+  twitter          :
   vine             :
   weibo            :
   xing             :
@@ -309,5 +309,3 @@ compress_html:
   clippings: all
   ignore:
     envs: development
-
-theme: jekyll-theme-minimal
