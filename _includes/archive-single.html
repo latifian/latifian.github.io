@@ -57,12 +57,12 @@
         <li> 
           <span>
             {% for ca in post.coauthors %}
-              {{ ca }} - {% if site.data.people[ca] %} (site.data.people[ca].name, site.data.people[ca]['last']) - {% endif %}
+              {{ ca }} - {% if site.data.people[ca] %} ({{ site.data.people[ca].name }}, {{ site.data.people[ca]['last'] }}) - {% endif %}
             {% endfor %}</span> </li>
         <li> 
           <span>
             {% for ca in site.data.people %}
-              {{ ca }} -
+              {{ ca.bio }} -
             {% endfor %}</span> </li>
       </ul>
     {% endif %}
