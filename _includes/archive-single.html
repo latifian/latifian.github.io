@@ -63,6 +63,8 @@
                 {{ ca }}{% unless forloop.last %}, {% endunless %}
               {% endif %}
             {% endfor %}</small> 
+<br><br>
+    
     {% endif %}
           
     {% if post.read_time %}
@@ -88,7 +90,6 @@
     {% elsif post.citation %}
           <p>Recommended citation: {{ post.citation }} </p>
     {% endif %}
-    
-<br>
+
   </article>
 </div>
