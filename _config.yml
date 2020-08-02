@@ -6,7 +6,6 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-people                   : [1: {name: "m", last: "h"}, "2": {"name": "m", "last": "h"}]
 locale                   : "en-US"
 title                    : "Mohamad Latifian"
 title_separator          : "-"
