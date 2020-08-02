@@ -57,10 +57,13 @@
         <li> 
           <span>
             {% for ca in post.coauthors %}
-              {% unless forloop.first %}{% unless forloop.last %},{% endunless %}, and{% endunless %}
+              {% unless forloop.first %}, {% endunless %}
+              {% if forloop.last %}and {% endif %}
               {% if site.data.people[ca] %}
-                  assign x = site.data.people[ca]
+                  {% assign x = site.data.people[ca] %}
                   <a href=" {{ x.url }} ">{{ x.name }} </a>
+              {% else %}
+                ca
               {% endif %}
             {% endfor %}</span> </li>
       </ul>
