@@ -57,12 +57,12 @@
         <li> 
           <span>
             {% for ca in post.coauthors %}
-              {{ ca }} -
+              {{ ca }} - {% if site.people[ca] %} (site.people[ca]['name'], site.people[ca]['last']) - {% endif %}
             {% endfor %}</span> </li>
         <li> 
           <span>
             {% for ca in site.people %}
-              {{ ca['name'] }} -
+              {{  site.people.ca['name'] }} -
             {% endfor %}</span> </li>
       </ul>
     {% endif %}
