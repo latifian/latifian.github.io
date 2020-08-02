@@ -1,7 +1,6 @@
 ---
 permalink: /
-title: "Homepage"
-excerpt: "About me"
+title:
 author_profile: true
 redirect_from: 
   - /about/
@@ -17,7 +16,6 @@ I'm a Ph.D. student at the University of Toronto, where I am fortunate to be adv
 - Algorithmic Game Theory
 - Computational Social Choice
 
-***Publications***
 <h1> Publications </h1>
 {% if author.googlescholar %}
   You can also find my articles on <a href="{{author.googlescholar}}">my Google Scholar profile</a>.
