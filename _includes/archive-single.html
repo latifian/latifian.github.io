@@ -57,12 +57,11 @@
         <li> 
           <span>
             {% for ca in post.coauthors %}
-              {{ ca }} - {% if site.data.people[ca] %} ({{ site.data.people[ca].name }}, {{ site.data.people[ca]['last'] }}) - {% endif %}
-            {% endfor %}</span> </li>
-        <li> 
-          <span>
-            {% for ca in site.data.people %}
-              {{ ca.bio }} -
+              {% unless forloop.first %}{% unless forloop.last %},{% endunless %}, and{% endunless %}
+              {% if site.data.people[ca] %}
+                  assign x = site.data.people[ca]
+                  <a href=" {{ x.url }} ">{{ x.name }} </a>
+              {% endif %}
             {% endfor %}</span> </li>
       </ul>
     {% endif %}
