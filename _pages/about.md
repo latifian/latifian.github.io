@@ -21,7 +21,7 @@ I'm a Ph.D. student at the University of Toronto, where I am fortunate to be adv
 
 **Publications**
 {% if author.googlescholar %}
-  You can also find my articles on <u><a href="{{author.googlescholar}}">my Google Scholar profile</a>.</u>
+  You can also find my articles on <a href="{{author.googlescholar}}">my Google Scholar profile</a>.
 {% endif %}
 
 {% include base_path %}
