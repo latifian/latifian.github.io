@@ -35,6 +35,8 @@
     {% if post.collection == 'publications' %}
         <div> 
           <b>{{ title }}</b> {% if post.shortvenue %} ({{ post.shortvenue }}) {% endif %}
+          {% if post.drafturl %}
+          <span style="float: right"> [ <a href=" {{ post.drafturl }} ">Draft</a>
           {% if post.paperurl %}
           <span style="float: right"> [ <a href=" {{ post.paperurl }} ">Paper</a>
           {% if post.fullurl %}
@@ -56,7 +58,7 @@
           <small>
             {% for ca in post.coauthors %}
               {% if forloop.last %}and {% endif %}
-              {% if site.data.people[ca] %}
+              {% if site.data.authors[ca] %}
                   {% assign x = site.data.people[ca] %}
                   <a href=" {{ x.url }} ">{{ x.name }}</a>
               {% else %}
