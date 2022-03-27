@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : ""
+title                    : "Mohamad Latifian"
 title_separator          : "-"
 name                     : &name "Mohamad Latifian"
 description              : &description "personal description"
@@ -83,7 +83,7 @@ author:
   name             : "Mohamad Latifian"
   avatar           : "profile.jpg"
   bio              : "Ph.D. Computer Science, University of Toronto"
-  location         : "Toronto, CA"
+  location         : "Toronto, ON"
   employer         :
   pubmed           :
   googlescholar    : "https://scholar.google.com/citations?user=NzeBNBYAAAAJ&hl=en"
