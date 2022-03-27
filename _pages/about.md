@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I'm a Ph.D. student at the University of Toronto, where I am fortunate to be advised by <a href="http://www.cs.toronto.edu/~nisarg/">Nisarg Shah</a>. Before joining here, I received my M.Sc. Degree in Computer Engineering from Sharif University of Technology where I had the honor to be advised by <a href="http://sharif.ir/~ghodsi/?page=home">Mohammad Ghodsi</a>.
+I am a second year Ph.D. student in <a href="https://web.cs.toronto.edu">Department of Computer Science</a> at <a href="https://www.utoronto.ca">University of Toronto</a>. I am fortunate to be advised by <a href="http://www.cs.toronto.edu/~nisarg/">Nisarg Shah</a> and <a href="http://www.cs.toronto.edu/~bor/"> Allan Borodin</a>. Before joining here, I completed my undergraduate and master's studies in the <a href="http://ce.sharif.edu"> Department of Computer Engineering</a> at <a href="http://sharif.edu"> Sharif University of Technology </a> where I had the honor to be advised by <a href="http://sharif.ir/~ghodsi/?page=home">Mohammad Ghodsi</a>.
 
 
 **Research Intrests**
@@ -15,14 +15,3 @@ I'm a Ph.D. student at the University of Toronto, where I am fortunate to be adv
 - Design and Analysis of Algorithms
 - Algorithmic Game Theory
 - Computational Social Choice
-
-<h1> Publications </h1>
-{% if author.googlescholar %}
-  You can also find my articles on <a href="{{author.googlescholar}}">my Google Scholar profile</a>.
-{% endif %}
-
-{% include base_path %}
-
-{% for post in site.publications reversed %}
-  {% include archive-single.html %}
-{% endfor %}
