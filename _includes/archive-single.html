@@ -59,7 +59,7 @@
             {% for ca in post.coauthors %}
               {% if forloop.last %}and {% endif %}
               {% if site.data.authors[ca] %}
-                  {% assign x = site.data.people[ca] %}
+                  {% assign x = site.data.authors[ca] %}
                   <a href=" {{ x.url }} ">{{ x.name }}</a>
               {% else %}
                 {{ ca }}{% unless forloop.last %}, {% endunless %}
