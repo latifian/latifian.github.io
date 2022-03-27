@@ -1,0 +1,10 @@
+---
+title: "Distortion in Voting with Top-t Preferences"
+collection: publications
+date: 2022-02-27
+venue: 
+shortvenue: 
+coauthors: ["Allan Borodin", "Daniel Halpern" , "Mohamad Latifian",  "Nisarg Shah"]
+
+fullurl: 'https://www.cs.toronto.edu/~nisarg/papers/distortion-top-t.pdf'
+---
