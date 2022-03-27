@@ -37,8 +37,10 @@
           <b>{{ title }}</b> {% if post.shortvenue %} ({{ post.shortvenue }}) {% endif %}
           {% if post.drafturl %}
           <span style="float: right"> [ <a href=" {{ post.drafturl }} ">Draft</a>
+            {% endif %}
           {% if post.paperurl %}
           <span style="float: right"> [ <a href=" {{ post.paperurl }} ">Paper</a>
+            {% endif %}
           {% if post.fullurl %}
             | <a href=" {{ post.fullurl }} ">Full Version</a> 
           {% endif %}
