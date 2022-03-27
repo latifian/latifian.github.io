@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Mohamad Latifian"
+title                    : ""
 title_separator          : "-"
 name                     : &name "Mohamad Latifian"
 description              : &description "personal description"
@@ -83,7 +83,7 @@ author:
   name             : "Mohamad Latifian"
   avatar           : "profile.jpg"
   bio              : "Ph.D. Computer Science, University of Toronto"
-  location         : "Tehran, Iran"
+  location         : "Toronto, CA"
   employer         :
   pubmed           :
   googlescholar    : "https://scholar.google.com/citations?user=NzeBNBYAAAAJ&hl=en"
@@ -176,16 +176,16 @@ kramdown:
 # Collections
 collections:
   teaching:
-    output: true
+    output: false
     permalink: /:collection/:path/
   publications:
     output: true
     permalink: /:collection/:path/
   portfolio:
-    output: true
+    output: false
     permalink: /:collection/:path/
   talks:
-    output: true
+    output: false
     permalink: /:collection/:path/
 
 
