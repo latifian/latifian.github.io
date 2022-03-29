@@ -67,7 +67,7 @@
                 {{ ca }}{% unless forloop.last %}, {% endunless %}
               {% endif %}
             {% endfor %}</small> 
-      
+      <br>
       {% if post.collection == 'publications' and post.shortvenue and post.venueurl %}
           <small>
             In <a href=" {{ post.venueurl }}">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
