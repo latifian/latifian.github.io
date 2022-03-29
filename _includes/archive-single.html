@@ -67,7 +67,10 @@
                 {{ ca }}{% unless forloop.last %}, {% endunless %}
               {% endif %}
             {% endfor %}</small> 
-    
+      
+      {% if post.collection == 'publications' and post.shortvenu %}
+        Hi
+      {% endif %}
       {% if post.collection == 'publications' and post.shortvenu and post.venuurl %}
           <small>
             In <a href=" {{ post.venuurl }}">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
