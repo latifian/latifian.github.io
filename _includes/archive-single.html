@@ -61,10 +61,11 @@
               {% if forloop.last %}and {% endif %}
               {% if site.data.authors[ca] %}
                   {% assign x = site.data.authors[ca] %}
-                  <a href=" {{ x.url }} ">{{ x.name }}</a>,
+                  <a href=" {{ x.url }} ">{{ x.name }}</a>
               {% else %}
-                {{ ca }}{% unless forloop.last %}, {% endunless %}
+                {{ ca }}
               {% endif %}
+            {% unless forloop.last %}, {% endunless %}
             {% endfor %}</small> 
 <br><br>
     
