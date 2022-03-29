@@ -5,6 +5,8 @@ excerpt: 'In this paper, we extend the Rent Sharing problem to the case that eve
 date: 2018-12-15
 venue: "12th Annual International Conference on Combinatorial Optimization and Applications"
 shortvenue: "COCOA '18"
+fulladdress: "International Conference on Combinatorial Optimization and Applications (pp. 577-591). Springer, Cham."
+venueurl: 'http://spacl.kennesaw.edu/cocoa2018/'
 coauthors: ["Mohammad Ghodsi", "Mohamad Latifian", "Arman Mohammadi", "Sadra Moradian", "Masoud Seddighin"]
 
 paperurl: 'http://latifian.github.io/files/RentSharing.pdf'
