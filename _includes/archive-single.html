@@ -68,15 +68,16 @@
               {% endif %}
             {% endfor %}</small> 
       
-      {% if post.collection == 'publications' and post.shortvenu and post.venuurl %}
+      {% if post.collection == 'publications' and post.shortvenue and post.venueurl %}
           <small>
-            In <a href=" {{ post.venuurl }}">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
+            In <a href=" {{ post.venueurl }}">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
           </small> 
+      {% else %}
+          <small> Working paper. </small>
       {% endif %}
 <br><br>
     
     {% endif %}
-    {{ post.shortvenu }}
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
