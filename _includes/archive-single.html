@@ -34,7 +34,7 @@
     
     {% if post.collection == 'publications' %}
         <div> 
-          <b>{{ title }}</b> {% if post.shortvenue %} ({{ post.shortvenue }}) {% endif %}
+          <b>{{ title }}</b>
           {% if post.drafturl %}
           <span style="float: right"> <small>[ <a href=" {{ post.drafturl }} ">Draft</a> ]</small></span>
             {% endif %}
@@ -57,15 +57,21 @@
     
     {% if post.collection == 'publications' and post.coauthors %}
           <small>
+            By
             {% for ca in post.coauthors %}
               {% if forloop.last %}and {% endif %}
               {% if site.data.authors[ca] %}
                   {% assign x = site.data.authors[ca] %}
-                  <a href=" {{ x.url }} ">{{ x.name }}</a>
+                  <a href=" {{ x.url }} ">{{ x.name }}</a>{% unless forloop.last %}, {% endunless %}
               {% else %}
-                {{ ca }}
-              {% endif %}{% unless forloop.last %}, {% endunless %}
+                {{ ca }}{% unless forloop.last %}, {% endunless %}
+              {% endif %}
             {% endfor %}</small> 
+    
+    {% if post.collection == 'publications' and post.shortvenu %}
+          <small>
+            In <a href=" {{ post.venuurl }}">{{ post.shortvenue }}</a>: {{ post.fulladdress }}.
+            </small> 
 <br><br>
     
     {% endif %}
