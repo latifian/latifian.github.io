@@ -7,5 +7,5 @@ shortvenue: "IJCAI '22"
 venueurl: 'https://ijcai-22.org'
 fulladdress: "Proc. of the 31st International Joint Conference on Artificial Intelligence (Forthcoming)"
 coauthors: ["Allan Borodin", "Daniel Halpern" , "Mohamad Latifian",  "Nisarg Shah"]
-uaperurl: 'https://www.cs.toronto.edu/~nisarg/papers/distortion-top-t.pdf'
+paperurl: 'https://www.cs.toronto.edu/~nisarg/papers/distortion-top-t.pdf'
 ---
