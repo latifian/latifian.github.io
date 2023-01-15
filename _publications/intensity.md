@@ -8,6 +8,6 @@ venueurl: 'https://aaai.org/Conferences/AAAI-23/'
 fulladdress: "Proc. of the AAAI Conference on Artificial Intelligence (Fothcoming)."
 coauthors: ["Anson Khang", "Mohamad Latifian", "Nisarg Shah"]
 
-paperurl: '/files/papaers/Voting_with_Preference_Intensities.pdf'
+paperurl: '/files/papers/Voting_with_Preference_Intensities.pdf'
 type: conf
 ---
