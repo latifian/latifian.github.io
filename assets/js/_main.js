@@ -3,6 +3,17 @@
    ========================================================================== */
 
 $(document).ready(function(){
+   let optionsContainer = $(".Conference");
+   optionsContainer.each(function() {
+      let options = $(this).find("div.Conference");
+      if (options.length) {
+         options.each(function(index, option) {
+            let startValue = 1;
+            let incrementedValue = startValue + index;
+            $('<div class="title-number float-left text-center mr-2">' + incrementedValue + '</div>').insertBefore(option);
+        });
+      }
+   });
    // Sticky footer
   var bumpIt = function() {
       $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
