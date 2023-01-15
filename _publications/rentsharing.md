@@ -12,6 +12,7 @@ coauthors: ["Mohammad Ghodsi", "Mohamad Latifian", "Arman Mohammadi", "Sadra Mor
 paperurl: 'http://latifian.github.io/files/RentSharing.pdf'
 slideurl: 'http://latifian.github.io/files/RentSharing-Slides.pdf'
 videourl: 'https://www.dropbox.com/s/j51mk9flhco3sy0/Rent%20Division%20Among%20Groups.mp4?dl=0'
+type: 'conf'
 ---
 
 [Download paper here](http://latifian.github.io/files/RentSharing.pdf)
