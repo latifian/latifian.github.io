@@ -85,7 +85,7 @@ layout: default
     {% for collection in site.collections %}
 {% for post in collection.docs %}
     {% if post.type == "conf" %}
-    {% capture amount %}{{ confcount | plus:1 }}{% endcapture %}
+    {% capture confcount %}{{ confcount | plus:1 }}{% endcapture %}
     {% endif %}
 {% endfor %}
     {% endfor %}
