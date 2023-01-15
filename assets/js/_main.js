@@ -1,21 +1,8 @@
 /* ==========================================================================
    jQuery plugin settings and other scripts
    ========================================================================== */
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 $(document).ready(function(){
-   let optionsContainer = $(".Conference");
-   optionsContainer.each(function() {
-      let options = $(this).find(".Conference");
-      if (options.length) {
-         options.each(function(index, option) {
-            let startValue = 1;
-            let incrementedValue = startValue + index;
-            console.log(index);
-            $('<div class="confbox">' + incrementedValue + '</div>').insertBefore(option);
-        });
-      }
-   });
+   
    // Sticky footer
   var bumpIt = function() {
       $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
