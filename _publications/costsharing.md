@@ -11,6 +11,7 @@ fulladdress: "Proc. of the 21st ACM conference on economics and computation (pp.
 paperurl: 'https://dl.acm.org/doi/pdf/10.1145/3391403.3399528'
 slideurl: 'http://latifian.github.io/files/EC20-Slides.pdf'
 videourl: 'https://www.youtube.com/watch?v=JzUwiM-QKD8&t=18s'
+type: 'conf'
 ---
 
 [Download paper here](https://dl.acm.org/doi/pdf/10.1145/3391403.3399528)
