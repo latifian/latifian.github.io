@@ -80,6 +80,9 @@
       {% else %}
     {% if post.collection == 'publications' and post.fulladdress %}
           <small class="pubvenue"> {{ post.fulladdress }} </small>
+    {% else %}
+              <small class="pubvenue"> Working paper. </small>
+    {% endif %}
       {% endif %}
 <br><br>
     
