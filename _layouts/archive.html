@@ -50,7 +50,7 @@ layout: default
       ul.pub li.conf::before {
         font-weight: bold;
         content: "C"Counter( confs )"" ; /* -- */ 
-        background-color: #73c8ff;
+        background-color: #056aad;
         border-radius: 2px 2px 2px 2px ;
         box-sizing: border-box ;
         margin-right: 10px ;
@@ -69,7 +69,7 @@ layout: default
       ul.pub li.journal::before {
         font-weight: bold;
         content: "J"Counter( journals )"" ; /* -- */ 
-        background-color: #ffb12f;
+        background-color: #6c9905;
         border-radius: 2px 2px 2px 2px ;
         box-sizing: border-box ;
         margin-right: 10px ;
@@ -90,7 +90,7 @@ layout: default
        ul.pub li.working::before {
         font-weight: bold;
         content: "W"Counter( workings )"" ; /* -- */ 
-        background-color: #eaeaea;
+        background-color: #baad8d;
         border-radius: 2px 2px 2px 2px ;
         box-sizing: border-box ;
         margin-right: 10px ;
@@ -119,7 +119,7 @@ layout: default
 {% endfor %}
     {% endfor %}
     
-    <ul class="pub" style="counter-reset: confs {{ confcount }} journals {{ jcount }} workings {{ jcount }}">
+    <ul class="pub" style="counter-reset: confs {{ confcount }} journals {{ jcount }} workings {{ wcount }}">
     {% endunless %}
     {{ content }}
       </ul>
