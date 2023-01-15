@@ -10,5 +10,5 @@ coauthors: ["Alireza Farhadi", "Mohammadtaghi Hajiaghayi", "Mohamad Latifian", "
 
 paperurl: 'https://ojs.aaai.org/index.php/AAAI/article/view/16675/16482'
 fullurl: 'https://arxiv.org/pdf/2007.07027.pdf'
-type: Conference
+type: conf
 ---
