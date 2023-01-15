@@ -14,10 +14,10 @@ author_profile: true
 {% capture written_year %}'None'{% endcapture %}
 {% for post in site.publications reversed %}
   {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-  <span> {{ year }} </span>
+  <span class="year"> {{ year }} </span>
   {% if year != written_year %}
-    <span class="year"> {{ year }} </span>
     {% capture written_year %}{{ year }}{% endcapture %}
+    <span class="year"> {{ year }} </span>
   {% endif %}
   {% include archive-single.html %}
 {% endfor %}
