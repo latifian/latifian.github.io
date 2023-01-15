@@ -34,12 +34,12 @@
     
     {% if post.collection == 'publications' %}
         <div class="{{post.type}}"> 
-          <b>{{ title }}</b>
+          <b class="pubtitle">{{ title }}</b>
           {% if post.drafturl %}
-          <span style="float: right"> <small>[ <a href=" {{ post.drafturl }} ">Draft</a> ]</small></span>
+          <span class="publinks" style="float: right"> <small>[ <a href=" {{ post.drafturl }} ">Draft</a> ]</small></span>
             {% endif %}
           {% if post.paperurl %}
-          <span style="float: right"> <small> [ <a href=" {{ post.paperurl }} ">Paper</a>
+          <span class="publinks" style="float: right"> <small> [ <a href=" {{ post.paperurl }} ">Paper</a>
           {% if post.fullurl %}
             | <a href=" {{ post.fullurl }} ">Full Version</a> 
           {% endif %}
@@ -56,7 +56,7 @@
     {% endif %}
     
     {% if post.collection == 'publications' and post.coauthors %}
-          <small>
+          <small class="authors">
             By
             {% for ca in post.coauthors %}
               {% if forloop.last %}and {% endif %}
@@ -69,11 +69,11 @@
             {% endfor %}</small> 
       <br>
       {% if post.collection == 'publications' and post.shortvenue and post.venueurl %}
-          <small>
+          <small class="pubvenue">
             In <a href=" {{ post.venueurl }}">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
           </small> 
       {% else %}
-          <small> Working paper. </small>
+          <small class="pubvenue"> Working paper. </small>
       {% endif %}
 <br><br>
     
