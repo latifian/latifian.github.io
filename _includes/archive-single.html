@@ -78,7 +78,8 @@
             In <a href=" {{ post.venueurl }}">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
           </small> 
       {% else %}
-          <small class="pubvenue"> Working paper. </small>
+    {% if post.collection == 'publications' and post.fulladdress %}
+          <small class="pubvenue"> {{ post.fulladdress }} </small>
       {% endif %}
 <br><br>
     
