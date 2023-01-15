@@ -57,7 +57,7 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               :
+  username               : 
 facebook:
   username               :
   app_id                 :
@@ -82,7 +82,7 @@ analytics:
 author:
   name             : "Mohamad Latifian"
   avatar           : "profile.jpg"
-  bio              : "Ph.D. student at University of Toronto"
+  bio              : "Ph.D. student at the University of Toronto"
   location         : "Toronto, ON"
   employer         :
   pubmed           :
@@ -108,8 +108,8 @@ author:
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
   steam            :
-  tumblr           :
-  twitter          :
+  tumblr           : 
+  twitter          : "https://twitter.com/latifian_m"
   vine             :
   weibo            :
   xing             :
