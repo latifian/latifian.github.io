@@ -82,11 +82,13 @@ layout: default
 </style>
         
     {% assign confcount = 1 %}
+    {% for collection in site.collections %}
 {% for post in collection.docs %}
     {% if post.type == "conf" %}
     {% capture amount %}{{ confcount | plus:1 }}{% endcapture %}
     {% endif %}
 {% endfor %}
+    {% endfor %}
     
     <ul class="pub" style="counter-reset: confs {{ confcount }} journals 2">
     {% endunless %}
