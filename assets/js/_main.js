@@ -1,6 +1,7 @@
 /* ==========================================================================
    jQuery plugin settings and other scripts
    ========================================================================== */
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 $(document).ready(function(){
    let optionsContainer = $(".Conference");
@@ -10,6 +11,7 @@ $(document).ready(function(){
          options.each(function(index, option) {
             let startValue = 1;
             let incrementedValue = startValue + index;
+            console.log(index);
             $('<div class="confbox">' + incrementedValue + '</div>').insertBefore(option);
         });
       }
