@@ -12,15 +12,75 @@ layout: default
   {% endunless %}
 {% endif %}
 
+
 <div id="main" role="main">
   {% include sidebar.html %}
 
   <div class="archive">
     {% unless page.header.overlay_color or page.header.overlay_image %}
       <h1 class="page__title" style="font-size: 35px;rger;">{{ page.title }}</h1>
-    <br><br>
+    <br>
     
-    <ul class="pub">
+    <style>.list__item{width: 100%;
+}
+.article{padding-top:0;}
+      .pubtitle{text-align: center ; 
+          font-size: 16pt;
+          line-height: 45px;
+      }
+      .authors {
+          font-size: 12pt;
+      }
+      .pubvenue {font-size: 12pt;
+      }
+      .publinks{line-height: 45px; font-size:14pt;}
+      ul.pub {
+        list-style-type: none ;
+        font-size: 14px ;
+        margin: 5px 0px 5px 5px ;
+        padding: 0px 0px 0px 0px ; 
+      }
+      ul.pub li.conf {
+        /* Decrement the counter by 1.*/  counter-increment: pubs -1 ; /* -- */
+        align-items: flex-start ;
+        display: flex ;
+        margin: 20px 0px 20px 15px ;
+        padding: 0px 0px 0px 0px ; 
+      }
+      ul.pub li.conf::before {
+        content: "C"Counter( confs )"" ; /* -- */ 
+        background-color: #73c8ff;
+        border-radius: 2px 2px 2px 2px ;
+        box-sizing: border-box ;
+        margin-right: 10px ;
+        margin-top:12px;
+ 
+        padding: 0px 7px 0px 7px ;
+        text-align: center ; 
+      }
+      ul.pub li.journal {
+        /* Decrement the counter by 1.*/  counter-increment: journals -1 ; /* -- */
+        align-items: flex-start ;
+        display: flex ;
+        margin: 20px 0px 20px 15px ;
+        padding: 0px 0px 0px 0px ; 
+      }
+      ul.pub li.journal::before {
+        content: "J"Counter( journals )"" ; /* -- */ 
+        background-color: #ffb12f;
+        border-radius: 2px 2px 2px 2px ;
+        box-sizing: border-box ;
+        margin-right: 10px ;
+        margin-top:12px;
+ 
+        padding: 0px 7px 0px 7px ;
+        text-align: center ; 
+      }
+
+</style>
+    
+    
+    <ul class="pub" style="counter-reset: confs 7 journals 1">
     {% endunless %}
     {{ content }}
       </ul>
