@@ -78,19 +78,48 @@ layout: default
         padding: 0px 7px 0px 7px ;
         text-align: center ; 
       }
+      
+      ul.pub li.working {
+        /* Decrement the counter by 1.*/  counter-increment: workings -1 ; /* -- */
+        align-items: flex-start ;
+        display: flex ;
+        margin: 15px 0px 15px 0px ;
+        padding: 0px 0px 0px 0px ; 
+      }
+      
+       ul.pub li.working::before {
+        font-weight: bold;
+        content: "W"Counter( workings )"" ; /* -- */ 
+        background-color: #eaeaea;
+        border-radius: 2px 2px 2px 2px ;
+        box-sizing: border-box ;
+        margin-right: 10px ;
+        margin-top:12px;
+ 
+        padding: 0px 7px 0px 7px ;
+        text-align: center ; 
+      }
 
 </style>
         
     {% assign confcount = 1 %}
+    {% assign jcount = 1 %}
+        {% assign wcount = 1 %}
     {% for collection in site.collections %}
 {% for post in collection.docs %}
     {% if post.type == "conf" %}
     {% capture confcount %}{{ confcount | plus:1 }}{% endcapture %}
     {% endif %}
+    {% if post.type == "journal" %}
+    {% capture jcount %}{{ jcount | plus:1 }}{% endcapture %}
+    {% endif %}
+        {% if post.type == "working" %}
+    {% capture wcount %}{{ wcount | plus:1 }}{% endcapture %}
+    {% endif %}
 {% endfor %}
     {% endfor %}
     
-    <ul class="pub" style="counter-reset: confs {{ confcount }} journals 2">
+    <ul class="pub" style="counter-reset: confs {{ confcount }} journals {{ jcount }} workings {{ jcount }}">
     {% endunless %}
     {{ content }}
       </ul>
