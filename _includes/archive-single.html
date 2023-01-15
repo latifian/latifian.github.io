@@ -33,7 +33,7 @@
     {% endif %}
     
     {% if post.collection == 'publications' %}
-        <div> 
+        <div class="{{post.type}}"> 
           <b>{{ title }}</b>
           {% if post.drafturl %}
           <span style="float: right"> <small>[ <a href=" {{ post.drafturl }} ">Draft</a> ]</small></span>
