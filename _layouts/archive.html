@@ -24,7 +24,9 @@ layout: default
     <style>.list__item{width: 100%;
 }
 .article{padding-top:0;}
-      .pubtitle{text-align: center ; 
+      .pubtitle{
+        font-family: 'Lato', sans-serif;
+        text-align: center ; 
           font-size: 14pt;
           line-height: 45px;
       }
@@ -50,12 +52,12 @@ layout: default
       ul.pub li.conf::before {
         font-weight: bold;
         content: "C"Counter( confs )"" ; /* -- */ 
-        background-color: #32bcff;
-        border-radius: 2px 2px 2px 2px ;
+        background-color: rgba(105, 199, 245, 0.95);
+        border-radius: 3px 3px 3px 3px ;
         box-sizing: border-box ;
         margin-right: 10px ;
         margin-top:12px;
- 
+        font-family: "Calibri";
         padding: 1px 5px 1px 7px ;
         text-align: center ; 
       }
@@ -67,10 +69,11 @@ layout: default
         padding: 0px 0px 0px 0px ; 
       }
       ul.pub li.journal::before {
+        font-family: "Calibri";
         font-weight: bold;
         content: "J"Counter( journals )"" ; /* -- */ 
-        background-color: #5df400;
-        border-radius: 2px 2px 2px 2px ;
+        background-color: #8de28c;
+        border-radius: 3px 3px 3px 3px ;
         box-sizing: border-box ;
         margin-right: 10px ;
         margin-top:12px;
@@ -88,10 +91,11 @@ layout: default
       }
       
        ul.pub li.working::before {
+        font-family: "Calibri";
         font-weight: bold;
         content: "W"Counter( workings )"" ; /* -- */ 
-        background-color: #feed00;
-        border-radius: 2px 2px 2px 2px ;
+        background-color: #fad48b;
+        border-radius: 3px 3px 3px 3px ;
         box-sizing: border-box ;
         margin-right: 10px ;
         margin-top:12px;
