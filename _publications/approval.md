@@ -7,5 +7,6 @@ shortvenue: "AAMAS '23"
 venueurl: 'https://aamas2023.soton.ac.uk'
 fulladdress: "Proc. of the 22nd International Conference on Autonomous Agents and Multiagent Systems (Fothcoming)."
 coauthors: ["Soroush", "Me", "Nisarg"]
+paperurl: "/files/papers/Distortion_of_Approval_with_Runoff.pdf
 type: conf
 ---
