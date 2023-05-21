@@ -1,8 +1,13 @@
 ---
 title: "Best of Both Distortion Worlds"
 collection: publications
+collection: publications
+date: 2020-7-13
+venue: "Twenty-Fourth ACM Conference on Economics and Computation"
+shortvenue: "EC '23"
+fulladdress: "Proceedings of the 24th ACM Conference on Economics and Computation (Forthcoming)"
 coauthors: ["Vasilis Gkatzelis", "Mohamad Latifian", "Nisarg Shah"]
 paperurl: "/files/papers/Best_of_Both_Distortion_Worlds.pdf"
-type: working
-date: 3000-01-01
+type: conf
+date: 2023-07-09
 ---
