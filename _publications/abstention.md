@@ -5,7 +5,7 @@ date: 2019-7-17
 venue: "33rd AAAI Confrenece on Artificial Intelligence"
 shortvenue: "AAAI '19"
 venueurl: 'https://aaai.org/Conferences/AAAI-19/'
-fulladdress: "Proc. of the 33rd AAAI Conference on Artificial Intelligence (Vol. 33, No. 01, pp. 1981-1988)."
+fulladdress: "Proc. of the 33rd AAAI Conference on Artificial Intelligence, pp. 1981-1988."
 coauthors: ["Mohammad Ghodsi", "Mohamad Latifian", "Masoud Seddighin"]
 
 paperurl: 'https://www.aaai.org/ojs/index.php/AAAI/article/view/4026/3904'
