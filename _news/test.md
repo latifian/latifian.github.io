@@ -1,3 +1,4 @@
-date: 2023-03-03
-news: "Test"
-category: news
+---
+collection: news
+date: 2023-02-07
+news: "Test News"
