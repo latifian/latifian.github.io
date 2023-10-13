@@ -42,7 +42,7 @@
     {% if post.collection == 'publications' %}
         <div> 
           {% if post.short %}
-          <b id="post.short" class="pubtitle">{{ title }}</b>
+          <b id="{{ post.short }}" class="pubtitle">{{ title }}</b>
           {% else %}
           <b class="pubtitle">{{ title }}</b>
           {% endif %}
