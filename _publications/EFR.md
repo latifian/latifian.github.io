@@ -12,16 +12,3 @@ venue: "Thirty-Fifth AAAI Confrenece on Artificial Intelligence"
 paperurl: 'https://ojs.aaai.org/index.php/AAAI/article/view/16675/16482'
 fullurl: 'https://arxiv.org/pdf/2007.07027.pdf'
 ---
-title: "Almost Envy-freeness, Envy-rank, and Nash Social Welfare Matchings "
-shortvenue: "AAAI '21"
-short: "EFR2"
-type: conf
-venueurl: 'https://aaai.org/Conferences/AAAI-21/'
-fulladdress: "Proc. of the 35th AAAI Conference on Artificial Intelligence, pp. 5355-5362."
-coauthors: ["Alireza Farhadi", "Mohammadtaghi Hajiaghayi", "Mohamad Latifian", "Masoud Seddighin", "Hadi Yami"]
-collection: publications
-date: 2021-05-18
-venue: "Thirty-Fifth AAAI Confrenece on Artificial Intelligence"
-paperurl: 'https://ojs.aaai.org/index.php/AAAI/article/view/16675/16482'
-fullurl: 'https://arxiv.org/pdf/2007.07027.pdf'
----
