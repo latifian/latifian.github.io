@@ -1,4 +1,8 @@
 {% include base_path %}
+{% if post.collection == 'news' %}
+ <p> <i>{{ post.date }}. </i> {{ post.news }}</p>
+<br>
+{% endif %}
 
 {% if post.header.teaser %}
   {% capture teaser %}{{ post.header.teaser }}{% endcapture %}
@@ -87,9 +91,7 @@
 <br><br>
     
     {% endif %}
-     {% if post.collection == 'news' %}
-          <p> <b>{{ post.date }}. </b> {{ post.news }}</p>
-    {% endif %}
+    
     {% if post.read_time %}
       <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</p>
     {% endif %}
