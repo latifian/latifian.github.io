@@ -17,7 +17,7 @@
   <li>
 {% endif %}
 
-<div class="{{ include.type | default: "list" }}__item__{{ post.collection }}">
+<div class="{{ include.type | default: "list" }}__item__">
   <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
     {% if include.type == "grid" and teaser %}
       <div class="archive__item-teaser">
@@ -37,10 +37,7 @@
     </h2>
     {% endif %}
     {% if post.collection == 'news' %}
-    {{ post }}
-    <br>
-      <i>{{ post.date }}. </i> {{ post.news }}
-      <br>
+      <b>{{ post.date | date: "%d/%B/%Y"}}.</b> {{ post.news }}
     {% endif %}
     {% if post.collection == 'publications' %}
         <div> 
@@ -99,7 +96,7 @@
     
         {% if post.collection == 'teaching' %}
           <p> {{ post.type }}, <i>{{ post.venue }}</i></p>
-        {% elsif post.date and post.collection != 'publications' %}
+        {% elsif post.date and post.collection != 'publications' and post.collection != 'news' %}
          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         
         {% elsif post.date and post.collection != 'publications' %}
