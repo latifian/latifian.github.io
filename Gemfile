@@ -8,6 +8,9 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
+group :jekyll_plugins do
+  gem 'jekyll-last-modified-at'
+end
 
 gem "github-pages", group: :jekyll_plugins
 
