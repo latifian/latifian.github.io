@@ -72,7 +72,7 @@
             {% for ca in post.coauthors %}
               {% if forloop.last %}and {% endif %}
             {% if ca == "Me" or ca == "Mohamad Latifian" %}
-            <b>Mohmad Latifian</b>{% unless forloop.last %}, {% endunless %}
+            <span style="font-weight: 550;">Mohamad Latifian</span>{% unless forloop.last %}, {% endunless %}
               {% elsif site.data.authors[ca] %}
                   {% assign x = site.data.authors[ca] %}
                   <a href=" {{ x.url }} ">{{ x.name }}</a>{% unless forloop.last %}, {% endunless %}
