@@ -15,3 +15,15 @@ I am a third year Ph.D. student in <a href="https://web.cs.toronto.edu">Departme
 - Computational Social Choice
 - Algorithmic Game Theory
 - Mechanism Design
+
+{% include base_path %}
+
+{% for post in site.posts reversed %}
+  {% include archive-single.html %}
+{% endfor %}
+
+** NEWS **
+
+{% for post in site.news reversed %}
+  {% include archive-single.html %}
+{% endfor %}
