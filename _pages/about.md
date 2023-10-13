@@ -13,8 +13,8 @@ I am a fourth year Ph.D. student in <a href="https://web.cs.toronto.edu">Departm
 **Research Intrests**
 
 - Computational Social Choice
+- Algorithmic Fairness
 - Algorithmic Game Theory
-- Mechanism Design
 
 **News**
 <ul>
