@@ -19,5 +19,5 @@ I am a third year Ph.D. student in <a href="https://web.cs.toronto.edu">Departme
 **News**
 
 {% for post in site.news reversed %}
-  {% include archive-single.html %}
+  post.date
 {% endfor %}
