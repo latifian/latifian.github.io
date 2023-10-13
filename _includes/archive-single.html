@@ -37,7 +37,9 @@
     </h2>
     {% endif %}
     {% if post.collection == 'news' %}
-      <p> <i>{{ post.date }}. </i> {{ post.news }}</p>
+    {{ post }}
+    <br>
+      <i>{{ post.date }}. </i> {{ post.news }}
       <br>
     {% endif %}
     {% if post.collection == 'publications' %}
