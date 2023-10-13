@@ -37,7 +37,7 @@
     </h2>
     {% endif %}
     {% if post.collection == 'news' %}
-      <b>{{ post.date | date: "%d/%B/%Y"}}.</b> {{ post.news }}
+      <b>{{ post.date | date: "%d %b %Y"}}.</b> {{ post.news }}
     {% endif %}
     {% if post.collection == 'publications' %}
         <div> 
@@ -99,7 +99,7 @@
         {% elsif post.date and post.collection != 'publications' and post.collection != 'news' %}
          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         
-        {% elsif post.date and post.collection != 'publications' %}
+        {% elsif post.date and post.collection != 'publications' and post.collection != 'news' %}
          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Published:" }}</strong> <time datetime="{{ post.date | default: "1900-01-01" | date_to_xmlschema }}">{{ post.date | default: "1900-01-01" | date: "%B %d, %Y" }}</time></p>
         {% endif %}
 
