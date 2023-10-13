@@ -17,9 +17,8 @@ I am a third year Ph.D. student in <a href="https://web.cs.toronto.edu">Departme
 - Mechanism Design
 
 **News**
-
+<ul>
 {% for post in site.news reversed %}
-  {{ post.date }}
-  <br>
   {% include archive-single.html %}
 {% endfor %}
+</ul>
