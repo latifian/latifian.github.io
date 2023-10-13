@@ -17,6 +17,7 @@
 }
 
 .page {
+   text-align: justify;
   @include breakpoint($large) {
     @include span(10 of 12 last);
     @include prefix(0.5 of 12);
@@ -32,7 +33,6 @@
       @include full();
     }
   }
-   text-align: justify;
 }
 
 .page__title {
