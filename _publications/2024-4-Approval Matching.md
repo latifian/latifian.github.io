@@ -4,5 +4,6 @@ title: "The Distortion of Threshold Approval Matching"
 collection: publications
 coauthors: ["Me", "Alex"]
 paperurl: "http://arxiv.org/abs/2401.09858"
-date: 2024-12-20
+type: working
+date: 3000-02-01
 ---
