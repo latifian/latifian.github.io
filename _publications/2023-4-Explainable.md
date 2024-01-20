@@ -1,5 +1,5 @@
 ---
-title: "Distortion of Explainable Voting Rules"
+title: "Explainable and Efficient Randomized Voting Rules"
 collection: publications
 coauthors: ["Aris", "Soroush", "Me", "Nisarg"]
 paperurl: "https://www.cs.toronto.edu/~nisarg/papers/explainable-distortion.pdf"
