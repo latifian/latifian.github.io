@@ -1,4 +1,16 @@
 # Authors
+Alex:
+  name        : "Alexandros Voudouris"
+  url         : "https://www.alexvoudouris.com"
+
+Martin:
+  name        : "Martin Bullinger"
+  url         : "https://www.cs.ox.ac.uk/people/martin.bullinger/"
+
+Edith:
+  name        : "Edith Elkind"
+  url         : "https://www.cs.ox.ac.uk/people/edith.elkind/"
+  
 Sid:
   name        : "Siddharth Barman"
   url         : "https://www.csa.iisc.ac.in/~barman/"
