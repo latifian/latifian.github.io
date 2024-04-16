@@ -5,7 +5,7 @@ coauthors: ["Aris", "Soroush", "Me", "Nisarg"]
 type: conf
 shortvenue: "AAMAS '24"
 venue: "The 23rd International Conference on Autonomous Agents and Multiagent Systems"
-fulladdress: "Proc. The 23rd International Conference on Autonomous Agents and Multi-Agent Systems (Forthcoming)"
+fulladdress: "Proc. of The 23rd International Conference on Autonomous Agents and Multi-Agent Systems (Forthcoming)"
 venueurl: "https://www.aamas2024-conference.auckland.ac.nz"
 paperurl: "/files/papers/2024/distortion-computation.pdf"
 date: 2024-05-06
