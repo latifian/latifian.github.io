@@ -1,5 +1,5 @@
 ---
-title: "Voting with Intensive Preferences"
+title: "Voting with Preference Intensities"
 collection: publications
 date: 2023-02-07
 venue: "Thirty-Eigth AAAI Confrenece on Artificial Intelligence"
