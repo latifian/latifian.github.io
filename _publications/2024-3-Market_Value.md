@@ -8,4 +8,5 @@ venueurl: 'https://aaai.org/Conferences/AAAI-25/'
 fulladdress: "Proc. of 39th AAAI Conference on Artificial Intelligence (Forthcoming)"
 type: 'conf'
 date: 2025-02-25
+paperurl: "https://arxiv.org/pdf/2410.23137"
 ---
