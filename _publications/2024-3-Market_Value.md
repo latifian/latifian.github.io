@@ -2,6 +2,10 @@
 title: "Fair Division with Market Values"
 collection: publications
 coauthors: ["Sid", "Soroush", "Me", "Nisarg"]
-type: working
-date: 3000-02-01
+venue: "Thirty-Ninth AAAI Confrenece on Artificial Intelligence"
+shortvenue: "AAAI '25"
+venueurl: 'https://aaai.org/Conferences/AAAI-25/'
+fulladdress: "Proc. of 39th AAAI Conference on Artificial Intelligence (Forthcoming)"
+type: 'conf'
+date: 2025-02-25
 ---
