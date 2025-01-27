@@ -42,9 +42,9 @@
     {% if post.collection == 'publications' %}
         <div> 
           {% if post.short %}
-          <b id="{{ post.short }}" class="pubtitle">{{ title }}</b>
+          <b id="{{ post.short }}" class="pubtitle" style="float: left">{{ title }}</b>
           {% else %}
-          <b class="pubtitle">{{ title }}</b>
+          <b class="pubtitle" style="float: left">{{ title }}</b>
           {% endif %}
           {% if post.drafturl %}
           <span class="publinks" style="float: right"> <small>[ <a href=" {{ post.drafturl }} ">Draft</a> ]</small></span>
