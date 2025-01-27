@@ -85,7 +85,7 @@
       <br>
       {% if post.collection == 'publications' and post.shortvenue and post.venueurl %}
           <small class="pubvenue">
-            In <a href=" {{ post.venueurl }}">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
+            In <a href=" {{ post.venueurl }}"  style="font-weight: 550;">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
           </small> 
       {% else %}
     {% if post.collection == 'publications' and post.fulladdress %}
