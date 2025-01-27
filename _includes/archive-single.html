@@ -42,16 +42,16 @@
     {% if post.collection == 'publications' %}
         <div> 
           {% if post.short %}
-          <b id="{{ post.short }}" class="pubtitle" style="float: left">{{ title }}</b>
+          <b id="{{ post.short }}" class="pubtitle">{{ title }}</b>
           {% else %}
-          <b class="pubtitle" style="float: left">{{ title }}</b>
+          <b class="pubtitle">{{ title }}</b>
           {% endif %}
           {% if post.drafturl %}
           <span class="publinks" style="float: right"> <small>[ <a href=" {{ post.drafturl }} ">Draft</a> ]</small></span>
-            {% endif %}
-          {% if post.paperurl %}
-          <span class="publinks" style="float: right"> <small> [ <a href=" {{ post.paperurl }} ">Paper</a>
-          {% if post.fullurl %}
+            {% else %}
+            {% if post.paperurl %}
+            <span class="publinks" style="float: right"> <small> [ <a href=" {{ post.paperurl }} ">Paper</a>
+            {% if post.fullurl %}
             | <a href=" {{ post.fullurl }} ">Full Version</a> 
           {% endif %}
           {% if post.slideurl %}
@@ -61,8 +61,10 @@
             | <a href=" {{ post.videourl }} ">Video</a> 
           {% endif %}
             ]</small> </span>
+          {% else %}
+           <span class="publinks" style="float: right"> <small> </small></span>
           {% endif %}
-          
+          {% endif %}
         </div>
     {% endif %}
     
