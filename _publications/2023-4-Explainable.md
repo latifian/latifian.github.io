@@ -7,6 +7,6 @@ type: 'conf'
 date: 2023-12-12
 venue: "37th Conference on Neural Information Processing Systems"
 shortvenue: "NeurIPS '23"
-fulladdress: "Proc. of 37th Conference on Neural Information Processing Systems, 36"
+fulladdress: "Proc. of 37th Conference on Neural Information Processing Systems, 36."
 venueurl: 'https://neurips.cc/Conferences/2023'
 ---
