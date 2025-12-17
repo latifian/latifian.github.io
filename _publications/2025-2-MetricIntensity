@@ -3,6 +3,11 @@ short: "MetricIntensity"
 title: "Metric Distortion with Preference Intensities"
 collection: publications
 coauthors: ["Mehrad Abbaszadeh", "Ali Ansarifar", "Me", "Masoud"]
-type: working
-date: 3000-05-19
+type: conf
+date: 2026-01-19
+venue: "Fortieth AAAI Confrenece on Artificial Intelligence"
+shortvenue: "AAAI '26"
+venueurl: 'https://aaai.org/conference/aaai/aaai-26/'
+fulladdress: "Proc. of 40th AAAI
+Conference on Artificial Intelligence"
 ---
