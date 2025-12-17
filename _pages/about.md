@@ -12,10 +12,7 @@ I am a postdoctoral research associate (PDRA) in the <a href="https://informatic
 
 <br>
 **Research Intrests**
-
-- Computational Social Choice
-- Algorithmic Fairness
-- Algorithmic Game Theory
+My research lies at the intersection of theoretical computer science, artificial intelligence, and economics, with an emphasis on algorithms and computational complexity. In particular, I am quite interested in problems related to social choice theory, fair division, algorithmic game theory and mechanism design. 
 
 <br>
 
