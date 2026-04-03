@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transitions Gallery</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --ink: #12253f;
+      --muted: #516987;
+      --card: #ffffff;
+      --line: #d5e0ef;
+      --accent: #2f68b8;
+      --accent-soft: #e7f0ff;
+      --done-soft: #eafbf0;
+      --done-line: #bfe8cc;
+      --bad-soft: #fff2f2;
+      --bad-line: #efcaca;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, #dce8ff 0, transparent 34%),
+        radial-gradient(circle at 88% 0%, #e8fff2 0, transparent 28%),
+        var(--bg);
+    }
+    .layout {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .tabs {
+      display: inline-flex;
+      gap: 8px;
+      background: #ffffffcc;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px;
+      backdrop-filter: blur(6px);
+    }
+    .tab {
+      text-decoration: none;
+      color: #315074;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: background .16s ease, color .16s ease;
+    }
+    .tab:hover { background: #edf4ff; }
+    .tab.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .ctaButton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(180deg, #2f68b8, #24579f);
+      border: 1px solid #1f4f92;
+      border-radius: 10px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 20px rgba(36, 87, 159, 0.25);
+      transition: transform .12s ease, box-shadow .16s ease, filter .16s ease;
+    }
+    .ctaButton:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(36, 87, 159, 0.30);
+      filter: brightness(1.03);
+    }
+    .automataFrame {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15, 37, 66, 0.08);
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(140deg, #ffffff, #f8fbff);
+      padding: 18px 20px;
+      box-shadow: 0 10px 28px rgba(15, 37, 66, 0.08);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 980px;
+    }
+    .build {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: 0 6px 22px rgba(15, 37, 66, 0.07);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+    .panel p, .panel li {
+      color: #233f61;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .panel ol {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .tile {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 5px 18px rgba(15, 37, 66, 0.06);
+    }
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(15, 37, 66, 0.13);
+      border-color: #b8cde9;
+    }
+    .tileTop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e6edf7;
+    }
+    .tile h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+    .badge {
+      border-radius: 999px;
+      border: 1px solid #c9d8ea;
+      background: #f3f8ff;
+      color: #2d4f79;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+    .tile img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #fff;
+    }
+    .tileBody {
+      padding: 10px 12px 12px;
+      font-size: 13px;
+      color: #345173;
+    }
+    .mono {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+    .status-done {
+      background: linear-gradient(180deg, var(--done-soft), #fff);
+      border-color: var(--done-line);
+    }
+    .status-bad {
+      background: linear-gradient(180deg, var(--bad-soft), #fff);
+      border-color: var(--bad-line);
+    }
+    .route {
+      margin-top: 8px;
+      font-weight: 600;
+      color: #2d4f79;
+    }
+    .metaLine {
+      color: #476386;
+      margin-top: 4px;
+      line-height: 1.45;
+      font-size: 13px;
+    }
+    .sectionTitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .sectionTitle h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footnote {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #486282;
+      line-height: 1.5;
+    }
+    .group {
+      margin-bottom: 18px;
+    }
+    .group h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+    .sourceHeader {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 12px;
+    }
+    .sourcePreview {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(15, 37, 66, 0.08);
+    }
+    .sourcePreview img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+    .ruleHero {
+      border: 1px solid #b7ccef;
+      border-radius: 12px;
+      background: linear-gradient(160deg, #eef5ff, #f9fbff);
+      padding: 12px 14px;
+      box-shadow: 0 6px 20px rgba(47, 104, 184, 0.10);
+    }
+    .ruleHero .k {
+      margin: 0 0 6px;
+      color: #35587f;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ruleHero .graphName {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #123159;
+    }
+    .ruleHero .ruleText {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.45;
+      color: #13355f;
+      font-weight: 700;
+      background: #ffffffcc;
+      border: 1px solid #d5e3f8;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .empty {
+      border: 1px dashed #c4d3e8;
+      border-radius: 10px;
+      padding: 12px;
+      color: #567194;
+      background: #f8fbff;
+      font-size: 13px;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 35, 0.68);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 3000;
+    }
+    .modal.open { display: flex; }
+    .modalCard {
+      width: min(1200px, 94vw);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 14px;
+      border: 1px solid #c9d6ea;
+      background: #fff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.34);
+      padding: 14px;
+    }
+    .modalTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .modalTitle {
+      margin: 0;
+      font-size: 20px;
+    }
+    .closeBtn {
+      border: 1px solid #bfd0e7;
+      background: #f5f9ff;
+      color: #2d4f79;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .modalActions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .navBtn {
+      width: 34px;
+      height: 32px;
+      border: 1px solid #bfd0e7;
+      background: #edf5ff;
+      color: #204d8a;
+      border-radius: 8px;
+      padding: 0;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .14s ease, transform .12s ease;
+    }
+    .navBtn:hover {
+      background: #deebff;
+      transform: translateY(-1px);
+    }
+    .navBtn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .modalGrid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 12px;
+    }
+    .modalImageWrap {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .modalImageWrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-in;
+    }
+    .infoBlock {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fbfdff;
+      margin-bottom: 8px;
+    }
+    .infoKey {
+      margin: 0 0 4px;
+      color: #567194;
+      font-size: 12px;
+    }
+    .infoVal {
+      margin: 0;
+      font-size: 14px;
+      color: #193556;
+      line-height: 1.45;
+    }
+    .zoomModal img {
+      width: auto;
+      max-width: min(96vw, 1700px);
+      max-height: 92vh;
+      border-radius: 10px;
+      border: 1px solid #c8d5ea;
+      background: #fff;
+    }
+    .hint {
+      margin-top: 6px;
+      color: #567194;
+      font-size: 12px;
+    }
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    @media (max-width: 1100px) {
+      .modalGrid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .hero h1 { font-size: 24px; }
+      .tabs { width: 100%; overflow-x: auto; }
+      .tab { white-space: nowrap; }
+    }
+    @media (max-width: 980px) {
+      .sourceHeader { grid-template-columns: 1fr; }
+    }
+  </style>
+
+</head>
+<body>
+  <div class="layout">
+    <div class="topbar">
+      <div class="brand">EF Cake Graph Explorer</div>
+      <nav class="tabs">
+<a class="tab" href="index.html">Valid Graphs</a>
+<a class="tab active" href="transitions.html">Transitions Gallery</a>
+<a class="tab" href="automata.html">State Transition Graph</a>
+</nav>
+    </div>
+    <section class="hero">
+      <h1>Transition Gallery</h1>
+      <p>
+        Transitions are grouped by source graph. Each card clearly shows source and destination.
+        Cards ending at <span class="mono">BAD</span> have a light red tone; cards ending at
+        <span class="mono">DONE</span> have a light green tone.
+      </p>
+      <div class="build">Build: 2026-04-01 17:22:33</div>
+    </section>
+    <section class="panel">
+      <h2>Critical Transition Definition</h2>
+      <p>
+        Starting from a graph, if we remove the critical edge (red) and add the appearing edge (green),
+        and the resulting graph is valid, then the transition is not critical.
+      </p>
+    </section>
+
+    
+      <section class="group panel" id="graph-1">
+        <div class="sourceHeader">
+          <a class="sourcePreview" href="../valid_bipartite_5x5_8edges_mincross/graph_001.svg" target="_blank" rel="noopener">
+            <img src="../valid_bipartite_5x5_8edges_mincross/graph_001.svg" alt="Graph 1 source graph" />
+          </a>
+          <div class="ruleHero">
+            <p class="k">Source Graph</p>
+            <p class="graphName">Graph 1</p>
+            <p class="ruleText">Rule: Shrink b5</p>
+            
+          </div>
+        </div>
+        <div class="grid">
+          <div class="empty">No critical transition SVGs from this graph.</div>
+        </div>
+      </section>
+
+      <section class="group panel" id="graph-2">
+        <div class="sourceHeader">
+          <a class="sourcePreview" href="../valid_bipartite_5x5_8edges_mincross/graph_002.svg" target="_blank" rel="noopener">
+            <img src="../valid_bipartite_5x5_8edges_mincross/graph_002.svg" alt="Graph 2 source graph" />
+          </a>
+          <div class="ruleHero">
+            <p class="k">Source Graph</p>
+            <p class="graphName">Graph 2</p>
+            <p class="ruleText">Rule: Shrink b5</p>
+            
+          </div>
+        </div>
+        <div class="grid">
+          <div class="empty">No critical transition SVGs from this graph.</div>
+        </div>
+      </section>
+
+      <section class="group panel" id="graph-3">
+        <div class="sourceHeader">
+          <a class="sourcePreview" href="../valid_bipartite_5x5_8edges_mincross/graph_003.svg" target="_blank" rel="noopener">
+            <img src="../valid_bipartite_5x5_8edges_mincross/graph_003.svg" alt="Graph 3 source graph" />
+          </a>
+          <div class="ruleHero">
+            <p class="k">Source Graph</p>
+            <p class="graphName">Graph 3</p>
+            <p class="ruleText">Rule: Shrink b5</p>
+            
+          </div>
+        </div>
+        <div class="grid">
+          
+          <article class="tile status-bad transitionTile" data-transition-id="G3T1">
+            <div class="tileTop">
+              <h3>G3T1</h3>
+              <span class="badge">BAD</span>
+            </div>
+            <img src="G3T1.svg" alt="G3T1" />
+            <div class="tileBody">
+              <div class="route">Graph 3 -> BAD</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a4-b5</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a4-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G3T2">
+            <div class="tileTop">
+              <h3>G3T2</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G3T2.svg" alt="G3T2" />
+            <div class="tileBody">
+              <div class="route">Graph 3 -> Graph 5</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a4-b5</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a4-b4</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a4-b4 | Removed: a1-b4</span></div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="group panel" id="graph-4">
+        <div class="sourceHeader">
+          <a class="sourcePreview" href="../valid_bipartite_5x5_8edges_mincross/graph_004.svg" target="_blank" rel="noopener">
+            <img src="../valid_bipartite_5x5_8edges_mincross/graph_004.svg" alt="Graph 4 source graph" />
+          </a>
+          <div class="ruleHero">
+            <p class="k">Source Graph</p>
+            <p class="graphName">Graph 4</p>
+            <p class="ruleText">Rule: Shrink b5</p>
+            
+          </div>
+        </div>
+        <div class="grid">
+          
+          <article class="tile status-done transitionTile" data-transition-id="G4T1">
+            <div class="tileTop">
+              <h3>G4T1</h3>
+              <span class="badge">DONE</span>
+            </div>
+            <img src="G4T1.svg" alt="G4T1" />
+            <div class="tileBody">
+              <div class="route">Graph 4 -> DONE</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a4-b5</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a4-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G4T2">
+            <div class="tileTop">
+              <h3>G4T2</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G4T2.svg" alt="G4T2" />
+            <div class="tileBody">
+              <div class="route">Graph 4 -> Graph 6</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a4-b5</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a4-b3</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a4-b3 | Removed: a1-b3</span></div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="group panel" id="graph-5">
+        <div class="sourceHeader">
+          <a class="sourcePreview" href="../valid_bipartite_5x5_8edges_mincross/graph_005.svg" target="_blank" rel="noopener">
+            <img src="../valid_bipartite_5x5_8edges_mincross/graph_005.svg" alt="Graph 5 source graph" />
+          </a>
+          <div class="ruleHero">
+            <p class="k">Source Graph</p>
+            <p class="graphName">Graph 5</p>
+            <p class="ruleText">Rule: Keep b4 and b5 equal for a3</p>
+            
+          </div>
+        </div>
+        <div class="grid">
+          
+          <article class="tile transitionTile" data-transition-id="G5T1">
+            <div class="tileTop">
+              <h3>G5T1</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G5T1.svg" alt="G5T1" />
+            <div class="tileBody">
+              <div class="route">Graph 5 -> Graph 2</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a1-b1</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a1-b4</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a1-b4 | Removed: a3-b4</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G5T2">
+            <div class="tileTop">
+              <h3>G5T2</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G5T2.svg" alt="G5T2" />
+            <div class="tileBody">
+              <div class="route">Graph 5 -> Graph 3</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a1-b1</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a1-b5</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a1-b5 | Removed: a3-b5</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-bad transitionTile" data-transition-id="G5T3">
+            <div class="tileTop">
+              <h3>G5T3</h3>
+              <span class="badge">BAD</span>
+            </div>
+            <img src="G5T3.svg" alt="G5T3" />
+            <div class="tileBody">
+              <div class="route">Graph 5 -> BAD</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a2-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a2-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G5T4">
+            <div class="tileTop">
+              <h3>G5T4</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G5T4.svg" alt="G5T4" />
+            <div class="tileBody">
+              <div class="route">Graph 5 -> Graph 5</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a2-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a2-b5</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a2-b5 | Removed: a3-b5</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-bad transitionTile" data-transition-id="G5T5">
+            <div class="tileTop">
+              <h3>G5T5</h3>
+              <span class="badge">BAD</span>
+            </div>
+            <img src="G5T5.svg" alt="G5T5" />
+            <div class="tileBody">
+              <div class="route">Graph 5 -> BAD</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-bad transitionTile" data-transition-id="G5T6">
+            <div class="tileTop">
+              <h3>G5T6</h3>
+              <span class="badge">BAD</span>
+            </div>
+            <img src="G5T6.svg" alt="G5T6" />
+            <div class="tileBody">
+              <div class="route">Graph 5 -> BAD</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b5</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="group panel" id="graph-6">
+        <div class="sourceHeader">
+          <a class="sourcePreview" href="../valid_bipartite_5x5_8edges_mincross/graph_006.svg" target="_blank" rel="noopener">
+            <img src="../valid_bipartite_5x5_8edges_mincross/graph_006.svg" alt="Graph 6 source graph" />
+          </a>
+          <div class="ruleHero">
+            <p class="k">Source Graph</p>
+            <p class="graphName">Graph 6</p>
+            <p class="ruleText">Rule: Keep b4 and b5 equal for a4</p>
+            <p class="small" style="margin-top:8px;"><a class="tab" href="graph6_transition_choices.html">Choose actions for Graph 6 transitions</a></p>
+          </div>
+        </div>
+        <div class="grid">
+          
+          <article class="tile transitionTile" data-transition-id="G6T1">
+            <div class="tileTop">
+              <h3>G6T1</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G6T1.svg" alt="G6T1" />
+            <div class="tileBody">
+              <div class="route">Graph 6 -> Graph 4</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a1-b1</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a1-b4</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a1-b4 | Removed: a4-b4</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G6T2">
+            <div class="tileTop">
+              <h3>G6T2</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G6T2.svg" alt="G6T2" />
+            <div class="tileBody">
+              <div class="route">Graph 6 -> Graph 4</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a1-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a1-b4</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a1-b4 | Removed: a4-b4</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-done transitionTile" data-transition-id="G6T3">
+            <div class="tileTop">
+              <h3>G6T3</h3>
+              <span class="badge">DONE</span>
+            </div>
+            <img src="G6T3.svg" alt="G6T3" />
+            <div class="tileBody">
+              <div class="route">Graph 6 -> DONE</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G6T4">
+            <div class="tileTop">
+              <h3>G6T4</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G6T4.svg" alt="G6T4" />
+            <div class="tileBody">
+              <div class="route">Graph 6 -> Graph 8</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b3</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a3-b3 | Removed: a1-b3</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G6T5">
+            <div class="tileTop">
+              <h3>G6T5</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G6T5.svg" alt="G6T5" />
+            <div class="tileBody">
+              <div class="route">Graph 6 -> Graph 6</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b5</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a3-b5 | Removed: a4-b5</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-done transitionTile" data-transition-id="G6T6">
+            <div class="tileTop">
+              <h3>G6T6</h3>
+              <span class="badge">DONE</span>
+            </div>
+            <img src="G6T6.svg" alt="G6T6" />
+            <div class="tileBody">
+              <div class="route">Graph 6 -> DONE</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a4-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a4-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G6T7">
+            <div class="tileTop">
+              <h3>G6T7</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G6T7.svg" alt="G6T7" />
+            <div class="tileBody">
+              <div class="route">Graph 6 -> Graph 7</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a4-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a4-b3</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a4-b3 | Removed: a1-b3</span></div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="group panel" id="graph-7">
+        <div class="sourceHeader">
+          <a class="sourcePreview" href="../valid_bipartite_5x5_8edges_mincross/graph_007.svg" target="_blank" rel="noopener">
+            <img src="../valid_bipartite_5x5_8edges_mincross/graph_007.svg" alt="Graph 7 source graph" />
+          </a>
+          <div class="ruleHero">
+            <p class="k">Source Graph</p>
+            <p class="graphName">Graph 7</p>
+            <p class="ruleText">Rule: Keep b3, b4, b5 equal for a3</p>
+            
+          </div>
+        </div>
+        <div class="grid">
+          
+          <article class="tile transitionTile" data-transition-id="G7T1">
+            <div class="tileTop">
+              <h3>G7T1</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G7T1.svg" alt="G7T1" />
+            <div class="tileBody">
+              <div class="route">Graph 7 -> Graph 6</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a1-b1</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a1-b3</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a1-b3 | Removed: a3-b3</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-done transitionTile" data-transition-id="G7T2">
+            <div class="tileTop">
+              <h3>G7T2</h3>
+              <span class="badge">DONE</span>
+            </div>
+            <img src="G7T2.svg" alt="G7T2" />
+            <div class="tileBody">
+              <div class="route">Graph 7 -> DONE</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a2-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a2-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G7T3">
+            <div class="tileTop">
+              <h3>G7T3</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G7T3.svg" alt="G7T3" />
+            <div class="tileBody">
+              <div class="route">Graph 7 -> Graph 8</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a2-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a2-b4</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a2-b4 | Removed: a3-b4</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-done transitionTile" data-transition-id="G7T4">
+            <div class="tileTop">
+              <h3>G7T4</h3>
+              <span class="badge">DONE</span>
+            </div>
+            <img src="G7T4.svg" alt="G7T4" />
+            <div class="tileBody">
+              <div class="route">Graph 7 -> DONE</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="group panel" id="graph-8">
+        <div class="sourceHeader">
+          <a class="sourcePreview" href="../valid_bipartite_5x5_8edges_mincross/graph_008.svg" target="_blank" rel="noopener">
+            <img src="../valid_bipartite_5x5_8edges_mincross/graph_008.svg" alt="Graph 8 source graph" />
+          </a>
+          <div class="ruleHero">
+            <p class="k">Source Graph</p>
+            <p class="graphName">Graph 8</p>
+            <p class="ruleText">Rule: Keep b3 and b4 equal for a3, and b4 and b5 equal for a4</p>
+            
+          </div>
+        </div>
+        <div class="grid">
+          
+          <article class="tile transitionTile" data-transition-id="G8T1">
+            <div class="tileTop">
+              <h3>G8T1</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G8T1.svg" alt="G8T1" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> Graph 6</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a1-b1</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a1-b3</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a1-b3 | Removed: a3-b3</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-bad transitionTile" data-transition-id="G8T2">
+            <div class="tileTop">
+              <h3>G8T2</h3>
+              <span class="badge">BAD</span>
+            </div>
+            <img src="G8T2.svg" alt="G8T2" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> BAD</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a1-b1</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a1-b4</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-done transitionTile" data-transition-id="G8T3">
+            <div class="tileTop">
+              <h3>G8T3</h3>
+              <span class="badge">DONE</span>
+            </div>
+            <img src="G8T3.svg" alt="G8T3" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> DONE</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a2-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a2-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G8T4">
+            <div class="tileTop">
+              <h3>G8T4</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G8T4.svg" alt="G8T4" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> Graph 8</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a2-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a2-b4</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a2-b4 | Removed: a3-b4</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G8T5">
+            <div class="tileTop">
+              <h3>G8T5</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G8T5.svg" alt="G8T5" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> Graph 8</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a2-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a2-b5</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a2-b5 | Removed: a4-b5</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-done transitionTile" data-transition-id="G8T6">
+            <div class="tileTop">
+              <h3>G8T6</h3>
+              <span class="badge">DONE</span>
+            </div>
+            <img src="G8T6.svg" alt="G8T6" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> DONE</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G8T7">
+            <div class="tileTop">
+              <h3>G8T7</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G8T7.svg" alt="G8T7" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> Graph 7</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b3</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b5</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a3-b5 | Removed: a4-b5</span></div>
+            </div>
+          </article>
+
+          <article class="tile status-done transitionTile" data-transition-id="G8T8">
+            <div class="tileTop">
+              <h3>G8T8</h3>
+              <span class="badge">DONE</span>
+            </div>
+            <img src="G8T8.svg" alt="G8T8" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> DONE</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b1</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: - | Removed: -</span></div>
+            </div>
+          </article>
+
+          <article class="tile transitionTile" data-transition-id="G8T9">
+            <div class="tileTop">
+              <h3>G8T9</h3>
+              <span class="badge">GRAPH</span>
+            </div>
+            <img src="G8T9.svg" alt="G8T9" />
+            <div class="tileBody">
+              <div class="route">Graph 8 -> Graph 7</div>
+              <div class="metaLine"><span style="color:#c52d2d">Critical:</span> <span class="mono">a3-b4</span></div>
+              <div class="metaLine"><span style="color:#1f9d64">Appearing:</span> <span class="mono">a3-b5</span></div>
+              <div class="metaLine"><span>Change:</span> <span class="mono">Added: a3-b5 | Removed: a4-b5</span></div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+  </div>
+
+  <div id="detailModal" class="modal">
+    <div class="modalCard">
+      <div class="modalTop">
+        <h3 id="modalTitle" class="modalTitle"></h3>
+        <div class="modalActions">
+          <button id="prevTransitionBtn" class="navBtn" type="button" aria-label="Previous transition">←</button>
+          <button id="nextTransitionBtn" class="navBtn" type="button" aria-label="Next transition">→</button>
+          <button id="closeDetailModal" class="closeBtn" type="button">Close</button>
+        </div>
+      </div>
+      <div class="modalGrid">
+        <div class="modalImageWrap">
+          <img id="modalImage" src="" alt="Transition details" />
+          <div class="hint" style="padding:8px 10px;">Click image to open larger view.</div>
+        </div>
+        <div id="modalInfo"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="zoomModal" class="modal zoomModal">
+    <img id="zoomImage" alt="Zoomed view" />
+  </div>
+
+  <script>
+    const TRANSITIONS = {"G3T1": {"id": "G3T1", "source": "G3", "source_num": 3, "transition_num": 1, "target": "BAD", "target_label": "BAD", "status": "bad", "kind": "bad", "critical_edge": "a4-b5", "appearing_edge": "a4-b1", "added": [], "removed": [], "image": "G3T1.svg", "rule": "Shrink b5"}, "G3T2": {"id": "G3T2", "source": "G3", "source_num": 3, "transition_num": 2, "target": "G5", "target_label": "Graph 5", "status": "graph", "kind": "transition", "critical_edge": "a4-b5", "appearing_edge": "a4-b4", "added": [[4, 4]], "removed": [[1, 4]], "image": "G3T2.svg", "rule": "Shrink b5"}, "G4T1": {"id": "G4T1", "source": "G4", "source_num": 4, "transition_num": 1, "target": "DONE", "target_label": "DONE", "status": "done", "kind": "done", "critical_edge": "a4-b5", "appearing_edge": "a4-b1", "added": [], "removed": [], "image": "G4T1.svg", "rule": "Shrink b5"}, "G4T2": {"id": "G4T2", "source": "G4", "source_num": 4, "transition_num": 2, "target": "G6", "target_label": "Graph 6", "status": "graph", "kind": "transition", "critical_edge": "a4-b5", "appearing_edge": "a4-b3", "added": [[4, 3]], "removed": [[1, 3]], "image": "G4T2.svg", "rule": "Shrink b5"}, "G5T1": {"id": "G5T1", "source": "G5", "source_num": 5, "transition_num": 1, "target": "G2", "target_label": "Graph 2", "status": "graph", "kind": "transition", "critical_edge": "a1-b1", "appearing_edge": "a1-b4", "added": [[1, 4]], "removed": [[3, 4]], "image": "G5T1.svg", "rule": "Keep b4 and b5 equal for a3"}, "G5T2": {"id": "G5T2", "source": "G5", "source_num": 5, "transition_num": 2, "target": "G3", "target_label": "Graph 3", "status": "graph", "kind": "transition", "critical_edge": "a1-b1", "appearing_edge": "a1-b5", "added": [[1, 5]], "removed": [[3, 5]], "image": "G5T2.svg", "rule": "Keep b4 and b5 equal for a3"}, "G5T3": {"id": "G5T3", "source": "G5", "source_num": 5, "transition_num": 3, "target": "BAD", "target_label": "BAD", "status": "bad", "kind": "bad", "critical_edge": "a2-b4", "appearing_edge": "a2-b1", "added": [], "removed": [], "image": "G5T3.svg", "rule": "Keep b4 and b5 equal for a3"}, "G5T4": {"id": "G5T4", "source": "G5", "source_num": 5, "transition_num": 4, "target": "G5", "target_label": "Graph 5", "status": "graph", "kind": "transition", "critical_edge": "a2-b4", "appearing_edge": "a2-b5", "added": [[2, 5]], "removed": [[3, 5]], "image": "G5T4.svg", "rule": "Keep b4 and b5 equal for a3"}, "G5T5": {"id": "G5T5", "source": "G5", "source_num": 5, "transition_num": 5, "target": "BAD", "target_label": "BAD", "status": "bad", "kind": "bad", "critical_edge": "a3-b4", "appearing_edge": "a3-b1", "added": [], "removed": [], "image": "G5T5.svg", "rule": "Keep b4 and b5 equal for a3"}, "G5T6": {"id": "G5T6", "source": "G5", "source_num": 5, "transition_num": 6, "target": "BAD", "target_label": "BAD", "status": "bad", "kind": "bad", "critical_edge": "a3-b5", "appearing_edge": "a3-b1", "added": [], "removed": [], "image": "G5T6.svg", "rule": "Keep b4 and b5 equal for a3"}, "G6T1": {"id": "G6T1", "source": "G6", "source_num": 6, "transition_num": 1, "target": "G4", "target_label": "Graph 4", "status": "graph", "kind": "transition", "critical_edge": "a1-b1", "appearing_edge": "a1-b4", "added": [[1, 4]], "removed": [[4, 4]], "image": "G6T1.svg", "rule": "Keep b4 and b5 equal for a4"}, "G6T2": {"id": "G6T2", "source": "G6", "source_num": 6, "transition_num": 2, "target": "G4", "target_label": "Graph 4", "status": "graph", "kind": "transition", "critical_edge": "a1-b3", "appearing_edge": "a1-b4", "added": [[1, 4]], "removed": [[4, 4]], "image": "G6T2.svg", "rule": "Keep b4 and b5 equal for a4"}, "G6T3": {"id": "G6T3", "source": "G6", "source_num": 6, "transition_num": 3, "target": "DONE", "target_label": "DONE", "status": "done", "kind": "done", "critical_edge": "a3-b4", "appearing_edge": "a3-b1", "added": [], "removed": [], "image": "G6T3.svg", "rule": "Keep b4 and b5 equal for a4"}, "G6T4": {"id": "G6T4", "source": "G6", "source_num": 6, "transition_num": 4, "target": "G8", "target_label": "Graph 8", "status": "graph", "kind": "transition", "critical_edge": "a3-b4", "appearing_edge": "a3-b3", "added": [[3, 3]], "removed": [[1, 3]], "image": "G6T4.svg", "rule": "Keep b4 and b5 equal for a4"}, "G6T5": {"id": "G6T5", "source": "G6", "source_num": 6, "transition_num": 5, "target": "G6", "target_label": "Graph 6", "status": "graph", "kind": "transition", "critical_edge": "a3-b4", "appearing_edge": "a3-b5", "added": [[3, 5]], "removed": [[4, 5]], "image": "G6T5.svg", "rule": "Keep b4 and b5 equal for a4"}, "G6T6": {"id": "G6T6", "source": "G6", "source_num": 6, "transition_num": 6, "target": "DONE", "target_label": "DONE", "status": "done", "kind": "done", "critical_edge": "a4-b4", "appearing_edge": "a4-b1", "added": [], "removed": [], "image": "G6T6.svg", "rule": "Keep b4 and b5 equal for a4"}, "G6T7": {"id": "G6T7", "source": "G6", "source_num": 6, "transition_num": 7, "target": "G7", "target_label": "Graph 7", "status": "graph", "kind": "transition", "critical_edge": "a4-b4", "appearing_edge": "a4-b3", "added": [[4, 3]], "removed": [[1, 3]], "image": "G6T7.svg", "rule": "Keep b4 and b5 equal for a4"}, "G7T1": {"id": "G7T1", "source": "G7", "source_num": 7, "transition_num": 1, "target": "G6", "target_label": "Graph 6", "status": "graph", "kind": "transition", "critical_edge": "a1-b1", "appearing_edge": "a1-b3", "added": [[1, 3]], "removed": [[3, 3]], "image": "G7T1.svg", "rule": "Keep b3, b4, b5 equal for a3"}, "G7T2": {"id": "G7T2", "source": "G7", "source_num": 7, "transition_num": 2, "target": "DONE", "target_label": "DONE", "status": "done", "kind": "done", "critical_edge": "a2-b3", "appearing_edge": "a2-b1", "added": [], "removed": [], "image": "G7T2.svg", "rule": "Keep b3, b4, b5 equal for a3"}, "G7T3": {"id": "G7T3", "source": "G7", "source_num": 7, "transition_num": 3, "target": "G8", "target_label": "Graph 8", "status": "graph", "kind": "transition", "critical_edge": "a2-b3", "appearing_edge": "a2-b4", "added": [[2, 4]], "removed": [[3, 4]], "image": "G7T3.svg", "rule": "Keep b3, b4, b5 equal for a3"}, "G7T4": {"id": "G7T4", "source": "G7", "source_num": 7, "transition_num": 4, "target": "DONE", "target_label": "DONE", "status": "done", "kind": "done", "critical_edge": "a3-b3", "appearing_edge": "a3-b1", "added": [], "removed": [], "image": "G7T4.svg", "rule": "Keep b3, b4, b5 equal for a3"}, "G8T1": {"id": "G8T1", "source": "G8", "source_num": 8, "transition_num": 1, "target": "G6", "target_label": "Graph 6", "status": "graph", "kind": "transition", "critical_edge": "a1-b1", "appearing_edge": "a1-b3", "added": [[1, 3]], "removed": [[3, 3]], "image": "G8T1.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}, "G8T2": {"id": "G8T2", "source": "G8", "source_num": 8, "transition_num": 2, "target": "BAD", "target_label": "BAD", "status": "bad", "kind": "bad", "critical_edge": "a1-b1", "appearing_edge": "a1-b4", "added": [[1, 4]], "removed": [[3, 4]], "image": "G8T2.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}, "G8T3": {"id": "G8T3", "source": "G8", "source_num": 8, "transition_num": 3, "target": "DONE", "target_label": "DONE", "status": "done", "kind": "done", "critical_edge": "a2-b3", "appearing_edge": "a2-b1", "added": [], "removed": [], "image": "G8T3.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}, "G8T4": {"id": "G8T4", "source": "G8", "source_num": 8, "transition_num": 4, "target": "G8", "target_label": "Graph 8", "status": "graph", "kind": "transition", "critical_edge": "a2-b3", "appearing_edge": "a2-b4", "added": [[2, 4]], "removed": [[3, 4]], "image": "G8T4.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}, "G8T5": {"id": "G8T5", "source": "G8", "source_num": 8, "transition_num": 5, "target": "G8", "target_label": "Graph 8", "status": "graph", "kind": "transition", "critical_edge": "a2-b3", "appearing_edge": "a2-b5", "added": [[2, 5]], "removed": [[4, 5]], "image": "G8T5.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}, "G8T6": {"id": "G8T6", "source": "G8", "source_num": 8, "transition_num": 6, "target": "DONE", "target_label": "DONE", "status": "done", "kind": "done", "critical_edge": "a3-b3", "appearing_edge": "a3-b1", "added": [], "removed": [], "image": "G8T6.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}, "G8T7": {"id": "G8T7", "source": "G8", "source_num": 8, "transition_num": 7, "target": "G7", "target_label": "Graph 7", "status": "graph", "kind": "transition", "critical_edge": "a3-b3", "appearing_edge": "a3-b5", "added": [[3, 5]], "removed": [[4, 5]], "image": "G8T7.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}, "G8T8": {"id": "G8T8", "source": "G8", "source_num": 8, "transition_num": 8, "target": "DONE", "target_label": "DONE", "status": "done", "kind": "done", "critical_edge": "a3-b4", "appearing_edge": "a3-b1", "added": [], "removed": [], "image": "G8T8.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}, "G8T9": {"id": "G8T9", "source": "G8", "source_num": 8, "transition_num": 9, "target": "G7", "target_label": "Graph 7", "status": "graph", "kind": "transition", "critical_edge": "a3-b4", "appearing_edge": "a3-b5", "added": [[3, 5]], "removed": [[4, 5]], "image": "G8T9.svg", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}};
+    const TRANSITION_ORDER = Array.from(document.querySelectorAll(".transitionTile")).map((card) => card.dataset.transitionId);
+    let currentTransitionIndex = -1;
+
+    const detailModal = document.getElementById("detailModal");
+    const closeDetailModal = document.getElementById("closeDetailModal");
+    const prevTransitionBtn = document.getElementById("prevTransitionBtn");
+    const nextTransitionBtn = document.getElementById("nextTransitionBtn");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalImage = document.getElementById("modalImage");
+    const modalInfo = document.getElementById("modalInfo");
+    const zoomModal = document.getElementById("zoomModal");
+    const zoomImage = document.getElementById("zoomImage");
+
+    function esc(s) {
+      return String(s ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function edgeText(arr) {
+      if (!arr || !arr.length) return "-";
+      return arr.map(x => `a${x[0]}-b${x[1]}`).join(", ");
+    }
+
+    function openTransitionByIndex(index) {
+      if (!TRANSITION_ORDER.length) return;
+      const n = TRANSITION_ORDER.length;
+      const wrapped = ((index % n) + n) % n;
+      currentTransitionIndex = wrapped;
+      openTransition(TRANSITION_ORDER[wrapped]);
+    }
+
+    function updateTransitionNavButtons() {
+      const disabled = TRANSITION_ORDER.length <= 1;
+      prevTransitionBtn.disabled = disabled;
+      nextTransitionBtn.disabled = disabled;
+    }
+
+    function openTransition(tid) {
+      const t = TRANSITIONS[tid];
+      if (!t) return;
+      const idx = TRANSITION_ORDER.indexOf(tid);
+      if (idx >= 0) currentTransitionIndex = idx;
+      modalTitle.textContent = tid;
+      modalImage.src = t.image;
+      modalImage.alt = tid;
+
+      const isTerminal = t.target === "DONE" || t.target === "BAD";
+      const added = isTerminal ? "-" : edgeText(t.added);
+      const removed = isTerminal ? "-" : edgeText(t.removed);
+
+      modalInfo.innerHTML = `
+        <div class="infoBlock">
+          <p class="infoKey">From / To</p>
+          <p class="infoVal mono">Graph ${esc(t.source_num)} -> ${esc(t.target_label)}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Status</p>
+          <p class="infoVal mono">${esc(t.status.toUpperCase())}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Critical Edge (Red)</p>
+          <p class="infoVal mono" style="color:#c52d2d">${esc(t.critical_edge || "-")}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Appearing Edge (Green dashed)</p>
+          <p class="infoVal mono" style="color:#1f9d64">${esc(t.appearing_edge || "-")}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Change</p>
+          <p class="infoVal mono">Added: <span style="color:#1f9d64">${esc(added)}</span> | Removed: <span style="color:#c52d2d">${esc(removed)}</span></p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Rule at Source</p>
+          <p class="infoVal">${esc(t.rule || "-")}</p>
+        </div>
+      `;
+      updateTransitionNavButtons();
+      detailModal.classList.add("open");
+    }
+
+    document.querySelectorAll(".transitionTile").forEach((card) => {
+      card.addEventListener("click", () => openTransition(card.dataset.transitionId));
+    });
+
+    function closeTransitionModal() {
+      detailModal.classList.remove("open");
+      zoomModal.classList.remove("open");
+      currentTransitionIndex = -1;
+    }
+
+    function browseTransitions(step) {
+      if (currentTransitionIndex < 0 || !TRANSITION_ORDER.length) return;
+      openTransitionByIndex(currentTransitionIndex + step);
+      if (zoomModal.classList.contains("open")) zoomImage.src = modalImage.src;
+    }
+
+    prevTransitionBtn.addEventListener("click", () => browseTransitions(-1));
+    nextTransitionBtn.addEventListener("click", () => browseTransitions(1));
+    closeDetailModal.addEventListener("click", closeTransitionModal);
+    detailModal.addEventListener("click", (evt) => {
+      if (evt.target === detailModal) closeTransitionModal();
+    });
+
+    modalImage.addEventListener("click", () => {
+      if (!modalImage.src) return;
+      zoomImage.src = modalImage.src;
+      zoomModal.classList.add("open");
+    });
+    zoomModal.addEventListener("click", () => zoomModal.classList.remove("open"));
+
+    document.addEventListener("keydown", (evt) => {
+      const detailOpen = detailModal.classList.contains("open");
+      const zoomOpen = zoomModal.classList.contains("open");
+      if (!detailOpen && !zoomOpen) return;
+
+      if (evt.key === "Escape") {
+        evt.preventDefault();
+        if (zoomOpen) {
+          zoomModal.classList.remove("open");
+          return;
+        }
+        closeTransitionModal();
+        return;
+      }
+
+      if (!detailOpen) return;
+      if (evt.key === "ArrowRight") {
+        evt.preventDefault();
+        browseTransitions(1);
+      } else if (evt.key === "ArrowLeft") {
+        evt.preventDefault();
+        browseTransitions(-1);
+      }
+    });
+    updateTransitionNavButtons();
+  </script>
+</body>
+</html>

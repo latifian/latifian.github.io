@@ -1,0 +1,174 @@
+{
+  "added_edges": [
+    [
+      1,
+      3
+    ]
+  ],
+  "base_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "black_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "divider_x": 820.0,
+  "green_edge": [
+    1,
+    3
+  ],
+  "height": 560.0,
+  "left_edges": [
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "name": "G7T1.svg",
+  "red_edge": [
+    1,
+    1
+  ],
+  "rel_path": "all_transitions_GiTj/G7T1.svg",
+  "removed_edges": [
+    [
+      3,
+      3
+    ]
+  ],
+  "right_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "source_graph": "G7",
+  "source_graph_index": 7,
+  "status": "transition",
+  "target": "G6",
+  "transition_id": "G7T1",
+  "transition_index": 1,
+  "type": "transition",
+  "watermark_bad": false,
+  "watermark_done": false,
+  "watermark_invalid": false,
+  "watermark_question": false,
+  "width": 1640.0
+}

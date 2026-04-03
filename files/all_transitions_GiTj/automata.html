@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>State Transition Graph</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --ink: #12253f;
+      --muted: #516987;
+      --card: #ffffff;
+      --line: #d5e0ef;
+      --accent: #2f68b8;
+      --accent-soft: #e7f0ff;
+      --done-soft: #eafbf0;
+      --done-line: #bfe8cc;
+      --bad-soft: #fff2f2;
+      --bad-line: #efcaca;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, #dce8ff 0, transparent 34%),
+        radial-gradient(circle at 88% 0%, #e8fff2 0, transparent 28%),
+        var(--bg);
+    }
+    .layout {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .tabs {
+      display: inline-flex;
+      gap: 8px;
+      background: #ffffffcc;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px;
+      backdrop-filter: blur(6px);
+    }
+    .tab {
+      text-decoration: none;
+      color: #315074;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: background .16s ease, color .16s ease;
+    }
+    .tab:hover { background: #edf4ff; }
+    .tab.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .ctaButton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(180deg, #2f68b8, #24579f);
+      border: 1px solid #1f4f92;
+      border-radius: 10px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 20px rgba(36, 87, 159, 0.25);
+      transition: transform .12s ease, box-shadow .16s ease, filter .16s ease;
+    }
+    .ctaButton:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(36, 87, 159, 0.30);
+      filter: brightness(1.03);
+    }
+    .automataFrame {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15, 37, 66, 0.08);
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(140deg, #ffffff, #f8fbff);
+      padding: 18px 20px;
+      box-shadow: 0 10px 28px rgba(15, 37, 66, 0.08);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 980px;
+    }
+    .build {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: 0 6px 22px rgba(15, 37, 66, 0.07);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+    .panel p, .panel li {
+      color: #233f61;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .panel ol {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .tile {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 5px 18px rgba(15, 37, 66, 0.06);
+    }
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(15, 37, 66, 0.13);
+      border-color: #b8cde9;
+    }
+    .tileTop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e6edf7;
+    }
+    .tile h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+    .badge {
+      border-radius: 999px;
+      border: 1px solid #c9d8ea;
+      background: #f3f8ff;
+      color: #2d4f79;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+    .tile img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #fff;
+    }
+    .tileBody {
+      padding: 10px 12px 12px;
+      font-size: 13px;
+      color: #345173;
+    }
+    .mono {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+    .status-done {
+      background: linear-gradient(180deg, var(--done-soft), #fff);
+      border-color: var(--done-line);
+    }
+    .status-bad {
+      background: linear-gradient(180deg, var(--bad-soft), #fff);
+      border-color: var(--bad-line);
+    }
+    .route {
+      margin-top: 8px;
+      font-weight: 600;
+      color: #2d4f79;
+    }
+    .metaLine {
+      color: #476386;
+      margin-top: 4px;
+      line-height: 1.45;
+      font-size: 13px;
+    }
+    .sectionTitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .sectionTitle h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footnote {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #486282;
+      line-height: 1.5;
+    }
+    .group {
+      margin-bottom: 18px;
+    }
+    .group h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+    .sourceHeader {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 12px;
+    }
+    .sourcePreview {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(15, 37, 66, 0.08);
+    }
+    .sourcePreview img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+    .ruleHero {
+      border: 1px solid #b7ccef;
+      border-radius: 12px;
+      background: linear-gradient(160deg, #eef5ff, #f9fbff);
+      padding: 12px 14px;
+      box-shadow: 0 6px 20px rgba(47, 104, 184, 0.10);
+    }
+    .ruleHero .k {
+      margin: 0 0 6px;
+      color: #35587f;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ruleHero .graphName {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #123159;
+    }
+    .ruleHero .ruleText {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.45;
+      color: #13355f;
+      font-weight: 700;
+      background: #ffffffcc;
+      border: 1px solid #d5e3f8;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .empty {
+      border: 1px dashed #c4d3e8;
+      border-radius: 10px;
+      padding: 12px;
+      color: #567194;
+      background: #f8fbff;
+      font-size: 13px;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 35, 0.68);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 3000;
+    }
+    .modal.open { display: flex; }
+    .modalCard {
+      width: min(1200px, 94vw);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 14px;
+      border: 1px solid #c9d6ea;
+      background: #fff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.34);
+      padding: 14px;
+    }
+    .modalTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .modalTitle {
+      margin: 0;
+      font-size: 20px;
+    }
+    .closeBtn {
+      border: 1px solid #bfd0e7;
+      background: #f5f9ff;
+      color: #2d4f79;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .modalActions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .navBtn {
+      width: 34px;
+      height: 32px;
+      border: 1px solid #bfd0e7;
+      background: #edf5ff;
+      color: #204d8a;
+      border-radius: 8px;
+      padding: 0;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .14s ease, transform .12s ease;
+    }
+    .navBtn:hover {
+      background: #deebff;
+      transform: translateY(-1px);
+    }
+    .navBtn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .modalGrid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 12px;
+    }
+    .modalImageWrap {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .modalImageWrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-in;
+    }
+    .infoBlock {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fbfdff;
+      margin-bottom: 8px;
+    }
+    .infoKey {
+      margin: 0 0 4px;
+      color: #567194;
+      font-size: 12px;
+    }
+    .infoVal {
+      margin: 0;
+      font-size: 14px;
+      color: #193556;
+      line-height: 1.45;
+    }
+    .zoomModal img {
+      width: auto;
+      max-width: min(96vw, 1700px);
+      max-height: 92vh;
+      border-radius: 10px;
+      border: 1px solid #c8d5ea;
+      background: #fff;
+    }
+    .hint {
+      margin-top: 6px;
+      color: #567194;
+      font-size: 12px;
+    }
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    @media (max-width: 1100px) {
+      .modalGrid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .hero h1 { font-size: 24px; }
+      .tabs { width: 100%; overflow-x: auto; }
+      .tab { white-space: nowrap; }
+    }
+    @media (max-width: 980px) {
+      .sourceHeader { grid-template-columns: 1fr; }
+    }
+  </style>
+
+</head>
+<body>
+  <div class="layout">
+    <div class="topbar">
+      <div class="brand">EF Cake Graph Explorer</div>
+      <nav class="tabs">
+<a class="tab" href="index.html">Valid Graphs</a>
+<a class="tab" href="transitions.html">Transitions Gallery</a>
+<a class="tab active" href="automata.html">State Transition Graph</a>
+</nav>
+    </div>
+    <section class="hero">
+      <h1>State Transition Graph</h1>
+      <p>
+        Directed state transition graph over Graph 1..8, plus terminal states <span class="mono">DONE</span> and
+        <span class="mono">BAD</span>. Click nodes and edges inside the graph panel for full details.
+      </p>
+      <div class="build">Build: 2026-04-01 17:22:33</div>
+      <div style="margin-top:12px;">
+        <a class="ctaButton" href="automata_interactive_v2.html" target="_blank" rel="noopener">Open Full Page</a>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Critical Transition Definition</h2>
+      <p>
+        Starting from a graph, if we remove the critical edge (red) and add the appearing edge (green),
+        and the resulting graph is valid, then the transition is not critical.
+      </p>
+    </section>
+    <section class="automataFrame">
+      <iframe src="automata_interactive_v2.html" title="State Transition Graph interactive"></iframe>
+    </section>
+  </div>
+</body>
+</html>

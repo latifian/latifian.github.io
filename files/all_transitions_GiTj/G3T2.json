@@ -1,0 +1,174 @@
+{
+  "added_edges": [
+    [
+      4,
+      4
+    ]
+  ],
+  "base_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "black_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "divider_x": 820.0,
+  "green_edge": [
+    4,
+    4
+  ],
+  "height": 560.0,
+  "left_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "name": "G3T2.svg",
+  "red_edge": [
+    4,
+    5
+  ],
+  "rel_path": "all_transitions_GiTj/G3T2.svg",
+  "removed_edges": [
+    [
+      1,
+      4
+    ]
+  ],
+  "right_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "source_graph": "G3",
+  "source_graph_index": 3,
+  "status": "transition",
+  "target": "G5",
+  "transition_id": "G3T2",
+  "transition_index": 2,
+  "type": "transition",
+  "watermark_bad": false,
+  "watermark_done": false,
+  "watermark_invalid": false,
+  "watermark_question": false,
+  "width": 1640.0
+}

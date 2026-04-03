@@ -1,0 +1,94 @@
+{
+  "added_edges": [],
+  "base_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "black_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "divider_x": null,
+  "green_edge": [
+    4,
+    1
+  ],
+  "height": 560.0,
+  "left_edges": [],
+  "name": "G3T1.svg",
+  "red_edge": [
+    4,
+    5
+  ],
+  "rel_path": "all_transitions_GiTj/G3T1.svg",
+  "removed_edges": [],
+  "right_edges": [],
+  "source_graph": "G3",
+  "source_graph_index": 3,
+  "status": "bad",
+  "target": "BAD",
+  "transition_id": "G3T1",
+  "transition_index": 1,
+  "type": "transition",
+  "watermark_bad": false,
+  "watermark_done": false,
+  "watermark_invalid": false,
+  "watermark_question": false,
+  "width": 820.0
+}

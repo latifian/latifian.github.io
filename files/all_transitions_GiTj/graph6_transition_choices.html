@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Graph 6 Transition Choices</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 16px; background:#f4f7fb; color:#123; }
+    h1 { margin: 0 0 8px; }
+    .meta { color:#456; margin-bottom:14px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:10px; }
+    .card { background:#fff; border:1px solid #ccd8ea; border-radius:10px; padding:10px; }
+    .card.critical { border-color:#efcaca; background:#fff4f4; }
+    .card.done { border-color:#bfe8cc; background:#ecfff2; }
+    .card.bad { border-color:#efcaca; background:#fff2f2; }
+    .line { margin:4px 0; font-size:14px; }
+    .red { color:#c52d2d; }
+    .green { color:#1f9d64; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .chip { display:inline-block; border:1px solid #ccd8ea; border-radius:999px; padding:3px 8px; margin-right:6px; background:#fff; }
+  </style>
+</head>
+<body>
+  <h1>Graph 6 Transition Choices (Rule: keep b4 and b5 equal for a4)</h1>
+  <div class="meta">
+    <span class="chip">All unique transitions: 9</span>
+    <span class="chip">Critical unique transitions: 7</span>
+  </div>
+  <div class="grid">
+    
+      <article class="card critical">
+        <h3>G6R1</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a1-b1</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a1-b4</span></div>
+        <div class="line"><strong>Critical:</strong> Yes</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> No</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">TRANSITION</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a1-b4 | Removed: a4-b4</span></div>
+      </article>
+
+      <article class="card critical">
+        <h3>G6R2</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a1-b3</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a1-b4</span></div>
+        <div class="line"><strong>Critical:</strong> Yes</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> No</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">TRANSITION</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a1-b4 | Removed: a4-b4</span></div>
+      </article>
+
+      <article class="card">
+        <h3>G6R3</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a2-b3</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a2-b1</span></div>
+        <div class="line"><strong>Critical:</strong> No</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> No</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">TRANSITION</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a2-b1 | Removed: a2-b3</span></div>
+      </article>
+
+      <article class="card">
+        <h3>G6R4</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a2-b3</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a2-b4</span></div>
+        <div class="line"><strong>Critical:</strong> No</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> No</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">TRANSITION</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a2-b4 | Removed: a2-b3</span></div>
+      </article>
+
+      <article class="card done">
+        <h3>G6R5</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a3-b4</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a3-b1</span></div>
+        <div class="line"><strong>Critical:</strong> Yes</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> Yes</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">DONE</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a3-b1 | Removed: a3-b4</span></div>
+      </article>
+
+      <article class="card critical">
+        <h3>G6R6</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a3-b4</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a3-b3</span></div>
+        <div class="line"><strong>Critical:</strong> Yes</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> No</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">TRANSITION</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a3-b3 | Removed: a1-b3</span></div>
+      </article>
+
+      <article class="card critical">
+        <h3>G6R7</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a3-b4</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a3-b5</span></div>
+        <div class="line"><strong>Critical:</strong> Yes</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> No</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">TRANSITION</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a3-b5 | Removed: a4-b5</span></div>
+      </article>
+
+      <article class="card done">
+        <h3>G6R8</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a4-b4</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a4-b1</span></div>
+        <div class="line"><strong>Critical:</strong> Yes</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> Yes</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">DONE</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a4-b1 | Removed: a4-b4</span></div>
+      </article>
+
+      <article class="card critical">
+        <h3>G6R9</h3>
+        <div class="line"><strong>Critical edge:</strong> <span class="red">a4-b4</span></div>
+        <div class="line"><strong>Appearing edge:</strong> <span class="green">a4-b3</span></div>
+        <div class="line"><strong>Critical:</strong> Yes</div>
+        <div class="line"><strong>DONE candidate (matching with red+green):</strong> No</div>
+        <div class="line"><strong>Selected status:</strong> <span class="mono">TRANSITION</span></div>
+        <div class="line"><strong>Selected change:</strong> <span class="mono">Added: a4-b3 | Removed: a1-b3</span></div>
+      </article>
+
+  </div>
+</body>
+</html>

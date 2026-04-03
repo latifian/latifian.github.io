@@ -1,0 +1,174 @@
+{
+  "added_edges": [
+    [
+      2,
+      5
+    ]
+  ],
+  "base_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "black_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "divider_x": 820.0,
+  "green_edge": [
+    2,
+    5
+  ],
+  "height": 560.0,
+  "left_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "name": "G8T5.svg",
+  "red_edge": [
+    2,
+    3
+  ],
+  "rel_path": "all_transitions_GiTj/G8T5.svg",
+  "removed_edges": [
+    [
+      4,
+      5
+    ]
+  ],
+  "right_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "source_graph": "G8",
+  "source_graph_index": 8,
+  "status": "transition",
+  "target": "G8",
+  "transition_id": "G8T5",
+  "transition_index": 5,
+  "type": "transition",
+  "watermark_bad": false,
+  "watermark_done": false,
+  "watermark_invalid": false,
+  "watermark_question": false,
+  "width": 1640.0
+}

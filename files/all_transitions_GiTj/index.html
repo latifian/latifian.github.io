@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valid Graphs</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --ink: #12253f;
+      --muted: #516987;
+      --card: #ffffff;
+      --line: #d5e0ef;
+      --accent: #2f68b8;
+      --accent-soft: #e7f0ff;
+      --done-soft: #eafbf0;
+      --done-line: #bfe8cc;
+      --bad-soft: #fff2f2;
+      --bad-line: #efcaca;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 4%, #dce8ff 0, transparent 34%),
+        radial-gradient(circle at 88% 0%, #e8fff2 0, transparent 28%),
+        var(--bg);
+    }
+    .layout {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .tabs {
+      display: inline-flex;
+      gap: 8px;
+      background: #ffffffcc;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px;
+      backdrop-filter: blur(6px);
+    }
+    .tab {
+      text-decoration: none;
+      color: #315074;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 999px;
+      transition: background .16s ease, color .16s ease;
+    }
+    .tab:hover { background: #edf4ff; }
+    .tab.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .ctaButton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(180deg, #2f68b8, #24579f);
+      border: 1px solid #1f4f92;
+      border-radius: 10px;
+      padding: 10px 16px;
+      box-shadow: 0 8px 20px rgba(36, 87, 159, 0.25);
+      transition: transform .12s ease, box-shadow .16s ease, filter .16s ease;
+    }
+    .ctaButton:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(36, 87, 159, 0.30);
+      filter: brightness(1.03);
+    }
+    .automataFrame {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(15, 37, 66, 0.08);
+      padding: 10px;
+      margin-top: 10px;
+    }
+    .hero {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(140deg, #ffffff, #f8fbff);
+      padding: 18px 20px;
+      box-shadow: 0 10px 28px rgba(15, 37, 66, 0.08);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 980px;
+    }
+    .build {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: 0 6px 22px rgba(15, 37, 66, 0.07);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+    .panel p, .panel li {
+      color: #233f61;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .panel ol {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .tile {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 5px 18px rgba(15, 37, 66, 0.06);
+    }
+    .tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(15, 37, 66, 0.13);
+      border-color: #b8cde9;
+    }
+    .tileTop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e6edf7;
+    }
+    .tile h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+    .badge {
+      border-radius: 999px;
+      border: 1px solid #c9d8ea;
+      background: #f3f8ff;
+      color: #2d4f79;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      white-space: nowrap;
+    }
+    .tile img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #fff;
+    }
+    .tileBody {
+      padding: 10px 12px 12px;
+      font-size: 13px;
+      color: #345173;
+    }
+    .mono {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+    .status-done {
+      background: linear-gradient(180deg, var(--done-soft), #fff);
+      border-color: var(--done-line);
+    }
+    .status-bad {
+      background: linear-gradient(180deg, var(--bad-soft), #fff);
+      border-color: var(--bad-line);
+    }
+    .route {
+      margin-top: 8px;
+      font-weight: 600;
+      color: #2d4f79;
+    }
+    .metaLine {
+      color: #476386;
+      margin-top: 4px;
+      line-height: 1.45;
+      font-size: 13px;
+    }
+    .sectionTitle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .sectionTitle h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+    .small {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footnote {
+      margin-top: 8px;
+      font-size: 12px;
+      color: #486282;
+      line-height: 1.5;
+    }
+    .group {
+      margin-bottom: 18px;
+    }
+    .group h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+    .sourceHeader {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 12px;
+      align-items: stretch;
+      margin-bottom: 12px;
+    }
+    .sourcePreview {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(15, 37, 66, 0.08);
+    }
+    .sourcePreview img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+    }
+    .ruleHero {
+      border: 1px solid #b7ccef;
+      border-radius: 12px;
+      background: linear-gradient(160deg, #eef5ff, #f9fbff);
+      padding: 12px 14px;
+      box-shadow: 0 6px 20px rgba(47, 104, 184, 0.10);
+    }
+    .ruleHero .k {
+      margin: 0 0 6px;
+      color: #35587f;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .ruleHero .graphName {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #123159;
+    }
+    .ruleHero .ruleText {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.45;
+      color: #13355f;
+      font-weight: 700;
+      background: #ffffffcc;
+      border: 1px solid #d5e3f8;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+    .empty {
+      border: 1px dashed #c4d3e8;
+      border-radius: 10px;
+      padding: 12px;
+      color: #567194;
+      background: #f8fbff;
+      font-size: 13px;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 35, 0.68);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 3000;
+    }
+    .modal.open { display: flex; }
+    .modalCard {
+      width: min(1200px, 94vw);
+      max-height: 92vh;
+      overflow: auto;
+      border-radius: 14px;
+      border: 1px solid #c9d6ea;
+      background: #fff;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.34);
+      padding: 14px;
+    }
+    .modalTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .modalTitle {
+      margin: 0;
+      font-size: 20px;
+    }
+    .closeBtn {
+      border: 1px solid #bfd0e7;
+      background: #f5f9ff;
+      color: #2d4f79;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .modalActions {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .navBtn {
+      width: 34px;
+      height: 32px;
+      border: 1px solid #bfd0e7;
+      background: #edf5ff;
+      color: #204d8a;
+      border-radius: 8px;
+      padding: 0;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .14s ease, transform .12s ease;
+    }
+    .navBtn:hover {
+      background: #deebff;
+      transform: translateY(-1px);
+    }
+    .navBtn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .modalGrid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 12px;
+    }
+    .modalImageWrap {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .modalImageWrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-in;
+    }
+    .infoBlock {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fbfdff;
+      margin-bottom: 8px;
+    }
+    .infoKey {
+      margin: 0 0 4px;
+      color: #567194;
+      font-size: 12px;
+    }
+    .infoVal {
+      margin: 0;
+      font-size: 14px;
+      color: #193556;
+      line-height: 1.45;
+    }
+    .zoomModal img {
+      width: auto;
+      max-width: min(96vw, 1700px);
+      max-height: 92vh;
+      border-radius: 10px;
+      border: 1px solid #c8d5ea;
+      background: #fff;
+    }
+    .hint {
+      margin-top: 6px;
+      color: #567194;
+      font-size: 12px;
+    }
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+    @media (max-width: 1100px) {
+      .modalGrid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .hero h1 { font-size: 24px; }
+      .tabs { width: 100%; overflow-x: auto; }
+      .tab { white-space: nowrap; }
+    }
+    @media (max-width: 980px) {
+      .sourceHeader { grid-template-columns: 1fr; }
+    }
+  </style>
+
+</head>
+<body>
+  <div class="layout">
+    <div class="topbar">
+      <div class="brand">EF Cake Graph Explorer</div>
+      <nav class="tabs">
+<a class="tab active" href="index.html">Valid Graphs</a>
+<a class="tab" href="transitions.html">Transitions Gallery</a>
+<a class="tab" href="automata.html">State Transition Graph</a>
+</nav>
+    </div>
+    <section class="hero">
+      <h1>Valid Graphs (Up To Isomorphism)</h1>
+      <p>
+        This page shows the 8 unique valid bipartite graphs for 5 agents and 5 pieces after quotienting by isomorphism.
+        In the isomorphism action, <span class="mono">a1</span> is fixed, while <span class="mono">a2..a5</span> can be permuted and
+        <span class="mono">b1..b5</span> can be permuted.
+      </p>
+      <div class="build">Build: 2026-04-01 17:22:33</div>
+    </section>
+    <section class="panel">
+      <h2>Critical Transition Definition</h2>
+      <p>
+        Starting from a graph, if we remove the critical edge (red) and add the appearing edge (green),
+        and the resulting graph is valid, then the transition is not critical.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>Validity Definition Used Here</h2>
+      <ol>
+        <li>Every agent <span class="mono">a1..a5</span> has degree at least 1.</li>
+        <li>The graph has exactly <span class="mono">8</span> edges (<span class="mono">2n-2</span> for <span class="mono">n=5</span>).</li>
+        <li>For every piece <span class="mono">bj</span>, at least one holds: (i) <span class="mono">a1</span> is connected to <span class="mono">bj</span>, or (ii) <span class="mono">bj</span> is connected to at least two agents.</li>
+        <li>An agent is active if its degree is at least 2.</li>
+        <li>No piece <span class="mono">bj</span> is connected to <span class="mono">a1</span> and also to another active agent at the same time.</li>
+        <li>If <span class="mono">ai</span> and <span class="mono">aj</span> are active and both are different from <span class="mono">a1</span>, then at most one piece is adjacent to both.</li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <div class="sectionTitle">
+        <h2>Graph Gallery</h2>
+        <div class="small">Click any graph to open full details.</div>
+      </div>
+      <div class="grid">
+        
+      <article class="tile graphTile" data-graph-id="G1">
+        <div class="tileTop">
+          <h3>Graph 1</h3>
+          <span class="badge">deg(a1)=4</span>
+        </div>
+        <img src="../valid_bipartite_5x5_8edges_mincross/graph_001.svg" alt="Graph 1" />
+        <div class="tileBody">
+          <div class="metaLine">Edges: <span class="mono">8</span></div>
+          <div class="metaLine">Active Agents: <span class="mono">a1</span></div>
+          <div class="metaLine"><strong>Rule:</strong> Move forward while shrinking b5</div>
+        </div>
+      </article>
+
+      <article class="tile graphTile" data-graph-id="G2">
+        <div class="tileTop">
+          <h3>Graph 2</h3>
+          <span class="badge">deg(a1)=4</span>
+        </div>
+        <img src="../valid_bipartite_5x5_8edges_mincross/graph_002.svg" alt="Graph 2" />
+        <div class="tileBody">
+          <div class="metaLine">Edges: <span class="mono">8</span></div>
+          <div class="metaLine">Active Agents: <span class="mono">a1</span></div>
+          <div class="metaLine"><strong>Rule:</strong> Move forward while shrinking b5</div>
+        </div>
+      </article>
+
+      <article class="tile graphTile" data-graph-id="G3">
+        <div class="tileTop">
+          <h3>Graph 3</h3>
+          <span class="badge">deg(a1)=4</span>
+        </div>
+        <img src="../valid_bipartite_5x5_8edges_mincross/graph_003.svg" alt="Graph 3" />
+        <div class="tileBody">
+          <div class="metaLine">Edges: <span class="mono">8</span></div>
+          <div class="metaLine">Active Agents: <span class="mono">a1</span></div>
+          <div class="metaLine"><strong>Rule:</strong> Move forward while shrinking b5</div>
+        </div>
+      </article>
+
+      <article class="tile graphTile" data-graph-id="G4">
+        <div class="tileTop">
+          <h3>Graph 4</h3>
+          <span class="badge">deg(a1)=4</span>
+        </div>
+        <img src="../valid_bipartite_5x5_8edges_mincross/graph_004.svg" alt="Graph 4" />
+        <div class="tileBody">
+          <div class="metaLine">Edges: <span class="mono">8</span></div>
+          <div class="metaLine">Active Agents: <span class="mono">a1</span></div>
+          <div class="metaLine"><strong>Rule:</strong> Move forward while shrinking b5</div>
+        </div>
+      </article>
+
+      <article class="tile graphTile" data-graph-id="G5">
+        <div class="tileTop">
+          <h3>Graph 5</h3>
+          <span class="badge">deg(a1)=3</span>
+        </div>
+        <img src="../valid_bipartite_5x5_8edges_mincross/graph_005.svg" alt="Graph 5" />
+        <div class="tileBody">
+          <div class="metaLine">Edges: <span class="mono">8</span></div>
+          <div class="metaLine">Active Agents: <span class="mono">a1, a3</span></div>
+          <div class="metaLine"><strong>Rule:</strong> Move forward while keeping b4 and b5 equal for a3</div>
+        </div>
+      </article>
+
+      <article class="tile graphTile" data-graph-id="G6">
+        <div class="tileTop">
+          <h3>Graph 6</h3>
+          <span class="badge">deg(a1)=3</span>
+        </div>
+        <img src="../valid_bipartite_5x5_8edges_mincross/graph_006.svg" alt="Graph 6" />
+        <div class="tileBody">
+          <div class="metaLine">Edges: <span class="mono">8</span></div>
+          <div class="metaLine">Active Agents: <span class="mono">a1, a4</span></div>
+          <div class="metaLine"><strong>Rule:</strong> Move forward while keeping b4 and b5 equal for a4</div>
+        </div>
+      </article>
+
+      <article class="tile graphTile" data-graph-id="G7">
+        <div class="tileTop">
+          <h3>Graph 7</h3>
+          <span class="badge">deg(a1)=2</span>
+        </div>
+        <img src="../valid_bipartite_5x5_8edges_mincross/graph_007.svg" alt="Graph 7" />
+        <div class="tileBody">
+          <div class="metaLine">Edges: <span class="mono">8</span></div>
+          <div class="metaLine">Active Agents: <span class="mono">a1, a3</span></div>
+          <div class="metaLine"><strong>Rule:</strong> Move forward while keeping b3, b4, b5 equal for a3</div>
+        </div>
+      </article>
+
+      <article class="tile graphTile" data-graph-id="G8">
+        <div class="tileTop">
+          <h3>Graph 8</h3>
+          <span class="badge">deg(a1)=2</span>
+        </div>
+        <img src="../valid_bipartite_5x5_8edges_mincross/graph_008.svg" alt="Graph 8" />
+        <div class="tileBody">
+          <div class="metaLine">Edges: <span class="mono">8</span></div>
+          <div class="metaLine">Active Agents: <span class="mono">a1, a3, a4</span></div>
+          <div class="metaLine"><strong>Rule:</strong> Move forward while keeping b3 and b4 equal for a3, and b4 and b5 equal for a4</div>
+        </div>
+      </article>
+
+      </div>
+    </section>
+  </div>
+
+  <div id="detailModal" class="modal">
+    <div class="modalCard">
+      <div class="modalTop">
+        <h3 id="modalTitle" class="modalTitle"></h3>
+        <div class="modalActions">
+          <button id="prevGraphBtn" class="navBtn" type="button" aria-label="Previous graph">←</button>
+          <button id="nextGraphBtn" class="navBtn" type="button" aria-label="Next graph">→</button>
+          <button id="closeDetailModal" class="closeBtn" type="button">Close</button>
+        </div>
+      </div>
+      <div class="modalGrid">
+        <div class="modalImageWrap">
+          <img id="modalImage" src="" alt="Graph details" />
+          <div class="hint" style="padding:8px 10px;">Click image to open larger view.</div>
+        </div>
+        <div id="modalInfo"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="zoomModal" class="modal zoomModal">
+    <img id="zoomImage" alt="Zoomed view" />
+  </div>
+
+  <script>
+    const GRAPH_DATA = {"G1": {"id": "G1", "num": 1, "title": "Graph 1", "image": "../valid_bipartite_5x5_8edges_mincross/graph_001.svg", "deg_a1": 4, "edge_count": 8, "edges": [[1, 1], [1, 2], [1, 3], [1, 4], [2, 5], [3, 5], [4, 5], [5, 5]], "edges_text": "a1-b1, a1-b2, a1-b3, a1-b4, a2-b5, a3-b5, a4-b5, a5-b5", "rule": "Shrink b5", "active_agents": ["a1"], "a1_pieces": ["b1", "b2", "b3", "b4"], "outgoing": [], "rule_display": "Move forward while shrinking b5"}, "G2": {"id": "G2", "num": 2, "title": "Graph 2", "image": "../valid_bipartite_5x5_8edges_mincross/graph_002.svg", "deg_a1": 4, "edge_count": 8, "edges": [[1, 1], [1, 2], [1, 3], [1, 4], [2, 4], [3, 5], [4, 5], [5, 5]], "edges_text": "a1-b1, a1-b2, a1-b3, a1-b4, a2-b4, a3-b5, a4-b5, a5-b5", "rule": "Shrink b5", "active_agents": ["a1"], "a1_pieces": ["b1", "b2", "b3", "b4"], "outgoing": [], "rule_display": "Move forward while shrinking b5"}, "G3": {"id": "G3", "num": 3, "title": "Graph 3", "image": "../valid_bipartite_5x5_8edges_mincross/graph_003.svg", "deg_a1": 4, "edge_count": 8, "edges": [[1, 1], [1, 2], [1, 3], [1, 4], [2, 4], [3, 4], [4, 5], [5, 5]], "edges_text": "a1-b1, a1-b2, a1-b3, a1-b4, a2-b4, a3-b4, a4-b5, a5-b5", "rule": "Shrink b5", "active_agents": ["a1"], "a1_pieces": ["b1", "b2", "b3", "b4"], "outgoing": [{"id": "G3T1", "target_label": "BAD", "status": "bad"}, {"id": "G3T2", "target_label": "Graph 5", "status": "graph"}], "rule_display": "Move forward while shrinking b5"}, "G4": {"id": "G4", "num": 4, "title": "Graph 4", "image": "../valid_bipartite_5x5_8edges_mincross/graph_004.svg", "deg_a1": 4, "edge_count": 8, "edges": [[1, 1], [1, 2], [1, 3], [1, 4], [2, 3], [3, 4], [4, 5], [5, 5]], "edges_text": "a1-b1, a1-b2, a1-b3, a1-b4, a2-b3, a3-b4, a4-b5, a5-b5", "rule": "Shrink b5", "active_agents": ["a1"], "a1_pieces": ["b1", "b2", "b3", "b4"], "outgoing": [{"id": "G4T1", "target_label": "DONE", "status": "done"}, {"id": "G4T2", "target_label": "Graph 6", "status": "graph"}], "rule_display": "Move forward while shrinking b5"}, "G5": {"id": "G5", "num": 5, "title": "Graph 5", "image": "../valid_bipartite_5x5_8edges_mincross/graph_005.svg", "deg_a1": 3, "edge_count": 8, "edges": [[1, 1], [1, 2], [1, 3], [2, 4], [3, 4], [3, 5], [4, 5], [5, 5]], "edges_text": "a1-b1, a1-b2, a1-b3, a2-b4, a3-b4, a3-b5, a4-b5, a5-b5", "rule": "Keep b4 and b5 equal for a3", "active_agents": ["a1", "a3"], "a1_pieces": ["b1", "b2", "b3"], "outgoing": [{"id": "G5T1", "target_label": "Graph 2", "status": "graph"}, {"id": "G5T2", "target_label": "Graph 3", "status": "graph"}, {"id": "G5T3", "target_label": "BAD", "status": "bad"}, {"id": "G5T4", "target_label": "Graph 5", "status": "graph"}, {"id": "G5T5", "target_label": "BAD", "status": "bad"}, {"id": "G5T6", "target_label": "BAD", "status": "bad"}], "rule_display": "Move forward while keeping b4 and b5 equal for a3"}, "G6": {"id": "G6", "num": 6, "title": "Graph 6", "image": "../valid_bipartite_5x5_8edges_mincross/graph_006.svg", "deg_a1": 3, "edge_count": 8, "edges": [[1, 1], [1, 2], [1, 3], [2, 3], [3, 4], [4, 4], [4, 5], [5, 5]], "edges_text": "a1-b1, a1-b2, a1-b3, a2-b3, a3-b4, a4-b4, a4-b5, a5-b5", "rule": "Keep b4 and b5 equal for a4", "active_agents": ["a1", "a4"], "a1_pieces": ["b1", "b2", "b3"], "outgoing": [{"id": "G6T1", "target_label": "Graph 4", "status": "graph"}, {"id": "G6T2", "target_label": "Graph 4", "status": "graph"}, {"id": "G6T3", "target_label": "DONE", "status": "done"}, {"id": "G6T4", "target_label": "Graph 8", "status": "graph"}, {"id": "G6T5", "target_label": "Graph 6", "status": "graph"}, {"id": "G6T6", "target_label": "DONE", "status": "done"}, {"id": "G6T7", "target_label": "Graph 7", "status": "graph"}], "rule_display": "Move forward while keeping b4 and b5 equal for a4"}, "G7": {"id": "G7", "num": 7, "title": "Graph 7", "image": "../valid_bipartite_5x5_8edges_mincross/graph_007.svg", "deg_a1": 2, "edge_count": 8, "edges": [[1, 1], [1, 2], [2, 3], [3, 3], [3, 4], [3, 5], [4, 4], [5, 5]], "edges_text": "a1-b1, a1-b2, a2-b3, a3-b3, a3-b4, a3-b5, a4-b4, a5-b5", "rule": "Keep b3, b4, b5 equal for a3", "active_agents": ["a1", "a3"], "a1_pieces": ["b1", "b2"], "outgoing": [{"id": "G7T1", "target_label": "Graph 6", "status": "graph"}, {"id": "G7T2", "target_label": "DONE", "status": "done"}, {"id": "G7T3", "target_label": "Graph 8", "status": "graph"}, {"id": "G7T4", "target_label": "DONE", "status": "done"}], "rule_display": "Move forward while keeping b3, b4, b5 equal for a3"}, "G8": {"id": "G8", "num": 8, "title": "Graph 8", "image": "../valid_bipartite_5x5_8edges_mincross/graph_008.svg", "deg_a1": 2, "edge_count": 8, "edges": [[1, 1], [1, 2], [2, 3], [3, 3], [3, 4], [4, 4], [4, 5], [5, 5]], "edges_text": "a1-b1, a1-b2, a2-b3, a3-b3, a3-b4, a4-b4, a4-b5, a5-b5", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4", "active_agents": ["a1", "a3", "a4"], "a1_pieces": ["b1", "b2"], "outgoing": [{"id": "G8T1", "target_label": "Graph 6", "status": "graph"}, {"id": "G8T2", "target_label": "BAD", "status": "bad"}, {"id": "G8T3", "target_label": "DONE", "status": "done"}, {"id": "G8T4", "target_label": "Graph 8", "status": "graph"}, {"id": "G8T5", "target_label": "Graph 8", "status": "graph"}, {"id": "G8T6", "target_label": "DONE", "status": "done"}, {"id": "G8T7", "target_label": "Graph 7", "status": "graph"}, {"id": "G8T8", "target_label": "DONE", "status": "done"}, {"id": "G8T9", "target_label": "Graph 7", "status": "graph"}], "rule_display": "Move forward while keeping b3 and b4 equal for a3, and b4 and b5 equal for a4"}};
+    const GRAPH_ORDER = Array.from(document.querySelectorAll(".graphTile")).map((card) => card.dataset.graphId);
+    let currentGraphIndex = -1;
+
+    const detailModal = document.getElementById("detailModal");
+    const closeDetailModal = document.getElementById("closeDetailModal");
+    const prevGraphBtn = document.getElementById("prevGraphBtn");
+    const nextGraphBtn = document.getElementById("nextGraphBtn");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalImage = document.getElementById("modalImage");
+    const modalInfo = document.getElementById("modalInfo");
+    const zoomModal = document.getElementById("zoomModal");
+    const zoomImage = document.getElementById("zoomImage");
+
+    function esc(s) {
+      return String(s ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function statusBadge(status) {
+      if (status === "done") return '<span class="badge" style="background:#ecfff2;border-color:#bfe8cc;">DONE</span>';
+      if (status === "bad") return '<span class="badge" style="background:#fff2f2;border-color:#efcaca;">BAD</span>';
+      return '<span class="badge">Graph</span>';
+    }
+
+    function openGraphByIndex(index) {
+      if (!GRAPH_ORDER.length) return;
+      const n = GRAPH_ORDER.length;
+      const wrapped = ((index % n) + n) % n;
+      currentGraphIndex = wrapped;
+      openGraphDetails(GRAPH_ORDER[wrapped]);
+    }
+
+    function updateGraphNavButtons() {
+      const disabled = GRAPH_ORDER.length <= 1;
+      prevGraphBtn.disabled = disabled;
+      nextGraphBtn.disabled = disabled;
+    }
+
+    function openGraphDetails(graphId) {
+      const g = GRAPH_DATA[graphId];
+      if (!g) return;
+      const idx = GRAPH_ORDER.indexOf(graphId);
+      if (idx >= 0) currentGraphIndex = idx;
+      modalTitle.textContent = g.title;
+      modalImage.src = g.image;
+      modalImage.alt = g.title;
+
+      const out = (g.outgoing || []).map(t => {
+        return `<div class="infoVal mono">${esc(t.id)} -> ${esc(t.target_label)} ${statusBadge(t.status)}</div>`;
+      }).join("") || '<p class="infoVal">No critical transition files.</p>';
+
+      modalInfo.innerHTML = `
+        <div class="infoBlock">
+          <p class="infoKey">Rule</p>
+          <p class="infoVal">${esc(g.rule_display || g.rule || "-")}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Degree of a1</p>
+          <p class="infoVal mono">${esc(g.deg_a1)}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Edges (8 total)</p>
+          <p class="infoVal mono">${esc(g.edges_text)}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Pieces liked by a1</p>
+          <p class="infoVal mono">${esc((g.a1_pieces || []).join(", ") || "-")}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Active Agents (deg >= 2)</p>
+          <p class="infoVal mono">${esc((g.active_agents || []).join(", ") || "-")}</p>
+        </div>
+        <div class="infoBlock">
+          <p class="infoKey">Outgoing Critical Transitions</p>
+          ${out}
+        </div>
+      `;
+      updateGraphNavButtons();
+      detailModal.classList.add("open");
+    }
+
+    document.querySelectorAll(".graphTile").forEach((card) => {
+      card.addEventListener("click", () => openGraphDetails(card.dataset.graphId));
+    });
+
+    function closeGraphModal() {
+      detailModal.classList.remove("open");
+      zoomModal.classList.remove("open");
+      currentGraphIndex = -1;
+    }
+
+    function browseGraphs(step) {
+      if (currentGraphIndex < 0 || !GRAPH_ORDER.length) return;
+      openGraphByIndex(currentGraphIndex + step);
+      if (zoomModal.classList.contains("open")) zoomImage.src = modalImage.src;
+    }
+
+    prevGraphBtn.addEventListener("click", () => browseGraphs(-1));
+    nextGraphBtn.addEventListener("click", () => browseGraphs(1));
+    closeDetailModal.addEventListener("click", closeGraphModal);
+    detailModal.addEventListener("click", (evt) => {
+      if (evt.target === detailModal) closeGraphModal();
+    });
+
+    modalImage.addEventListener("click", () => {
+      if (!modalImage.src) return;
+      zoomImage.src = modalImage.src;
+      zoomModal.classList.add("open");
+    });
+    zoomModal.addEventListener("click", () => zoomModal.classList.remove("open"));
+
+    document.addEventListener("keydown", (evt) => {
+      const detailOpen = detailModal.classList.contains("open");
+      const zoomOpen = zoomModal.classList.contains("open");
+      if (!detailOpen && !zoomOpen) return;
+
+      if (evt.key === "Escape") {
+        evt.preventDefault();
+        if (zoomOpen) {
+          zoomModal.classList.remove("open");
+          return;
+        }
+        closeGraphModal();
+        return;
+      }
+
+      if (!detailOpen) return;
+      if (evt.key === "ArrowRight") {
+        evt.preventDefault();
+        browseGraphs(1);
+      } else if (evt.key === "ArrowLeft") {
+        evt.preventDefault();
+        browseGraphs(-1);
+      }
+    });
+    updateGraphNavButtons();
+  </script>
+</body>
+</html>

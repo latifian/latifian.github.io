@@ -1,0 +1,97 @@
+{
+  "a1_pieces": [
+    "b1",
+    "b2",
+    "b3"
+  ],
+  "active_agents": [
+    "a1",
+    "a4"
+  ],
+  "black_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "deg_a1": 3,
+  "divider_x": null,
+  "edge_count": 8,
+  "edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "graph_id": "G6",
+  "graph_index": 6,
+  "green_edge": null,
+  "height": 540.0,
+  "left_edges": [],
+  "name": "graph_006.svg",
+  "red_edge": null,
+  "rel_path": "valid_bipartite_5x5_8edges_mincross/graph_006.svg",
+  "right_edges": [],
+  "type": "graph",
+  "watermark_bad": false,
+  "watermark_done": false,
+  "watermark_invalid": false,
+  "watermark_question": false,
+  "width": 780.0
+}

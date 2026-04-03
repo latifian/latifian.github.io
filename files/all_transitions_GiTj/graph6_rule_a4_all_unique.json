@@ -1,0 +1,272 @@
+[
+  {
+    "index": 1,
+    "id": "G6R1",
+    "critical_edge": [
+      1,
+      1
+    ],
+    "appearing_edge": [
+      1,
+      4
+    ],
+    "critical_edge_text": "a1-b1",
+    "appearing_edge_text": "a1-b4",
+    "valid_after_replace": false,
+    "is_critical": true,
+    "done_candidate": false,
+    "selected_added": [
+      [
+        1,
+        4
+      ]
+    ],
+    "selected_removed": [
+      [
+        4,
+        4
+      ]
+    ],
+    "selected_status": "transition"
+  },
+  {
+    "index": 2,
+    "id": "G6R2",
+    "critical_edge": [
+      1,
+      3
+    ],
+    "appearing_edge": [
+      1,
+      4
+    ],
+    "critical_edge_text": "a1-b3",
+    "appearing_edge_text": "a1-b4",
+    "valid_after_replace": false,
+    "is_critical": true,
+    "done_candidate": false,
+    "selected_added": [
+      [
+        1,
+        4
+      ]
+    ],
+    "selected_removed": [
+      [
+        4,
+        4
+      ]
+    ],
+    "selected_status": "transition"
+  },
+  {
+    "index": 3,
+    "id": "G6R3",
+    "critical_edge": [
+      2,
+      3
+    ],
+    "appearing_edge": [
+      2,
+      1
+    ],
+    "critical_edge_text": "a2-b3",
+    "appearing_edge_text": "a2-b1",
+    "valid_after_replace": true,
+    "is_critical": false,
+    "done_candidate": false,
+    "selected_added": [
+      [
+        2,
+        1
+      ]
+    ],
+    "selected_removed": [
+      [
+        2,
+        3
+      ]
+    ],
+    "selected_status": "transition"
+  },
+  {
+    "index": 4,
+    "id": "G6R4",
+    "critical_edge": [
+      2,
+      3
+    ],
+    "appearing_edge": [
+      2,
+      4
+    ],
+    "critical_edge_text": "a2-b3",
+    "appearing_edge_text": "a2-b4",
+    "valid_after_replace": true,
+    "is_critical": false,
+    "done_candidate": false,
+    "selected_added": [
+      [
+        2,
+        4
+      ]
+    ],
+    "selected_removed": [
+      [
+        2,
+        3
+      ]
+    ],
+    "selected_status": "transition"
+  },
+  {
+    "index": 5,
+    "id": "G6R5",
+    "critical_edge": [
+      3,
+      4
+    ],
+    "appearing_edge": [
+      3,
+      1
+    ],
+    "critical_edge_text": "a3-b4",
+    "appearing_edge_text": "a3-b1",
+    "valid_after_replace": false,
+    "is_critical": true,
+    "done_candidate": true,
+    "selected_added": [
+      [
+        3,
+        1
+      ]
+    ],
+    "selected_removed": [
+      [
+        3,
+        4
+      ]
+    ],
+    "selected_status": "done"
+  },
+  {
+    "index": 6,
+    "id": "G6R6",
+    "critical_edge": [
+      3,
+      4
+    ],
+    "appearing_edge": [
+      3,
+      3
+    ],
+    "critical_edge_text": "a3-b4",
+    "appearing_edge_text": "a3-b3",
+    "valid_after_replace": false,
+    "is_critical": true,
+    "done_candidate": false,
+    "selected_added": [
+      [
+        3,
+        3
+      ]
+    ],
+    "selected_removed": [
+      [
+        1,
+        3
+      ]
+    ],
+    "selected_status": "transition"
+  },
+  {
+    "index": 7,
+    "id": "G6R7",
+    "critical_edge": [
+      3,
+      4
+    ],
+    "appearing_edge": [
+      3,
+      5
+    ],
+    "critical_edge_text": "a3-b4",
+    "appearing_edge_text": "a3-b5",
+    "valid_after_replace": false,
+    "is_critical": true,
+    "done_candidate": false,
+    "selected_added": [
+      [
+        3,
+        5
+      ]
+    ],
+    "selected_removed": [
+      [
+        4,
+        5
+      ]
+    ],
+    "selected_status": "transition"
+  },
+  {
+    "index": 8,
+    "id": "G6R8",
+    "critical_edge": [
+      4,
+      4
+    ],
+    "appearing_edge": [
+      4,
+      1
+    ],
+    "critical_edge_text": "a4-b4",
+    "appearing_edge_text": "a4-b1",
+    "valid_after_replace": false,
+    "is_critical": true,
+    "done_candidate": true,
+    "selected_added": [
+      [
+        4,
+        1
+      ]
+    ],
+    "selected_removed": [
+      [
+        4,
+        4
+      ]
+    ],
+    "selected_status": "done"
+  },
+  {
+    "index": 9,
+    "id": "G6R9",
+    "critical_edge": [
+      4,
+      4
+    ],
+    "appearing_edge": [
+      4,
+      3
+    ],
+    "critical_edge_text": "a4-b4",
+    "appearing_edge_text": "a4-b3",
+    "valid_after_replace": false,
+    "is_critical": true,
+    "done_candidate": false,
+    "selected_added": [
+      [
+        4,
+        3
+      ]
+    ],
+    "selected_removed": [
+      [
+        1,
+        3
+      ]
+    ],
+    "selected_status": "transition"
+  }
+]

@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>State Transition Graph</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f2f5f9;
+      --ink: #10243f;
+      --muted: #4b607f;
+      --card: #ffffff;
+      --line: #d5dfec;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 5%, #dbe7ff 0, transparent 35%),
+        radial-gradient(circle at 90% 0%, #e8ffe9 0, transparent 30%),
+        var(--bg);
+    }
+    .shell {
+      display: grid;
+      grid-template-columns: 1fr 344px;
+      gap: 16px;
+      padding: 16px;
+      min-height: 100vh;
+    }
+    .left, .right {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(16,36,63,.08);
+    }
+    .left { padding: 12px; overflow: hidden; }
+    .right { padding: 14px; overflow: auto; }
+    h1 { margin: 4px 0 6px; font-size: 28px; }
+    .subtitle { margin: 0 0 10px; color: var(--muted); font-size: 14px; }
+    .legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 8px 0 10px; align-items: center; }
+    .chip { border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; background: #f8fbff; }
+    .btn {
+      border: 1px solid #c7d6eb;
+      border-radius: 8px;
+      padding: 8px 12px;
+      background: #f7fbff;
+      color: #254875;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(16, 36, 63, 0.12);
+      transition: background .18s ease, transform .08s ease, box-shadow .18s ease;
+    }
+    .btn:hover { background: #ecf5ff; box-shadow: 0 4px 10px rgba(16, 36, 63, 0.16); }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: 2px solid #2e66b8; outline-offset: 2px; }
+    .btn.primary {
+      background: #2e66b8;
+      color: #ffffff;
+      border-color: #2e66b8;
+    }
+    .btn.primary:hover { background: #24569c; }
+    .toggleWrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid #c7d6eb;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #f7fbff;
+      color: #254875;
+      font-size: 12px;
+      user-select: none;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 42px;
+      height: 24px;
+      flex: 0 0 auto;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background-color: #d5e0ef;
+      transition: .22s ease;
+      border-radius: 999px;
+    }
+    .slider:before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      top: 3px;
+      background-color: white;
+      transition: .22s ease;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.22);
+    }
+    .switch input:checked + .slider {
+      background-color: #6f89ad;
+    }
+    .switch input:checked + .slider:before {
+      transform: translateX(18px);
+    }
+    .row { display: flex; gap: 8px; align-items: center; margin: 6px 0; }
+    .row input[type="range"] { width: 220px; }
+    #cyWrap {
+      position: relative;
+      width: 100%;
+      height: 980px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fbfdff 0%, #f4f8ff 100%);
+      overflow: hidden;
+    }
+    #cy {
+      width: 100%;
+      height: 100%;
+    }
+    #edgeLabelLayer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+    .edgeLabel {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      pointer-events: auto;
+      white-space: nowrap;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      font-weight: 600;
+      color: #1f2e46;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid #d9e3f0;
+      border-radius: 8px;
+      padding: 2px 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .edgeLabel .r { color: #d13a3a; }
+    .edgeLabel .g { color: #1f9d64; }
+    .edgeLabel .c { color: #6b7d97; }
+    .edgeLabel:hover { box-shadow: 0 4px 10px rgba(16,36,63,.16); }
+    .section { border: 1px solid var(--line); border-radius: 12px; padding: 10px; margin-bottom: 10px; background: #fcfdff; }
+    .section h2 { margin: 0 0 8px; font-size: 17px; }
+    .mono { font-family: "IBM Plex Mono", monospace; font-size: 13px; }
+    .k { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .v { font-size: 14px; margin-bottom: 8px; }
+    .imgwrap { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #fff; }
+    .imgwrap img { display: block; width: 100%; height: auto; cursor: zoom-in; }
+    .rules ul { margin: 8px 0 0 18px; padding: 0; color: #223a5e; font-size: 14px; }
+    .rules li { margin: 3px 0; }
+    .small { font-size: 12px; color: var(--muted); }
+    .imgnote { margin-top: 4px; font-size: 12px; color: var(--muted); }
+    #imgModal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(8, 16, 30, 0.72);
+      z-index: 9999;
+      padding: 20px;
+    }
+    #imgModal.open { display: flex; }
+    #imgModal img {
+      max-width: min(96vw, 1800px);
+      max-height: 92vh;
+      width: auto;
+      height: auto;
+      background: white;
+      border: 1px solid #cdd8e8;
+      border-radius: 10px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+    }
+    #imgModalClose {
+      position: fixed;
+      top: 18px;
+      right: 24px;
+      border: 1px solid #b7c6df;
+      background: #fff;
+      color: #233d63;
+      border-radius: 8px;
+      font-size: 14px;
+      padding: 6px 10px;
+      cursor: pointer;
+      z-index: 10000;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="left">
+      <h1>State Transition Graph</h1>
+      <p class="subtitle">Interactive map. Click a node or edge for details.</p>
+      <p class="subtitle"><strong>Critical transition definition:</strong> Starting from a graph, if we remove the critical edge (red) and add the appearing edge (green), and the resulting graph is valid, then the transition is not critical.</p>
+      <p class="subtitle"><strong>Build:</strong> 2026-04-01 17:22:33</p>
+      <div class="legend">
+        <label class="toggleWrap" for="toggleNonCritical">
+          <span id="toggleNonCriticalText">Critical Only: On</span>
+          <span class="switch">
+            <input type="checkbox" id="toggleNonCritical" />
+            <span class="slider"></span>
+          </span>
+        </label>
+        <button class="btn primary" id="resetLayout" type="button">Reset Layout</button>
+      </div>
+      <div id="cyWrap">
+        <div id="cy"></div>
+        <div id="edgeLabelLayer"></div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="section" id="selectionCard">
+        <h2>Selection</h2>
+        <div class="small">Select a node or edge in the state transition graph.</div>
+      </div>
+      <div class="section rules">
+        <h2>Rules</h2>
+        <div class="small">Current per-graph rules used to generate transitions:</div>
+        <ul id="rulesList"></ul>
+      </div>
+      <div class="section">
+        <h2>Model Notes</h2>
+        <div class="small">
+          Nodes are graph states G1..G8. Edges are critical transitions GiTj.
+          Done transitions go to DONE. Bad/invalid/questionable transitions go to BAD.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="imgModal">
+    <button id="imgModalClose">Close</button>
+    <img id="imgModalImage" alt="Large preview" />
+  </div>
+
+  <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+  <script>
+    console.log("State Transition Graph build:", "2026-04-01 17:22:33");
+    const DATA = {"nodes": [{"id": "G1", "type": "rep", "title": "Graph G1", "rule": "Shrink b5", "image": "../valid_bipartite_5x5_8edges_mincross/graph_001.svg"}, {"id": "G2", "type": "rep", "title": "Graph G2", "rule": "Shrink b5", "image": "../valid_bipartite_5x5_8edges_mincross/graph_002.svg"}, {"id": "G3", "type": "rep", "title": "Graph G3", "rule": "Shrink b5", "image": "../valid_bipartite_5x5_8edges_mincross/graph_003.svg"}, {"id": "G4", "type": "rep", "title": "Graph G4", "rule": "Shrink b5", "image": "../valid_bipartite_5x5_8edges_mincross/graph_004.svg"}, {"id": "G5", "type": "rep", "title": "Graph G5", "rule": "Keep b4 and b5 equal for a3", "image": "../valid_bipartite_5x5_8edges_mincross/graph_005.svg"}, {"id": "G6", "type": "rep", "title": "Graph G6", "rule": "Keep b4 and b5 equal for a4", "image": "../valid_bipartite_5x5_8edges_mincross/graph_006.svg"}, {"id": "G7", "type": "rep", "title": "Graph G7", "rule": "Keep b3, b4, b5 equal for a3", "image": "../valid_bipartite_5x5_8edges_mincross/graph_007.svg"}, {"id": "G8", "type": "rep", "title": "Graph G8", "rule": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4", "image": "../valid_bipartite_5x5_8edges_mincross/graph_008.svg"}, {"id": "START", "type": "start", "title": "Start", "description": "State Transition Graph starts at G1, G2, G3, or G4."}, {"id": "DONE", "type": "done", "title": "Done (Final)", "description": "Transition-state graph has a perfect matching."}, {"id": "BAD", "type": "bad", "title": "Bad (Failure)", "description": "Transition is marked bad or leads to an invalid state."}], "edges": [{"id": "E_START_G1", "from": "START", "to": "G1", "kind": "start", "label": "start"}, {"id": "E_START_G2", "from": "START", "to": "G2", "kind": "start", "label": "start"}, {"id": "E_START_G3", "from": "START", "to": "G3", "kind": "start", "label": "start"}, {"id": "E_START_G4", "from": "START", "to": "G4", "kind": "start", "label": "start"}, {"id": "E_G3_T1", "from": "G3", "to": "BAD", "kind": "bad", "transition_id": "G3T1", "transition_file": "G3T1.svg", "label": {"id": "G3T1", "red": "a4-b5", "green": "a4-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G3_T2", "from": "G3", "to": "G5", "kind": "transition", "transition_id": "G3T2", "transition_file": "G3T2.svg", "label": {"id": "G3T2", "red": "a4-b5", "green": "a4-b4"}, "actual_added": [[4, 4]], "actual_removed": [[1, 4]]}, {"id": "E_G4_T1", "from": "G4", "to": "DONE", "kind": "done", "transition_id": "G4T1", "transition_file": "G4T1.svg", "label": {"id": "G4T1", "red": "a4-b5", "green": "a4-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G4_T2", "from": "G4", "to": "G6", "kind": "transition", "transition_id": "G4T2", "transition_file": "G4T2.svg", "label": {"id": "G4T2", "red": "a4-b5", "green": "a4-b3"}, "actual_added": [[4, 3]], "actual_removed": [[1, 3]]}, {"id": "E_G5_T1", "from": "G5", "to": "G2", "kind": "transition", "transition_id": "G5T1", "transition_file": "G5T1.svg", "label": {"id": "G5T1", "red": "a1-b1", "green": "a1-b4"}, "actual_added": [[1, 4]], "actual_removed": [[3, 4]]}, {"id": "E_G5_T2", "from": "G5", "to": "G3", "kind": "transition", "transition_id": "G5T2", "transition_file": "G5T2.svg", "label": {"id": "G5T2", "red": "a1-b1", "green": "a1-b5"}, "actual_added": [[1, 5]], "actual_removed": [[3, 5]]}, {"id": "E_G5_T3", "from": "G5", "to": "BAD", "kind": "bad", "transition_id": "G5T3", "transition_file": "G5T3.svg", "label": {"id": "G5T3", "red": "a2-b4", "green": "a2-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G5_T4", "from": "G5", "to": "G5", "kind": "transition", "transition_id": "G5T4", "transition_file": "G5T4.svg", "label": {"id": "G5T4", "red": "a2-b4", "green": "a2-b5"}, "actual_added": [[2, 5]], "actual_removed": [[3, 5]]}, {"id": "E_G5_T5", "from": "G5", "to": "BAD", "kind": "bad", "transition_id": "G5T5", "transition_file": "G5T5.svg", "label": {"id": "G5T5", "red": "a3-b4", "green": "a3-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G5_T6", "from": "G5", "to": "BAD", "kind": "bad", "transition_id": "G5T6", "transition_file": "G5T6.svg", "label": {"id": "G5T6", "red": "a3-b5", "green": "a3-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G6_T1", "from": "G6", "to": "G4", "kind": "transition", "transition_id": "G6T1", "transition_file": "G6T1.svg", "label": {"id": "G6T1", "red": "a1-b1", "green": "a1-b4"}, "actual_added": [[1, 4]], "actual_removed": [[4, 4]]}, {"id": "E_G6_T2", "from": "G6", "to": "G4", "kind": "transition", "transition_id": "G6T2", "transition_file": "G6T2.svg", "label": {"id": "G6T2", "red": "a1-b3", "green": "a1-b4"}, "actual_added": [[1, 4]], "actual_removed": [[4, 4]]}, {"id": "E_G6_T3", "from": "G6", "to": "DONE", "kind": "done", "transition_id": "G6T3", "transition_file": "G6T3.svg", "label": {"id": "G6T3", "red": "a3-b4", "green": "a3-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G6_T4", "from": "G6", "to": "G8", "kind": "transition", "transition_id": "G6T4", "transition_file": "G6T4.svg", "label": {"id": "G6T4", "red": "a3-b4", "green": "a3-b3"}, "actual_added": [[3, 3]], "actual_removed": [[1, 3]]}, {"id": "E_G6_T5", "from": "G6", "to": "G6", "kind": "transition", "transition_id": "G6T5", "transition_file": "G6T5.svg", "label": {"id": "G6T5", "red": "a3-b4", "green": "a3-b5"}, "actual_added": [[3, 5]], "actual_removed": [[4, 5]]}, {"id": "E_G6_T6", "from": "G6", "to": "DONE", "kind": "done", "transition_id": "G6T6", "transition_file": "G6T6.svg", "label": {"id": "G6T6", "red": "a4-b4", "green": "a4-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G6_T7", "from": "G6", "to": "G7", "kind": "transition", "transition_id": "G6T7", "transition_file": "G6T7.svg", "label": {"id": "G6T7", "red": "a4-b4", "green": "a4-b3"}, "actual_added": [[4, 3]], "actual_removed": [[1, 3]]}, {"id": "E_G7_T1", "from": "G7", "to": "G6", "kind": "transition", "transition_id": "G7T1", "transition_file": "G7T1.svg", "label": {"id": "G7T1", "red": "a1-b1", "green": "a1-b3"}, "actual_added": [[1, 3]], "actual_removed": [[3, 3]]}, {"id": "E_G7_T2", "from": "G7", "to": "DONE", "kind": "done", "transition_id": "G7T2", "transition_file": "G7T2.svg", "label": {"id": "G7T2", "red": "a2-b3", "green": "a2-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G7_T3", "from": "G7", "to": "G8", "kind": "transition", "transition_id": "G7T3", "transition_file": "G7T3.svg", "label": {"id": "G7T3", "red": "a2-b3", "green": "a2-b4"}, "actual_added": [[2, 4]], "actual_removed": [[3, 4]]}, {"id": "E_G7_T4", "from": "G7", "to": "DONE", "kind": "done", "transition_id": "G7T4", "transition_file": "G7T4.svg", "label": {"id": "G7T4", "red": "a3-b3", "green": "a3-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G8_T1", "from": "G8", "to": "G6", "kind": "transition", "transition_id": "G8T1", "transition_file": "G8T1.svg", "label": {"id": "G8T1", "red": "a1-b1", "green": "a1-b3"}, "actual_added": [[1, 3]], "actual_removed": [[3, 3]]}, {"id": "E_G8_T2", "from": "G8", "to": "BAD", "kind": "bad", "transition_id": "G8T2", "transition_file": "G8T2.svg", "label": {"id": "G8T2", "red": "a1-b1", "green": "a1-b4"}, "actual_added": [[1, 4]], "actual_removed": [[3, 4]]}, {"id": "E_G8_T3", "from": "G8", "to": "DONE", "kind": "done", "transition_id": "G8T3", "transition_file": "G8T3.svg", "label": {"id": "G8T3", "red": "a2-b3", "green": "a2-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G8_T4", "from": "G8", "to": "G8", "kind": "transition", "transition_id": "G8T4", "transition_file": "G8T4.svg", "label": {"id": "G8T4", "red": "a2-b3", "green": "a2-b4"}, "actual_added": [[2, 4]], "actual_removed": [[3, 4]]}, {"id": "E_G8_T5", "from": "G8", "to": "G8", "kind": "transition", "transition_id": "G8T5", "transition_file": "G8T5.svg", "label": {"id": "G8T5", "red": "a2-b3", "green": "a2-b5"}, "actual_added": [[2, 5]], "actual_removed": [[4, 5]]}, {"id": "E_G8_T6", "from": "G8", "to": "DONE", "kind": "done", "transition_id": "G8T6", "transition_file": "G8T6.svg", "label": {"id": "G8T6", "red": "a3-b3", "green": "a3-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G8_T7", "from": "G8", "to": "G7", "kind": "transition", "transition_id": "G8T7", "transition_file": "G8T7.svg", "label": {"id": "G8T7", "red": "a3-b3", "green": "a3-b5"}, "actual_added": [[3, 5]], "actual_removed": [[4, 5]]}, {"id": "E_G8_T8", "from": "G8", "to": "DONE", "kind": "done", "transition_id": "G8T8", "transition_file": "G8T8.svg", "label": {"id": "G8T8", "red": "a3-b4", "green": "a3-b1"}, "actual_added": [], "actual_removed": []}, {"id": "E_G8_T9", "from": "G8", "to": "G7", "kind": "transition", "transition_id": "G8T9", "transition_file": "G8T9.svg", "label": {"id": "G8T9", "red": "a3-b4", "green": "a3-b5"}, "actual_added": [[3, 5]], "actual_removed": [[4, 5]]}, {"id": "E_NC_G1_1", "from": "G1", "to": "G2", "kind": "noncritical", "transition_id": "G1N1", "transition_file": "", "label": {"id": "G1N1", "red": "a2-b5", "green": "a2-b1"}, "actual_added": [[2, 1]], "actual_removed": [[2, 5]]}, {"id": "E_NC_G2_1", "from": "G2", "to": "G2", "kind": "noncritical", "transition_id": "G2N1", "transition_file": "", "label": {"id": "G2N1", "red": "a2-b4", "green": "a2-b1"}, "actual_added": [[2, 1]], "actual_removed": [[2, 4]]}, {"id": "E_NC_G2_2", "from": "G2", "to": "G4", "kind": "noncritical", "transition_id": "G2N2", "transition_file": "", "label": {"id": "G2N2", "red": "a3-b5", "green": "a3-b1"}, "actual_added": [[3, 1]], "actual_removed": [[3, 5]]}, {"id": "E_NC_G2_3", "from": "G2", "to": "G3", "kind": "noncritical", "transition_id": "G2N3", "transition_file": "", "label": {"id": "G2N3", "red": "a3-b5", "green": "a3-b4"}, "actual_added": [[3, 4]], "actual_removed": [[3, 5]]}, {"id": "E_NC_G3_1", "from": "G3", "to": "G4", "kind": "noncritical", "transition_id": "G3N1", "transition_file": "", "label": {"id": "G3N1", "red": "a2-b4", "green": "a2-b1"}, "actual_added": [[2, 1]], "actual_removed": [[2, 4]]}, {"id": "E_NC_G4_1", "from": "G4", "to": "G4", "kind": "noncritical", "transition_id": "G4N1", "transition_file": "", "label": {"id": "G4N1", "red": "a2-b3", "green": "a2-b1"}, "actual_added": [[2, 1]], "actual_removed": [[2, 3]]}, {"id": "E_NC_G4_2", "from": "G4", "to": "G3", "kind": "noncritical", "transition_id": "G4N2", "transition_file": "", "label": {"id": "G4N2", "red": "a2-b3", "green": "a2-b4"}, "actual_added": [[2, 4]], "actual_removed": [[2, 3]]}, {"id": "E_NC_G5_1", "from": "G5", "to": "G6", "kind": "noncritical", "transition_id": "G5N1", "transition_file": "", "label": {"id": "G5N1", "red": "a4-b5", "green": "a4-b1"}, "actual_added": [[4, 1]], "actual_removed": [[4, 5]]}, {"id": "E_NC_G5_2", "from": "G5", "to": "G5", "kind": "noncritical", "transition_id": "G5N2", "transition_file": "", "label": {"id": "G5N2", "red": "a4-b5", "green": "a4-b4"}, "actual_added": [[4, 4]], "actual_removed": [[4, 5]]}, {"id": "E_NC_G6_1", "from": "G6", "to": "G6", "kind": "noncritical", "transition_id": "G6N1", "transition_file": "", "label": {"id": "G6N1", "red": "a2-b3", "green": "a2-b1"}, "actual_added": [[2, 1]], "actual_removed": [[2, 3]]}, {"id": "E_NC_G6_2", "from": "G6", "to": "G5", "kind": "noncritical", "transition_id": "G6N2", "transition_file": "", "label": {"id": "G6N2", "red": "a2-b3", "green": "a2-b4"}, "actual_added": [[2, 4]], "actual_removed": [[2, 3]]}], "rules": {"G1": "Shrink b5", "G2": "Shrink b5", "G3": "Shrink b5", "G4": "Shrink b5", "G5": "Keep b4 and b5 equal for a3", "G6": "Keep b4 and b5 equal for a4", "G7": "Keep b3, b4, b5 equal for a3", "G8": "Keep b3 and b4 equal for a3, and b4 and b5 equal for a4"}};
+    const selectionCard = document.getElementById("selectionCard");
+    const rulesList = document.getElementById("rulesList");
+    const edgeLabelLayer = document.getElementById("edgeLabelLayer");
+    const imgModal = document.getElementById("imgModal");
+    const imgModalImage = document.getElementById("imgModalImage");
+    const imgModalClose = document.getElementById("imgModalClose");
+    const toggleNonCriticalSwitch = document.getElementById("toggleNonCritical");
+    const toggleNonCriticalText = document.getElementById("toggleNonCriticalText");
+    let showNonCritical = false;
+    let activeEdgeId = null;
+    let edgeDragState = null;
+
+    for (const [k, v] of Object.entries(DATA.rules)) {
+      const li = document.createElement("li");
+      li.innerHTML = `<span class="mono">${k}</span>: ${v}`;
+      rulesList.appendChild(li);
+    }
+
+    const STORAGE_KEY = "ef_cake_automata_node_positions_v1";
+    const EDGE_STORAGE_KEY = "ef_cake_automata_edge_bends_v1";
+
+    const nodePosDefault = {
+      START: { x: 80, y: 560 },
+      G1: { x: 520, y: 100 },
+      G2: { x: 520, y: 300 },
+      G3: { x: 520, y: 500 },
+      G4: { x: 520, y: 700 },
+      G5: { x: 520, y: 900 },
+      G6: { x: 1180, y: 320 },
+      G7: { x: 1180, y: 560 },
+      G8: { x: 1180, y: 820 },
+      DONE: { x: 1840, y: 330 },
+      BAD: { x: 1840, y: 820 }
+    };
+
+    function loadNodePos() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return { ...nodePosDefault };
+        const parsed = JSON.parse(raw);
+        const out = { ...nodePosDefault };
+        for (const id of Object.keys(nodePosDefault)) {
+          if (parsed[id] && Number.isFinite(parsed[id].x) && Number.isFinite(parsed[id].y)) {
+            out[id] = { x: parsed[id].x, y: parsed[id].y };
+          }
+        }
+        return out;
+      } catch {
+        return { ...nodePosDefault };
+      }
+    }
+
+    function saveNodePos(cyInstance) {
+      const obj = {};
+      cyInstance.nodes().forEach(n => {
+        const p = n.position();
+        obj[n.id()] = { x: p.x, y: p.y };
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+    }
+
+    function loadEdgeBends() {
+      try {
+        const raw = localStorage.getItem(EDGE_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      } catch {
+        return {};
+      }
+    }
+
+    function saveEdgeBends(cyInstance) {
+      const obj = {};
+      cyInstance.edges().forEach(e => {
+        obj[e.id()] = Number(e.data("cpd")) || 0;
+      });
+      localStorage.setItem(EDGE_STORAGE_KEY, JSON.stringify(obj));
+    }
+
+    const nodePos = loadNodePos();
+    const edgeBends = loadEdgeBends();
+
+    const nodeMeta = Object.fromEntries(DATA.nodes.map(n => [n.id, n]));
+
+    // Compute separation values for edges so opposite directions are clearly distinct.
+    const dirCount = {};
+    for (const e of DATA.edges) {
+      const k = `${e.from}->${e.to}`;
+      dirCount[k] = (dirCount[k] || 0) + 1;
+    }
+    const groups = {};
+    for (const e of DATA.edges) {
+      const k = `${e.from}->${e.to}`;
+      if (!groups[k]) groups[k] = [];
+      groups[k].push(e);
+    }
+    for (const arr of Object.values(groups)) arr.sort((a,b)=>a.id.localeCompare(b.id));
+
+    const elements = [];
+    for (const n of DATA.nodes) {
+      elements.push({ data: { id: n.id, label: n.id, type: n.type || "rep" }, position: nodePos[n.id] });
+    }
+
+    for (const e of DATA.edges) {
+      const key = `${e.from}->${e.to}`;
+      const arr = groups[key];
+      const idx = arr.findIndex(x => x.id === e.id);
+      const n = arr.length;
+      const reverse = `${e.to}->${e.from}`;
+      const hasReverse = (dirCount[reverse] || 0) > 0;
+      const side = hasReverse ? (e.from < e.to ? -1 : 1) : 0;
+      const baseCurve = hasReverse ? 160 : 40;
+      const curve = side * (hasReverse ? 220 : 70) + (idx - (n - 1) / 2) * 130;
+      const rich = e.label || {};
+      const text = (rich.red && rich.green)
+        ? `🟥 ${rich.red}, 🟩 ${rich.green}`
+        : "";
+      const cpd = (edgeBends[e.id] !== undefined) ? Number(edgeBends[e.id]) : curve;
+      elements.push({
+        data: {
+          id: e.id,
+          source: e.from,
+          target: e.to,
+          kind: e.kind,
+          transition_id: e.transition_id || "",
+          transition_file: e.transition_file || "",
+          edge_text: text,
+          cpd: cpd,
+          red_text: rich.red || "",
+          green_text: rich.green || "",
+          actual_added: e.actual_added || [],
+          actual_removed: e.actual_removed || [],
+        }
+      });
+    }
+
+    const cy = cytoscape({
+      container: document.getElementById("cy"),
+      elements,
+      layout: { name: "preset" },
+      autolock: false,
+      autoungrabify: false,
+      wheelSensitivity: 0.25,
+      style: [
+        {
+          selector: "node",
+          style: {
+            "label": "data(label)",
+            "font-family": "Space Grotesk",
+            "font-size": 28,
+            "font-weight": 700,
+            "text-valign": "center",
+            "text-halign": "center",
+            "width": 88,
+            "height": 88,
+            "background-color": "#ffffff",
+            "border-width": 3,
+            "border-color": "#3f5577",
+            "color": "#173256",
+            "cursor": "grab"
+          }
+        },
+        { selector: 'node[type = "start"]', style: { "background-color": "#e6f2ff", "border-color": "#2e66b8" } },
+        { selector: 'node[type = "done"]', style: { "background-color": "#d7f7df", "border-color": "#1f9d64" } },
+        { selector: 'node[type = "bad"]', style: { "background-color": "#ffe0e0", "border-color": "#d13a3a" } },
+        {
+          selector: "edge",
+          style: {
+            "width": 4,
+            "curve-style": "unbundled-bezier",
+            "control-point-distances": "data(cpd)",
+            "control-point-weights": 0.5,
+            "target-arrow-shape": "triangle",
+            "target-arrow-color": "#566b8a",
+            "arrow-scale": 2.1,
+            "line-color": "#6e83a1",
+            "label": "",
+            "font-family": "IBM Plex Mono",
+            "font-size": 18,
+            "font-weight": 600,
+            "text-events": "no",
+            "selection-box-opacity": 0
+          }
+        },
+        { selector: 'edge[kind = "done"]', style: { "line-color": "#1f9d64", "target-arrow-color": "#1f9d64" } },
+        { selector: 'edge[kind = "bad"]', style: { "line-color": "#d13a3a", "target-arrow-color": "#d13a3a" } },
+        { selector: 'edge[kind = "start"]', style: { "line-color": "#2e66b8", "target-arrow-color": "#2e66b8" } },
+        {
+          selector: 'edge[kind = "noncritical"]',
+          style: {
+            "line-color": "#c5ced9",
+            "target-arrow-color": "#c5ced9",
+          }
+        },
+        {
+          selector: "edge[source = target]",
+          style: {
+            "curve-style": "bezier",
+            "loop-direction": "-40deg",
+            "loop-sweep": "130deg",
+            "control-point-step-size": 220
+          }
+        },
+        { selector: "node:selected", style: { "border-color": "#ff8c00", "border-width": 6 } },
+        { selector: "edge:selected", style: { "width": 7, "line-color": "#ff8c00", "target-arrow-color": "#ff8c00", "z-index": 999 } }
+      ]
+    });
+
+    cy.fit(cy.elements(), 80);
+    cy.nodes().forEach(n => n.grabbable(true));
+    cy.on("dragfree", "node", () => saveNodePos(cy));
+
+    function applyLoopStyle(edge) {
+      if (!edge || edge.empty()) return;
+      if (edge.source().id() !== edge.target().id()) return;
+      const v = Number(edge.data("cpd")) || 0;
+      const step = Math.max(140, Math.abs(v) + 140);
+      const dir = v >= 0 ? "-40deg" : "140deg";
+      edge.style("control-point-step-size", step);
+      edge.style("loop-direction", dir);
+      edge.style("loop-sweep", "130deg");
+    }
+
+    function applyEdgeBendStyle(edge) {
+      if (!edge || edge.empty()) return;
+      const v = Number(edge.data("cpd")) || 0;
+      if (edge.source().id() === edge.target().id()) {
+        applyLoopStyle(edge);
+      } else {
+        edge.style("curve-style", "unbundled-bezier");
+        edge.style("control-point-distances", v);
+      }
+    }
+
+    cy.edges().forEach(e => applyEdgeBendStyle(e));
+
+    function setNonCriticalVisible(show) {
+      cy.edges('[kind = "noncritical"]').style("display", show ? "element" : "none");
+      if (toggleNonCriticalText) {
+        toggleNonCriticalText.textContent = show ? "Critical Only: Off" : "Critical Only: On";
+      }
+      if (toggleNonCriticalSwitch) {
+        toggleNonCriticalSwitch.checked = !show;
+      }
+      positionEdgeLabels();
+    }
+
+    function syncEdgeBendControls(edge) {
+      if (!edge || edge.empty()) return;
+      if (activeEdgeId !== edge.id()) return;
+      const v = Number(edge.data("cpd")) || 0;
+      const slider = document.getElementById("bendSlider");
+      const val = document.getElementById("bendVal");
+      if (slider) slider.value = String(v);
+      if (val) val.textContent = String(v);
+    }
+
+    function pointerToRendered(evt) {
+      const rect = cy.container().getBoundingClientRect();
+      return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top,
+      };
+    }
+
+    function beginEdgeDrag(edge, renderedPos) {
+      if (!edge || edge.empty()) return;
+      const sp = edge.source().renderedPosition();
+      const tp = edge.target().renderedPosition();
+      const dx = tp.x - sp.x;
+      const dy = tp.y - sp.y;
+      const len = Math.hypot(dx, dy);
+      const perp = len > 1e-6 ? { x: -dy / len, y: dx / len } : { x: 1, y: 0 };
+      edgeDragState = {
+        edgeId: edge.id(),
+        startPos: renderedPos,
+        startCpd: Number(edge.data("cpd")) || 0,
+        perp,
+        isLoop: edge.source().id() === edge.target().id(),
+      };
+      cy.userPanningEnabled(false);
+    }
+
+    function updateEdgeDrag(renderedPos) {
+      if (!edgeDragState) return;
+      const edge = cy.$id(edgeDragState.edgeId);
+      if (!edge || edge.empty()) return;
+      const dx = renderedPos.x - edgeDragState.startPos.x;
+      const dy = renderedPos.y - edgeDragState.startPos.y;
+      const delta = edgeDragState.isLoop
+        ? dx / Math.max(cy.zoom(), 0.0001)
+        : ((dx * edgeDragState.perp.x + dy * edgeDragState.perp.y) / Math.max(cy.zoom(), 0.0001));
+      const next = Math.max(-900, Math.min(900, edgeDragState.startCpd + delta));
+      edge.data("cpd", next);
+      applyEdgeBendStyle(edge);
+      syncEdgeBendControls(edge);
+      positionEdgeLabels();
+    }
+
+    function endEdgeDrag() {
+      if (!edgeDragState) return;
+      saveEdgeBends(cy);
+      edgeDragState = null;
+      cy.userPanningEnabled(true);
+    }
+
+    function escAttr(s) {
+      return String(s || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    function buildEdgeLabels() {
+      edgeLabelLayer.innerHTML = "";
+      cy.edges().forEach((e) => {
+        const d = e.data();
+        if (!d.red_text && !d.green_text) return;
+        const el = document.createElement("div");
+        el.className = "edgeLabel";
+        el.dataset.edgeId = e.id();
+        el.dataset.kind = d.kind || "";
+        el.innerHTML =
+          `<span class="r">${escAttr(d.red_text || "")}</span>` +
+          `<span class="c">, </span>` +
+          `<span class="g">${escAttr(d.green_text || "")}</span>`;
+        el.addEventListener("click", (evt) => {
+          evt.stopPropagation();
+          e.select();
+          showEdge(e);
+        });
+        el.addEventListener("mousedown", (evt) => {
+          if (evt.button !== 0) return;
+          evt.preventDefault();
+          evt.stopPropagation();
+          const rp = pointerToRendered(evt);
+          beginEdgeDrag(e, rp);
+        });
+        edgeLabelLayer.appendChild(el);
+      });
+      positionEdgeLabels();
+    }
+
+    function positionEdgeLabels() {
+      edgeLabelLayer.querySelectorAll(".edgeLabel").forEach((el) => {
+        const edgeId = el.dataset.edgeId;
+        const e = cy.$id(edgeId);
+        if (!e || e.empty()) {
+          el.style.display = "none";
+          return;
+        }
+        if (el.dataset.kind === "noncritical" && !showNonCritical) {
+          el.style.display = "none";
+          return;
+        }
+        const mp = e.renderedMidpoint();
+        const sp = e.source().renderedPosition();
+        const tp = e.target().renderedPosition();
+        let angle = Math.atan2(tp.y - sp.y, tp.x - sp.x) * 180 / Math.PI;
+        if (angle > 90 || angle < -90) angle += 180;
+        el.style.display = "";
+        el.style.left = `${mp.x}px`;
+        el.style.top = `${mp.y}px`;
+        el.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+      });
+    }
+
+    function esc(s) {
+      return String(s || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function wireImageZoom(scopeEl) {
+      if (!scopeEl) return;
+      scopeEl.querySelectorAll("img[data-full-src]").forEach((img) => {
+        img.addEventListener("click", () => {
+          const src = img.getAttribute("data-full-src");
+          if (!src) return;
+          imgModalImage.src = src;
+          imgModal.classList.add("open");
+        });
+      });
+    }
+
+    function showNode(id) {
+      const meta = nodeMeta[id];
+      let body = `<h2>${esc(meta.title || id)}</h2>`;
+      if (id.startsWith("G")) {
+        body += `<div class="k">Rule</div><div class="v">${esc(meta.rule || "")}</div>`;
+        body += `<div class="k">Graph Image</div>`;
+        body += `<div class="imgwrap"><img data-full-src="${meta.image}" src="${meta.image}" alt="${id}"/></div>`;
+        body += `<div class="imgnote">Click image to enlarge</div>`;
+        const outgoing = DATA.edges.filter(e => e.from === id);
+        body += `<div class="k" style="margin-top:10px;">Outgoing Transitions (${outgoing.length})</div>`;
+        body += `<div class="v mono">${outgoing.map(e => (e.label && e.label.id) ? e.label.id : e.id).join(", ") || "None"}</div>`;
+      } else {
+        body += `<div class="small">${esc(meta.description || "")}</div>`;
+      }
+      selectionCard.innerHTML = `<div class="section">${body}</div>`;
+      wireImageZoom(selectionCard);
+    }
+
+    function showEdge(ele) {
+        const d = ele.data();
+      activeEdgeId = ele.id();
+      let body = `<h2>Transition ${esc(d.transition_id || "")}</h2>`;
+      const stateLabel = (id) => {
+        if (typeof id === "string" && /^G\d+$/.test(id)) return `Graph ${id.slice(1)}`;
+        return id;
+      };
+      body += `<div class="k">From / To</div><div class="v mono">${esc(stateLabel(d.source))} -> ${esc(stateLabel(d.target))}</div>`;
+      if (d.red_text) {
+        body += `<div class="k">Critical Edge (Red)</div>`;
+        body += `<div class="v mono" style="color:#d13a3a">${esc(d.red_text)}</div>`;
+      }
+      if (d.green_text) {
+        body += `<div class="k">Appearing Edge (Green dashed)</div>`;
+        body += `<div class="v mono" style="color:#1f9d64">${esc(d.green_text)}</div>`;
+      }
+      if (!(d.target === "DONE" || d.target === "BAD")) {
+        const removed = (d.actual_removed && d.actual_removed.length)
+          ? d.actual_removed.map(x => `a${x[0]}-b${x[1]}`).join(", ")
+          : "";
+        const added = (d.actual_added && d.actual_added.length)
+          ? d.actual_added.map(x => `a${x[0]}-b${x[1]}`).join(", ")
+          : "";
+        body += `<div class="k">Change</div>`;
+        body += `<div class="v mono">Added: <span style="color:#1f9d64">${esc(added || "-")}</span> | Removed: <span style="color:#d13a3a">${esc(removed || "-")}</span></div>`;
+      }
+      if (d.transition_file) {
+        body += `<div class="k">Transition Graph</div>`;
+        body += `<div class="imgwrap"><img data-full-src="${esc(d.transition_file)}" src="${esc(d.transition_file)}" alt="${esc(d.transition_file)}"/></div>`;
+        body += `<div class="imgnote">Click image to enlarge</div>`;
+      }
+      body += `<div class="k" style="margin-top:10px;">Edge Bend (Move Edge)</div>`;
+      body += `<div class="row"><input id="bendSlider" type="range" min="-600" max="600" step="1" value="${Number(d.cpd)||0}"/><span id="bendVal" class="mono">${Number(d.cpd)||0}</span></div>`;
+      body += `<div class="row"><button class="btn" id="resetEdgeBend">Reset Edge Bend</button></div>`;
+      selectionCard.innerHTML = `<div class="section">${body}</div>`;
+      wireImageZoom(selectionCard);
+
+      const slider = document.getElementById("bendSlider");
+      const val = document.getElementById("bendVal");
+      const reset = document.getElementById("resetEdgeBend");
+      if (slider && val) {
+        slider.addEventListener("input", () => {
+          const v = Number(slider.value);
+          ele.data("cpd", v);
+          applyEdgeBendStyle(ele);
+          val.textContent = String(v);
+          positionEdgeLabels();
+          saveEdgeBends(cy);
+        });
+      }
+      if (reset) {
+        reset.addEventListener("click", () => {
+          ele.data("cpd", 0);
+          applyEdgeBendStyle(ele);
+          if (slider) slider.value = "0";
+          if (val) val.textContent = "0";
+          positionEdgeLabels();
+          saveEdgeBends(cy);
+        });
+      }
+    }
+
+    cy.on("tap", "node", (evt) => showNode(evt.target.id()));
+    cy.on("tap", "edge", (evt) => showEdge(evt.target));
+    cy.on("mousedown", "edge", (evt) => {
+      const oe = evt.originalEvent;
+      if (!oe || oe.button !== 0) return;
+      oe.preventDefault();
+      const rp = pointerToRendered(oe);
+      beginEdgeDrag(evt.target, rp);
+    });
+    document.addEventListener("mousemove", (evt) => {
+      if (!edgeDragState) return;
+      updateEdgeDrag(pointerToRendered(evt));
+    });
+    document.addEventListener("mouseup", () => endEdgeDrag());
+
+    cy.$id("START").select();
+    showNode("START");
+    setNonCriticalVisible(false);
+    buildEdgeLabels();
+    cy.on("render zoom pan dragfree position data", () => positionEdgeLabels());
+
+    imgModalClose.addEventListener("click", () => imgModal.classList.remove("open"));
+    imgModal.addEventListener("click", (evt) => {
+      if (evt.target === imgModal) imgModal.classList.remove("open");
+    });
+
+    document.getElementById("resetLayout").addEventListener("click", () => {
+      localStorage.removeItem(STORAGE_KEY);
+      Object.entries(nodePosDefault).forEach(([id, p]) => {
+        const n = cy.$id(id);
+        if (n.nonempty()) n.position({ x: p.x, y: p.y });
+      });
+      saveNodePos(cy);
+      cy.fit(cy.elements(), 80);
+    });
+
+    if (toggleNonCriticalSwitch) {
+      toggleNonCriticalSwitch.addEventListener("change", () => {
+        // checked=true means "Critical Only"
+        showNonCritical = !toggleNonCriticalSwitch.checked;
+        setNonCriticalVisible(showNonCritical);
+      });
+    }
+  </script>
+</body>
+</html>

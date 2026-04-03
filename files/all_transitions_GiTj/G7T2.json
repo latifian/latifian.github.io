@@ -1,0 +1,94 @@
+{
+  "added_edges": [],
+  "base_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "black_edges": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      5,
+      5
+    ]
+  ],
+  "divider_x": null,
+  "green_edge": [
+    2,
+    1
+  ],
+  "height": 560.0,
+  "left_edges": [],
+  "name": "G7T2.svg",
+  "red_edge": [
+    2,
+    3
+  ],
+  "rel_path": "all_transitions_GiTj/G7T2.svg",
+  "removed_edges": [],
+  "right_edges": [],
+  "source_graph": "G7",
+  "source_graph_index": 7,
+  "status": "done",
+  "target": "DONE",
+  "transition_id": "G7T2",
+  "transition_index": 2,
+  "type": "transition",
+  "watermark_bad": false,
+  "watermark_done": false,
+  "watermark_invalid": false,
+  "watermark_question": false,
+  "width": 820.0
+}
