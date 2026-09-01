@@ -2,7 +2,7 @@
 title: "Voting with Preference Intensities"
 collection: publications
 date: 2023-02-07
-venue: "Thirty-Seventh AAAI Confrenece on Artificial Intelligence"
+venue: "Thirty-Seventh AAAI Conference on Artificial Intelligence"
 shortvenue: "AAAI '23"
 venueurl: 'https://aaai.org/Conferences/AAAI-23/'
 fulladdress: "Proc. of 37th AAAI

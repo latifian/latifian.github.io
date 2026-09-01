@@ -66,30 +66,22 @@
       </div>
     {% endif %}
     {% if post.collection == 'publications' %}
-        <div> 
-          {% if post.short %}
-          <b id="{{ post.short }}" class="pubtitle">{{ title }}</b>
+        {% assign publication_primary_url = post.paperurl | default: post.drafturl %}
+        <div class="publication__header">
+          {% if publication_primary_url %}
+            <a{% if post.short %} id="{{ post.short }}"{% endif %} class="publication__title" href="{{ publication_primary_url }}">{{ title }}</a>
           {% else %}
-          <b class="pubtitle">{{ title }}</b>
+            <span{% if post.short %} id="{{ post.short }}"{% endif %} class="publication__title">{{ title }}</span>
           {% endif %}
-          {% if post.drafturl %}
-          <span class="publinks" style="float: right"> <small>[ <a href=" {{ post.drafturl }} ">Draft</a> ]</small></span>
-            {% else %}
-            {% if post.paperurl %}
-            <span class="publinks" style="float: right"> <small> [ <a href=" {{ post.paperurl }} ">Paper</a>
-            {% if post.fullurl %}
-            | <a href=" {{ post.fullurl }} ">Full Version</a> 
-          {% endif %}
-          {% if post.slideurl %}
-            | <a href=" {{ post.slideurl }} ">Slides</a> 
-          {% endif %}
-          {% if post.videourl %}
-            | <a href=" {{ post.videourl }} ">Video</a> 
-          {% endif %}
-            ]</small> </span>
-          {% else %}
-           <span class="publinks" style="float: right"> <small> </small></span>
-          {% endif %}
+          {% if post.drafturl or post.paperurl or post.fullurl or post.codeurl or post.slideurl or post.videourl %}
+            <span class="publication__links" aria-label="Publication resources">
+              {% if post.drafturl %}<a class="publication__link" href="{{ post.drafturl }}">Draft</a>{% endif %}
+              {% if post.paperurl %}<a class="publication__link" href="{{ post.paperurl }}">{% if post.paperurl contains 'doi.org' %}DOI{% else %}Paper{% endif %}</a>{% endif %}
+              {% if post.fullurl %}<a class="publication__link" href="{{ post.fullurl }}">Full version</a>{% endif %}
+              {% if post.codeurl %}<a class="publication__link" href="{{ post.codeurl }}">Code</a>{% endif %}
+              {% if post.slideurl %}<a class="publication__link" href="{{ post.slideurl }}">Slides</a>{% endif %}
+              {% if post.videourl %}<a class="publication__link" href="{{ post.videourl }}">Video</a>{% endif %}
+            </span>
           {% endif %}
         </div>
     {% endif %}

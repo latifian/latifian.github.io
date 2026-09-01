@@ -1,0 +1,154 @@
+/* ==========================================================================
+   Publications
+   ========================================================================== */
+
+.archive .page__title {
+  margin-bottom: 1.5rem;
+  font-size: $type-size-2;
+}
+
+.archive .list__item {
+  width: 100%;
+}
+
+ul.pub {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .year {
+    margin: 2rem 0 0.35rem;
+    font-size: $type-size-4;
+  }
+
+  hr {
+    margin: 0 0 1rem;
+  }
+
+  li.conf,
+  li.journal,
+  li.working {
+    display: flex;
+    align-items: flex-start;
+    margin: 0 0 1.35rem;
+    padding: 0;
+  }
+
+  li.conf {
+    counter-increment: confs -1;
+  }
+
+  li.journal {
+    counter-increment: journals -1;
+  }
+
+  li.working {
+    counter-increment: workings -1;
+  }
+
+  li.conf::before,
+  li.journal::before,
+  li.working::before {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    min-width: 2rem;
+    margin: 0.1rem 0.65rem 0 0;
+    padding: 0.15rem 0.35rem;
+    color: #fff;
+    font-family: $sans-serif;
+    font-size: $type-size-7;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+    border-radius: 0.25rem;
+  }
+
+  li.conf::before {
+    content: "C" counter(confs);
+    background-color: #304f7c;
+  }
+
+  li.journal::before {
+    content: "J" counter(journals);
+    background-color: #288a38;
+  }
+
+  li.working::before {
+    content: "W" counter(workings);
+    background-color: #c86600;
+  }
+}
+
+.publication__header {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.archive a.publication__title,
+.publication__title {
+  color: $text-color;
+  font-family: $serif;
+  font-size: 1.03rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-decoration: none;
+
+  &:hover {
+    color: $link-color-hover;
+    text-decoration: underline;
+  }
+}
+
+.publication__links {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: flex-end;
+}
+
+.archive a.publication__link {
+  padding: 0.24rem 0.5rem;
+  color: $link-color;
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-weight: 600;
+  line-height: 1.1;
+  text-decoration: none;
+  background: mix(#fff, $link-color, 96%);
+  border: 1px solid mix(#fff, $link-color, 72%);
+  border-radius: 999px;
+
+  &:hover {
+    color: $link-color-hover;
+    text-decoration: none;
+    background: mix(#fff, $link-color, 90%);
+    border-color: mix(#fff, $link-color, 50%);
+  }
+
+  &:focus {
+    outline: 2px solid mix(#fff, $link-color, 35%);
+    outline-offset: 2px;
+  }
+}
+
+.authors,
+.pubvenue {
+  font-size: $type-size-6;
+  line-height: 1.55;
+}
+
+@media (max-width: $small) {
+  .publication__header {
+    display: block;
+  }
+
+  .publication__links {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0.5rem;
+  }
+}
