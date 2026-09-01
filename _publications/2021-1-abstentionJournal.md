@@ -4,8 +4,9 @@ collection: publications
 date: 2021-01-29
 fulladdress: "Journal of Artificial Intelligence Research, 70, pp. 567-595."
 coauthors: ["Mohammad Ghodsi", "Mohamad Latifian",  "Masoud Seddighin"]
-paperurl: 'https://dl.acm.org/doi/pdf/10.1613/jair.1.12306'
+officialurl: 'https://doi.org/10.1613/jair.1.12306'
+paperurl: 'https://arxiv.org/pdf/1812.09851.pdf'
 type: 'journal'
 ---
 
-[Download paper here](http://latifian.github.io/files/RentSharing.pdf)
+[Download paper here](https://arxiv.org/pdf/1812.09851.pdf)

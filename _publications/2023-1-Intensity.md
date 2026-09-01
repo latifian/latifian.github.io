@@ -5,6 +5,7 @@ date: 2023-02-07
 venue: "Thirty-Seventh AAAI Conference on Artificial Intelligence"
 shortvenue: "AAAI '23"
 venueurl: 'https://aaai.org/Conferences/AAAI-23/'
+officialurl: 'https://ojs.aaai.org/index.php/AAAI/article/view/25707'
 fulladdress: "Proc. of 37th AAAI
 Conference on Artificial Intelligence, pp. 5697–5704, 2023"
 coauthors: ["Anson Khang", "Mohamad Latifian", "Nisarg Shah"]

@@ -9,5 +9,6 @@ shortvenue: "IJCAI '24"
 venue: "The 33rd International Joint Conference on Artificial Intelligence"
 fulladdress: "Proc. of the 33rd International Joint Conference on Artificial Intelligence, pp. 2851–2859."
 venueurl: "https://ijcai24.org"
+officialurl: "https://www.ijcai.org/proceedings/2024/316"
 date: 2024-08-03
 ---

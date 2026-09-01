@@ -66,17 +66,17 @@
       </div>
     {% endif %}
     {% if post.collection == 'publications' %}
-        {% assign publication_primary_url = post.paperurl | default: post.drafturl %}
+        {% assign publication_official_url = post.officialurl | default: post.venueurl %}
         <div class="publication__header">
-          {% if publication_primary_url %}
-            <a{% if post.short %} id="{{ post.short }}"{% endif %} class="publication__title" href="{{ publication_primary_url }}">{{ title }}</a>
+          {% if publication_official_url %}
+            <a{% if post.short %} id="{{ post.short }}"{% endif %} class="publication__title" href="{{ publication_official_url }}">{{ title }}</a>
           {% else %}
             <span{% if post.short %} id="{{ post.short }}"{% endif %} class="publication__title">{{ title }}</span>
           {% endif %}
           {% if post.drafturl or post.paperurl or post.fullurl or post.codeurl or post.slideurl or post.videourl %}
             <span class="publication__links" aria-label="Publication resources">
               {% if post.drafturl %}<a class="publication__link" href="{{ post.drafturl }}">Draft</a>{% endif %}
-              {% if post.paperurl %}<a class="publication__link" href="{{ post.paperurl }}">{% if post.paperurl contains 'doi.org' %}DOI{% else %}Paper{% endif %}</a>{% endif %}
+              {% if post.paperurl %}<a class="publication__link" href="{{ post.paperurl }}">Paper</a>{% endif %}
               {% if post.fullurl %}<a class="publication__link" href="{{ post.fullurl }}">Full version</a>{% endif %}
               {% if post.codeurl %}<a class="publication__link" href="{{ post.codeurl }}">Code</a>{% endif %}
               {% if post.slideurl %}<a class="publication__link" href="{{ post.slideurl }}">Slides</a>{% endif %}

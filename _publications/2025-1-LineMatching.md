@@ -9,5 +9,6 @@ paperurl: "https://arxiv.org/abs/2502.00149"
 venue: "The 34th International Joint Conference on Artificial Intelligence"
 shortvenue: "IJCAI '25"
 venueurl: 'https://2025.ijcai.org'
+officialurl: 'https://www.ijcai.org/proceedings/2025/429'
 fulladdress: "Proc. of the 34th International Joint Conference on Artificial Intelligence."
 ---

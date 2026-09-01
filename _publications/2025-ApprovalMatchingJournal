@@ -3,7 +3,8 @@ short: "App_Match_Journal"
 title: "The Distortion of Threshold Approval Matching"
 collection: publications
 coauthors: ["Me", "Alex"]
-paperurl: "https://link.springer.com/article/10.1007/s10458-025-09724-6"
+officialurl: "https://link.springer.com/article/10.1007/s10458-025-09724-6"
+paperurl: "https://arxiv.org/pdf/2401.09858.pdf"
 type: journal
 shortvenue: "JAAMAS"
 venue: "Autonomous Agents and Multi-Agent Systems"

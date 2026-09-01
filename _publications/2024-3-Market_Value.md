@@ -5,6 +5,7 @@ coauthors: ["Sid", "Soroush", "Me", "Nisarg"]
 venue: "Thirty-Ninth AAAI Conference on Artificial Intelligence"
 shortvenue: "AAAI '25"
 venueurl: 'https://aaai.org/Conferences/AAAI-25/'
+officialurl: 'https://ojs.aaai.org/index.php/AAAI/article/view/33484'
 fulladdress: "Proc. of the 39th AAAI Conference on Artificial Intelligence."
 type: 'conf'
 date: 2025-02-25
