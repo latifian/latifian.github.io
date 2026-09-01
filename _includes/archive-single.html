@@ -37,7 +37,33 @@
     </h2>
     {% endif %}
     {% if post.collection == 'news' %}
-      <b class="news">{{ post.date | date: "%e %b. %Y"}}.</b> <span class="news">{{ post.news }}</span>
+      {% capture news_details_id %}news-details-{{ post.date | date: "%Y%m%d" }}-{{ forloop.index0 }}{% endcapture %}
+      <div class="news-item{% if post.details %} news-item--expandable{% endif %}">
+        <div class="news-item__row">
+          <div class="news-item__headline">
+            <b class="news">{{ post.date | date: "%e %b. %Y"}}.</b>
+            <span class="news">{{ post.news }}</span>
+          </div>
+          {% if post.details %}
+            <button
+              class="news-item__toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="{{ news_details_id | strip }}"
+              data-news-toggle>
+              <span class="news-item__toggle-label">Details</span>
+              <svg class="news-item__toggle-icon" viewBox="0 0 12 8" aria-hidden="true" focusable="false">
+                <path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          {% endif %}
+        </div>
+        {% if post.details %}
+          <div class="news-item__details" id="{{ news_details_id | strip }}" hidden>
+            <p>{{ post.details }}</p>
+          </div>
+        {% endif %}
+      </div>
     {% endif %}
     {% if post.collection == 'publications' %}
         <div> 

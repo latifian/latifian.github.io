@@ -1,0 +1,119 @@
+/* ==========================================================================
+   Expandable news items
+   ========================================================================== */
+
+.news-item {
+  margin: 0 0 0.85rem;
+  padding: 0.65rem 0 0.85rem;
+  border-bottom: 1px solid $border-color;
+}
+
+.news-item__row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.news-item__headline {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.55;
+}
+
+.news-item__toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+  margin-top: 0.05rem;
+  padding: 0.3rem 0.6rem;
+  color: $link-color;
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-weight: 600;
+  line-height: 1;
+  background: mix(#fff, $link-color, 95%);
+  border: 1px solid mix(#fff, $link-color, 75%);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+
+  &:hover {
+    color: $link-color-hover;
+    background: mix(#fff, $link-color, 90%);
+    border-color: mix(#fff, $link-color, 55%);
+  }
+
+  &:focus {
+    outline: 2px solid mix(#fff, $link-color, 35%);
+    outline-offset: 2px;
+  }
+}
+
+.news-item__toggle-icon {
+  width: 0.65rem;
+  height: 0.45rem;
+  transition: transform 0.18s ease;
+}
+
+.news-item__toggle[aria-expanded="true"] .news-item__toggle-icon {
+  transform: rotate(180deg);
+}
+
+.news-item__details {
+  margin-top: 0.7rem;
+  padding: 0.8rem 0.95rem;
+  color: $text-color;
+  font-size: 0.82em;
+  line-height: 1.65;
+  background: mix(#fff, $link-color, 96%);
+  border-left: 3px solid $link-color;
+  border-radius: 0 $border-radius $border-radius 0;
+  animation: news-details-reveal 0.18s ease-out;
+
+  p {
+    margin: 0;
+  }
+}
+
+@keyframes news-details-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .news-item__toggle,
+  .news-item__toggle-icon,
+  .news-item__details {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (max-width: $small) {
+  .news-item__row {
+    gap: 0.5rem;
+  }
+
+  .news-item__toggle-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .news-item__toggle {
+    padding: 0.45rem;
+  }
+}
