@@ -78,6 +78,11 @@
   }
 }
 
+.page__content .news-item__headline,
+.page__content .news-item__details {
+  text-align: left;
+}
+
 @keyframes news-details-reveal {
   from {
     opacity: 0;
