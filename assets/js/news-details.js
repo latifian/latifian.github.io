@@ -42,7 +42,7 @@
 
         var label = button.querySelector("[data-news-more-label]");
         if (label) {
-          label.textContent = isExpanded ? "More news" : "Show less";
+          label.textContent = isExpanded ? "Older news" : "Show less";
         }
       });
     });

@@ -14,7 +14,7 @@ redirect_from:
 
 <section class="homepage__section">
   <h2>Research Interests</h2>
-  <p>My research lies at the intersection of theoretical computer science, artificial intelligence, and economics, with an emphasis on algorithms and computational complexity. In particular, I am quite interested in problems related to social choice theory, fair division, algorithmic game theory, and mechanism design.</p>
+  <p>My research lies at the intersection of theoretical computer science, artificial intelligence, and economics, with a focus on algorithms and computational complexity. My primary interests include computational social choice, fair division, algorithmic game theory, and mechanism design.</p>
 </section>
 
 <section class="homepage__section homepage__section--news">
@@ -26,7 +26,7 @@ redirect_from:
 </ul>
 {% if site.news.size > 5 %}
 <button class="news-list__more" type="button" aria-expanded="false" aria-controls="news-list" data-news-more hidden>
-  <span data-news-more-label>More news</span>
+  <span data-news-more-label>Older news</span>
   <svg class="news-list__more-icon" viewBox="0 0 12 8" aria-hidden="true" focusable="false">
     <path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>

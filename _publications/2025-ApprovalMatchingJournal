@@ -8,6 +8,7 @@ paperurl: "https://arxiv.org/pdf/2401.09858.pdf"
 type: journal
 shortvenue: "JAAMAS"
 venue: "Autonomous Agents and Multi-Agent Systems"
-fulladdress: "Autonomous Agents and Multi-Agent Systems, volume 39, article 42, 2025"
+venueurl: "https://link.springer.com/journal/10458"
+fulladdress: "Autonomous Agents and Multi-Agent Systems."
 date: 2025-10-03
 ---

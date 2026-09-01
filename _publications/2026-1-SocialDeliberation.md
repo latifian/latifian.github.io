@@ -9,6 +9,6 @@ venue: "The ACM Web Conference 2026"
 shortvenue: "WWW '26"
 venueurl: "https://archives.iw3c2.org/www2026/"
 officialurl: "https://dl.acm.org/doi/10.1145/3774904.3792650"
-fulladdress: "Proceedings of the ACM Web Conference 2026, pp. 375-383."
+fulladdress: "Proc. of the ACM Web Conference 2026."
 paperurl: "/files/papers/Social_Deliberation.pdf"
 ---

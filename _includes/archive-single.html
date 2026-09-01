@@ -92,10 +92,10 @@
             {% for ca in post.coauthors %}
               {% if forloop.last %}and {% endif %}
             {% if ca == "Me" or ca == "Mohamad Latifian" %}
-            <span style="font-weight: 550;">Mohamad Latifian</span>{% unless forloop.last %}, {% endunless %}
+            <strong>Mohamad Latifian</strong>{% unless forloop.last %}, {% endunless %}
               {% elsif site.data.authors[ca] %}
                   {% assign x = site.data.authors[ca] %}
-                  <a href=" {{ x.url }} ">{{ x.name }}</a>{% unless forloop.last %}, {% endunless %}
+                  <a href="{{ x.url }}">{{ x.name }}</a>{% unless forloop.last %}, {% endunless %}
               {% else %}
                 {{ ca }}{% unless forloop.last %}, {% endunless %}
               {% endif %}
@@ -103,7 +103,7 @@
       <br>
       {% if post.collection == 'publications' and post.shortvenue and post.venueurl %}
           <small class="pubvenue">
-            In <a href=" {{ post.venueurl }}"  style="font-weight: 550;">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
+            In <a href="{{ post.venueurl }}" style="font-weight: 550;">{{ post.shortvenue }}</a>: {{ post.fulladdress }}
           </small> 
       {% else %}
     {% if post.collection == 'publications' and post.fulladdress %}

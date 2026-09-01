@@ -5,7 +5,7 @@ collection: publications
 date: 2020-7-13
 venue: "Twenty-Fourth ACM Conference on Economics and Computation"
 shortvenue: "EC '23"
-fulladdress: "Proc. of the 24th ACM Conference on Economics and Computation, pp. 738–758."
+fulladdress: "Proc. of the 24th ACM Conference on Economics and Computation."
 coauthors: ["Vasilis Gkatzelis", "Mohamad Latifian", "Nisarg Shah"]
 paperurl: "/files/papers/Best_of_Both_Distortion_Worlds.pdf"
 venueurl: "https://ec23.sigecom.org"

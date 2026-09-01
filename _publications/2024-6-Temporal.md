@@ -10,5 +10,5 @@ venue: "The 24th International Conference on Autonomous Agents and Multiagent Sy
 shortvenue: "AAMAS '25"
 venueurl: 'https://aamas2025.org'
 officialurl: 'https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p676.pdf'
-fulladdress: "Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems"
+fulladdress: "Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems."
 ---
