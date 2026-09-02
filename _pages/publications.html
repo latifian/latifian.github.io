@@ -14,7 +14,10 @@ author_profile: true
 {% capture written_year %}'None'{% endcapture %}
 {% for post in site.publications reversed %}
   {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
-  {% if year != written_year %}
+  {% if post.forthcoming %}
+ <h1 class="year"> {{ year }} + Forthcoming </h1>
+<hr>
+  {% elsif year != written_year %}
 {% if year == '3000' %}
  <h1 class="year"> Working Papers </h1>
 {% else %}
