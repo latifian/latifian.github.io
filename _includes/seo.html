@@ -96,8 +96,8 @@
   <meta property="og:image" content="{% if seo_image contains "://" %}{{ seo_image }}{% else %}{{ seo_image | prepend: "/images/" | prepend: base_path }}{% endif %}">
   <meta property="og:image:alt" content="Portrait of {{ site.author.name | default: site.name }}">
   {% unless seo_image contains "://" %}
-    <meta property="og:image:width" content="1180">
-    <meta property="og:image:height" content="1180">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
   {% endunless %}
 {% endif %}
 
