@@ -2,7 +2,7 @@
 title: "On the Distortion Value of the Elections with Abstention"
 collection: publications
 date: 2019-7-17
-venue: "33rd AAAI Conference on Artificial Intelligence"
+venue: "The 33rd AAAI Conference on Artificial Intelligence"
 shortvenue: "AAAI '19"
 venueurl: 'https://aaai.org/Conferences/AAAI-19/'
 officialurl: 'https://ojs.aaai.org/index.php/AAAI/article/view/4026'

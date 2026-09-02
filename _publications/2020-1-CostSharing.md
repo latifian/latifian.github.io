@@ -2,7 +2,7 @@
 title: "Resource-Aware Protocols for Network Cost-Sharing Games"
 collection: publications
 date: 2020-7-13
-venue: "Twenty-First ACM Conference on Economics and Computation"
+venue: "The 21st ACM Conference on Economics and Computation"
 shortvenue: "EC '20"
 coauthors: ["George Christodoulou", "Vasilis Gkatzelis", "Mohamad Latifian", "Alkmini Sgouritsa"]
 venueurl: 'http://ec20.sigecom.org'

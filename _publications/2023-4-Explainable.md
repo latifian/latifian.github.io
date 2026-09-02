@@ -4,7 +4,7 @@ collection: publications
 coauthors: ["Aris", "Soroush", "Me", "Nisarg"]
 type: 'conf'
 date: 2023-12-12
-venue: "37th Conference on Neural Information Processing Systems"
+venue: "The 37th Conference on Neural Information Processing Systems"
 shortvenue: "NeurIPS '23"
 fulladdress: "Proc. of the 37th Conference on Neural Information Processing Systems."
 venueurl: 'https://neurips.cc/Conferences/2023'
