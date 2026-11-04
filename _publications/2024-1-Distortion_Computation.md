@@ -8,6 +8,6 @@ venue: "The 23rd International Conference on Autonomous Agents and Multiagent Sy
 fulladdress: "Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems."
 venueurl: "https://www.aamas2024-conference.auckland.ac.nz"
 officialurl: "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p499.pdf"
-paperurl: "/files/papers/2024/distortion-computation.pdf"
+paperurl: "https://arxiv.org/abs/2611.05257"
 date: 2024-05-06
 ---

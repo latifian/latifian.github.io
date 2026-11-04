@@ -7,7 +7,7 @@ shortvenue: "JAAMAS"
 venue: "Autonomous Agents and Multi-Agent Systems"
 fulladdress: "Forthcoming in Autonomous Agents and Multi-Agent Systems."
 venueurl: "https://link.springer.com/journal/10458"
-paperurl: "/files/papers/2024/distortion-computation.pdf"
+paperurl: "https://arxiv.org/abs/2611.05257"
 forthcoming: true
 date: 2026-12-31
 ---
