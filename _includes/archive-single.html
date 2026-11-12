@@ -90,7 +90,7 @@
           <small class="authors">
             By
             {% for ca in post.coauthors %}
-              {% if forloop.last %}and {% endif %}
+              {% if forloop.last and forloop.length > 1 %}and {% endif %}
             {% if ca == "Me" or ca == "Mohamad Latifian" %}
             <strong>Mohamad Latifian</strong>{% unless forloop.last %}, {% endunless %}
               {% elsif site.data.authors[ca] %}
