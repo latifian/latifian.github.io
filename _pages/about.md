@@ -9,12 +9,12 @@ redirect_from:
 <div class="homepage">
 <section class="homepage__section">
   <h2>About Me</h2>
-  <p>I am a postdoctoral research associate (PDRA) in the <a href="https://informatics.ed.ac.uk">School of Informatics</a> at the <a href="https://www.ed.ac.uk/">University of Edinburgh</a>. Before that I was a Ph.D. student in the <a href="https://web.cs.toronto.edu">Department of Computer Science</a> at the <a href="https://www.utoronto.ca">University of Toronto</a>, where I was fortunate to have <a href="http://www.cs.toronto.edu/~nisarg/">Nisarg Shah</a> and <a href="http://www.cs.toronto.edu/~bor/">Allan Borodin</a> as my supervisors. Before that, I completed my undergraduate and master's studies in the <a href="http://ce.sharif.edu">Department of Computer Engineering</a> at <a href="http://sharif.edu">Sharif University of Technology</a>, where I had the honor to be advised by <a href="http://sharif.ir/~ghodsi/?page=home">Mohammad Ghodsi</a>.</p>
+  <p style="text-align: justify;">I am a postdoctoral research associate (PDRA) in the <a href="https://informatics.ed.ac.uk">School of Informatics</a> at the <a href="https://www.ed.ac.uk/">University of Edinburgh</a>. Before that I was a Ph.D. student in the <a href="https://web.cs.toronto.edu">Department of Computer Science</a> at the <a href="https://www.utoronto.ca">University of Toronto</a>, where I was fortunate to have <a href="http://www.cs.toronto.edu/~nisarg/">Nisarg Shah</a> and <a href="http://www.cs.toronto.edu/~bor/">Allan Borodin</a> as my supervisors. Before that, I completed my undergraduate and master's studies in the <a href="http://ce.sharif.edu">Department of Computer Engineering</a> at <a href="http://sharif.edu">Sharif University of Technology</a>, where I had the honor to be advised by <a href="http://sharif.ir/~ghodsi/?page=home">Mohammad Ghodsi</a>.</p>
 </section>
 
 <section class="homepage__section">
   <h2>Research Interests</h2>
-  <p>My research lies at the intersection of theoretical computer science, artificial intelligence, and economics, with a focus on algorithms and computational complexity. My primary interests include computational social choice, fair division, algorithmic game theory, and mechanism design.</p>
+  <p style="text-align: justify;">My research lies at the intersection of theoretical computer science, artificial intelligence, and economics, with a focus on algorithms and computational complexity. My primary interests include computational social choice, fair division, algorithmic game theory, and mechanism design.</p>
 </section>
 
 <section class="homepage__section homepage__section--news">
